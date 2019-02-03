@@ -5,7 +5,6 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
-  pointer-events: none;
 }
 
 .App-header {
@@ -30,4 +29,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#root {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.desktop {
+  margin-left: auto;
+  margin-right: auto;
+  width: 640px;
+  height: 480px;
+  overflow: hidden;
+
+  transform: scale(2);
 }
