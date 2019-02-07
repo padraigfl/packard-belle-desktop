@@ -23,33 +23,49 @@ class Explorer extends Component {
   restore = () => this.setState({ maximized: false });
 
   render() {
+    let programWindow = (
+      <WindowExplorer
+        title="Needs default"
+        footer={[
+          { text: "needs 100% width height" },
+          { text: "overflow control" }
+        ]}
+        onClose={() => {
+          /* needs default visibles */
+        }}
+        onMinimize={() => {}}
+        onRestore={this.restore}
+        onMaximize={this.maximize}
+        maximized={this.state.maximized}
+        resizable={!this.state.maximized}
+      />
+    );
+    if (this.state.maximized) {
+      return programWindow;
+    }
     return (
       <Rnd
-        size={{ width: this.state.width, height: this.state.height }}
-        position={{ x: this.state.x, y: this.state.y }}
+        size={
+          !this.state.maximized
+            ? { width: this.state.width, height: this.state.height }
+            : { width: "100%", height: "100%" }
+        }
+        position={
+          !this.state.maximized
+            ? { x: this.state.x, y: this.state.y }
+            : { x: 0, y: 0 }
+        }
         onDragStop={this.updateLocation}
-        onResize={this.resize}
-        scale={2}
+        onResize={!this.state.maximized && this.resize}
+        // scale={2}
         dragHandleClassName="Window__title"
-        resizeHandleClasses={{ bottomRight: "potato" }}
         bounds=".w98"
-        minWidth={this.props.initialWidth}
-        minHeight={this.props.initialHeight}
+        minWidth={this.props.minWidth}
+        minHeight={this.props.minHeight}
         maxWidth={this.props.maxWidth}
         maxHeight={this.props.maxHeight}
       >
-        <WindowExplorer
-          title="Needs default"
-          footer={[
-            { text: "needs 100% width height" },
-            { text: "overflow control" }
-          ]}
-          onClose={() => {
-            /* needs default visibles */
-          }}
-          onRestore={this.restore}
-          onMaximize={this.maximize}
-        />
+        {programWindow}
       </Rnd>
     );
   }
