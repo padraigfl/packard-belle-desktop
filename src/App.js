@@ -3,6 +3,7 @@ import { Theme, ExplorerView, TaskBar, ExplorerIcon } from "packard-belle";
 import logo from "./logo.svg";
 import "./App.css";
 import Explorer from "./components/ExplorerWindow";
+import startMenuData from "./data/start";
 
 const testOptions = [
   {
@@ -52,7 +53,7 @@ class App extends Component {
             <ExplorerIcon key={option.title} {...option} />
           ))}
         </ExplorerView>
-        <TaskBar options={testOptions} />
+        <TaskBar options={startMenuData} />
         <Explorer scale={2} />
       </Theme>
     );
