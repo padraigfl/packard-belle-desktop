@@ -36,6 +36,7 @@
   align-content: center;
   align-items: center;
   height: 100vh;
+  background-color: darkslategrey;
 }
 
 .desktop {
@@ -44,6 +45,6 @@
   width: 640px;
   height: 480px;
   overflow: hidden;
-
+  background-color: cadetblue;
   /* transform: scale(2); */
 }

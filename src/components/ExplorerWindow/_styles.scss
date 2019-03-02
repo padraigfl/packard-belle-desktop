@@ -16,12 +16,9 @@
 .WindowExplorer {
   width: 100%;
   height: 100%;
-}
 
-.Window--maximized {
-  position: fixed;
-  top: -3px;
-  left: -2px;
-  height: calc(100% - 28px);
-  width: calc(100% - 2px);
+  &.Window--maximized {
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+  }
 }
