@@ -38,7 +38,20 @@ class Explorer extends Component {
         dragHandleClassName="Window__title"
         onDragStop={!this.state.maximized && this.updateLocation}
         disableDragging={this.state.maximized}
-        enableResizing={this.state.maximized ? false : undefined}
+        enableResizing={
+          this.state.maximized
+            ? false
+            : {
+                bottom: true,
+                bottomLeft: true,
+                bottomRight: true,
+                left: true,
+                right: true,
+                top: true,
+                topLeft: true,
+                topRight: false
+              }
+        }
         onResize={!this.state.maximized && this.resize}
         bounds=".w98"
         minWidth={this.props.minWidth}
