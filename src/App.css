@@ -46,5 +46,8 @@
   height: 480px;
   overflow: hidden;
   background-color: cadetblue;
-  /* transform: scale(2); */
+}
+
+.desktopX2 {
+  transform: scale(2);
 }

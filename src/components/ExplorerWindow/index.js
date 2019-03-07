@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Rnd } from "react-rnd";
 import { WindowExplorer } from "packard-belle";
+import { ScaleContext } from "../../App";
 import "./_styles.scss";
 
 class Explorer extends Component {
+  static contextType = ScaleContext;
   state = {
     width: this.props.initialWidth || this.props.minWidth,
     height: this.props.initialHeight || this.props.minHeight,
@@ -24,58 +26,62 @@ class Explorer extends Component {
 
   render() {
     return (
-      <Rnd
-        size={
-          !this.state.maximized
-            ? { width: this.state.width, height: this.state.height }
-            : { width: "101%", height: "101%" }
-        }
-        position={
-          !this.state.maximized
-            ? { x: this.state.x, y: this.state.y }
-            : { x: -2, y: -3 }
-        }
-        dragHandleClassName="Window__title"
-        onDragStop={!this.state.maximized && this.updateLocation}
-        disableDragging={this.state.maximized}
-        enableResizing={
-          this.state.maximized
-            ? false
-            : {
-                bottom: true,
-                bottomLeft: true,
-                bottomRight: true,
-                left: true,
-                right: true,
-                top: true,
-                topLeft: true,
-                topRight: false
-              }
-        }
-        onResize={!this.state.maximized && this.resize}
-        bounds=".w98"
-        minWidth={this.props.minWidth}
-        minHeight={this.props.minHeight}
-        maxWidth={this.props.maxWidth}
-        maxHeight={this.props.maxHeight}
-        // scale={2}
-      >
-        <WindowExplorer
-          title="Needs default"
-          footer={[
-            { text: "needs 100% width height" },
-            { text: "overflow control" }
-          ]}
-          onClose={() => {
-            /* needs default visibles */
-          }}
-          onMinimize={() => {}}
-          onRestore={this.restore}
-          onMaximize={this.maximize}
-        >
-          Children
-        </WindowExplorer>
-      </Rnd>
+      <ScaleContext.Consumer>
+        {context => (
+          <Rnd
+            size={
+              !this.state.maximized
+                ? { width: this.state.width, height: this.state.height }
+                : { width: "101%", height: "101%" }
+            }
+            position={
+              !this.state.maximized
+                ? { x: this.state.x, y: this.state.y }
+                : { x: -2, y: -3 }
+            }
+            dragHandleClassName="Window__title"
+            onDragStop={!this.state.maximized && this.updateLocation}
+            disableDragging={this.state.maximized}
+            enableResizing={
+              this.state.maximized
+                ? false
+                : {
+                    bottom: true,
+                    bottomLeft: true,
+                    bottomRight: true,
+                    left: true,
+                    right: true,
+                    top: true,
+                    topLeft: true,
+                    topRight: false
+                  }
+            }
+            onResize={!this.state.maximized && this.resize}
+            bounds=".w98"
+            minWidth={this.props.minWidth}
+            minHeight={this.props.minHeight}
+            maxWidth={this.props.maxWidth}
+            maxHeight={this.props.maxHeight}
+            scale={context.scale}
+          >
+            <WindowExplorer
+              title="Needs default"
+              footer={[
+                { text: "needs 100% width height" },
+                { text: "overflow control" }
+              ]}
+              onClose={() => {
+                /* needs default visibles */
+              }}
+              onMinimize={() => {}}
+              onRestore={this.restore}
+              onMaximize={this.maximize}
+            >
+              Children
+            </WindowExplorer>
+          </Rnd>
+        )}
+      </ScaleContext.Consumer>
     );
   }
 }
