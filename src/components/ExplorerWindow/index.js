@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Rnd } from "react-rnd";
 import { WindowExplorer } from "packard-belle";
-import { ScaleContext } from "../../App";
+import { ScaleContext } from "../../contexts/scale";
 import "./_styles.scss";
 
 class Explorer extends Component {
@@ -11,10 +11,12 @@ class Explorer extends Component {
     height: this.props.initialHeight || this.props.minHeight,
     x: 0,
     y: 0,
-    maximized: false
+    maximized: false,
+    changingState: false
   };
 
-  updateLocation = (a, b) => this.setState({ x: b.x, y: b.y });
+  updateLocation = (a, b) =>
+    this.setState({ x: b.x, y: b.y, changingState: false });
   resize = (e, direction, ref, delta, position) =>
     this.setState({
       width: ref.style.width,
@@ -23,6 +25,7 @@ class Explorer extends Component {
     });
   maximize = () => this.setState({ maximized: true });
   restore = () => this.setState({ maximized: false });
+  toggleChanging = val => () => this.setState({ changingState: val });
 
   render() {
     return (
@@ -40,6 +43,7 @@ class Explorer extends Component {
                 : { x: -2, y: -3 }
             }
             dragHandleClassName="Window__title"
+            onDragStart={this.toggleChanging(true)}
             onDragStop={!this.state.maximized && this.updateLocation}
             disableDragging={this.state.maximized}
             enableResizing={
@@ -57,6 +61,8 @@ class Explorer extends Component {
                   }
             }
             onResize={!this.state.maximized && this.resize}
+            onResizeStart={this.toggleChanging(true)}
+            onResizeStop={this.toggleChanging(false)}
             bounds=".w98"
             minWidth={this.props.minWidth}
             minHeight={this.props.minHeight}
@@ -76,6 +82,7 @@ class Explorer extends Component {
               onMinimize={() => {}}
               onRestore={this.restore}
               onMaximize={this.maximize}
+              changingState={this.state.changingState}
             >
               Children
             </WindowExplorer>

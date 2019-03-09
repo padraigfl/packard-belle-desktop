@@ -1,10 +1,12 @@
-import React, { Component, createContext } from "react";
+import React, { Component } from "react";
 import { Theme, ExplorerView, ExplorerIcon } from "packard-belle";
 import cx from "classnames";
 import logo from "./logo.svg";
 import "./App.css";
 import Explorer from "./components/ExplorerWindow";
 import TaskBar from "./components/TaskBar";
+import ProgramProvider, { ProgramContext } from "./contexts/programs";
+import ScaleProvider, { ScaleContext } from "./contexts/scale";
 
 const testOptions = [
   {
@@ -36,43 +38,8 @@ const testOptions = [
   }
 ];
 
-export const ProgramContext = createContext();
-
-export const ScaleContext = createContext();
-
-class ProgramProvider extends Component {
-  state = {
-    activePrograms: []
-  };
-  render() {
-    return (
-      <ProgramContext.Provider value={this.state}>
-        {this.props.children}
-      </ProgramContext.Provider>
-    );
-  }
-}
-
-class ScaleProvider extends Component {
-  state = {
-    scale: 2,
-    // changeScale: val =>
-    //   typeof val === "number" ? this.setState(() => ({ scale: val })) : null
-    changeScale: () => {
-      this.setState(() => ({ scale: this.state.scale === 1 ? 2 : 1 }));
-    }
-  };
-  render() {
-    return (
-      <ScaleContext.Provider value={this.state}>
-        {this.props.children}
-      </ScaleContext.Provider>
-    );
-  }
-}
-
 class Desktop extends Component {
-  static contextType = ScaleContext;
+  static contextType = ProgramContext;
 
   render() {
     return (
@@ -89,7 +56,7 @@ class Desktop extends Component {
                   ))}
                 </ExplorerView>
                 <TaskBar />
-                <Explorer scale={this.context.scale} />
+                <Explorer scale={context.scale} />
               </Theme>
               <button onClick={context.changeScale}>changeScale</button>
             </React.Fragment>

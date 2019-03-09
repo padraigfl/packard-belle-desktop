@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TaskBar as TaskBarComponent } from "packard-belle";
-import { ProgramContext } from "../../App";
+import { ProgramContext } from "../../contexts/programs";
 import startMenuData from "../../data/start";
 
 class TaskBar extends Component {
