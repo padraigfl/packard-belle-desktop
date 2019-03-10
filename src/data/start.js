@@ -1,4 +1,5 @@
 import * as icons from "../icons";
+import ExplorerWindow from "../components/ExplorerWindow";
 
 const goTo = url => () => window.open(url);
 
@@ -59,12 +60,15 @@ const settings = [
     {
       title: "Printers",
       icon: icons.controlPanel16,
-      onClick: goTo("")
+      component: ExplorerWindow,
+      data: {},
+      onClick: () => {}
     },
     {
       title: "Taskbar & Start Menu...",
       icon: icons.settingsTaskbar16,
-      onClick: goTo("")
+      component: ExplorerWindow,
+      onClick: () => {}
     },
     {
       title: "Folder Options",
