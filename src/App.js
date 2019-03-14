@@ -3,8 +3,8 @@ import { Theme, ExplorerView, ExplorerIcon } from "packard-belle";
 import cx from "classnames";
 import logo from "./logo.svg";
 import "./App.css";
-import Explorer from "./components/ExplorerWindow";
 import TaskBar from "./components/TaskBar";
+import WindowManager from "./components/WindowManager";
 import ProgramProvider, { ProgramContext } from "./contexts/programs";
 import ScaleProvider, { ScaleContext } from "./contexts/scale";
 
@@ -56,7 +56,7 @@ class Desktop extends Component {
                   ))}
                 </ExplorerView>
                 <TaskBar />
-                <Explorer scale={context.scale} />
+                <WindowManager />
               </Theme>
               <button onClick={context.changeScale}>changeScale</button>
             </React.Fragment>

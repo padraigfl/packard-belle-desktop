@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
+    "nanoid": "^2.0.1",
     "node-sass": "^4.11.0",
     "packard-belle": "github:padraigfl/packard-belle",
     "react": "^16.8.3",

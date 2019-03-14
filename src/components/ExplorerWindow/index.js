@@ -4,7 +4,7 @@ import { WindowExplorer } from "packard-belle";
 import { ScaleContext } from "../../contexts/scale";
 import "./_styles.scss";
 
-class Explorer extends Component {
+class Explorer extends React.PureComponent {
   static contextType = ScaleContext;
   state = {
     width: this.props.initialWidth || this.props.minWidth,
@@ -69,16 +69,15 @@ class Explorer extends Component {
             maxWidth={this.props.maxWidth}
             maxHeight={this.props.maxHeight}
             scale={context.scale}
+            onMouseDown={() => this.props.moveToTop(this.props)}
           >
             <WindowExplorer
-              title="Needs default"
+              title={this.props.title}
               footer={[
                 { text: "needs 100% width height" },
                 { text: "overflow control" }
               ]}
-              onClose={() => {
-                /* needs default visibles */
-              }}
+              onClose={() => this.props.onClose(this.props)}
               onMinimize={() => {}}
               onRestore={this.restore}
               onMaximize={this.maximize}
