@@ -51,3 +51,12 @@
 .desktopX2 {
   transform: scale(2);
 }
+
+.react-draggable > .Window {
+  height: 100%;
+  width: 100%;
+}
+
+.SelectBox {
+  height: 100px;
+}

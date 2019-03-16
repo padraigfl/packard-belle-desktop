@@ -7,6 +7,7 @@ import TaskBar from "./components/TaskBar";
 import WindowManager from "./components/WindowManager";
 import ProgramProvider, { ProgramContext } from "./contexts/programs";
 import ScaleProvider, { ScaleContext } from "./contexts/scale";
+import TaskManager from "./components/TaskManager";
 
 const testOptions = [
   {
@@ -56,6 +57,7 @@ class Desktop extends Component {
                   ))}
                 </ExplorerView>
                 <TaskBar />
+                <TaskManager />
                 <WindowManager />
               </Theme>
               <button onClick={context.changeScale}>changeScale</button>

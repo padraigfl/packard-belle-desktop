@@ -4,7 +4,7 @@ export const ScaleContext = createContext();
 
 class ScaleProvider extends Component {
   state = {
-    scale: 2,
+    scale: 1,
     // changeScale: val =>
     //   typeof val === "number" ? this.setState(() => ({ scale: val })) : null
     changeScale: () => {

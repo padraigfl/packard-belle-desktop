@@ -52,6 +52,9 @@ class ProgramProvider extends Component {
     activePrograms: []
   };
 
+  toggleTaskManager = () =>
+    this.setState({ taskManager: !this.state.taskManager });
+
   isProgramActive = program =>
     this.state.activePrograms.some(sameProgram(program));
 
@@ -89,6 +92,7 @@ class ProgramProvider extends Component {
   };
 
   close = program => {
+    debugger;
     if (!this.isProgramActive(program)) {
       return;
     }
@@ -106,7 +110,8 @@ class ProgramProvider extends Component {
         value={{
           ...this.state,
           onClose: this.close,
-          moveToTop: this.moveToTop
+          moveToTop: this.moveToTop,
+          toggleTaskManager: this.toggleTaskManager
         }}
       >
         {this.props.children}
