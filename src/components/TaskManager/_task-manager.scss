@@ -1,0 +1,19 @@
+.TaskManager {
+  padding: 3px;
+
+  .SelectBox {
+    height: 100px;
+    width: initial;
+    margin: 4px;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 4px;
+    .btn {
+      margin-left: 2px;
+    }
+  }
+}

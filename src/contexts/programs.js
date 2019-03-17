@@ -110,6 +110,7 @@ class ProgramProvider extends Component {
         value={{
           ...this.state,
           onClose: this.close,
+          onExit: this.exit,
           moveToTop: this.moveToTop,
           toggleTaskManager: this.toggleTaskManager
         }}

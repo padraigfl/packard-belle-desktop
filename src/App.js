@@ -57,8 +57,8 @@ class Desktop extends Component {
                   ))}
                 </ExplorerView>
                 <TaskBar />
-                <TaskManager />
                 <WindowManager />
+                <TaskManager />
               </Theme>
               <button onClick={context.changeScale}>changeScale</button>
             </React.Fragment>
