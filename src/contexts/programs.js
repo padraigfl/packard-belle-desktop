@@ -49,7 +49,8 @@ class ProgramProvider extends Component {
   state = {
     startMenu: initialize(p => this.open(p), startWithIds),
     desktop: initialize(this.open, desktopWithIds),
-    activePrograms: []
+    activePrograms: [],
+    openOrder: []
   };
 
   toggleTaskManager = () =>
@@ -82,21 +83,23 @@ class ProgramProvider extends Component {
     if (!program.component) {
       return;
     }
-    if (this.isProgramActive(program)) {
+    if (this.isProgramActive(program) && !program.alwaysNew) {
       this.moveToTop(program);
       return;
     }
     this.setState({
-      activePrograms: [...this.state.activePrograms, program]
+      activePrograms: [...this.state.activePrograms, program],
+      openOrder: [...this.state.openOrder, program.id]
     });
   };
 
   close = program => {
-    debugger;
     if (!this.isProgramActive(program)) {
       return;
     }
 
+    const taskBar = this.state.openOrder.filter(p => p.id !== program.id);
+    this.setState({ openOrder: taskBar });
     // this.windowClose(program);
 
     if (!program.background) {

@@ -8,6 +8,7 @@ const Explorer = props => (
     {rnd => (
       <WindowExplorer
         title={props.title}
+        icon={props.icon}
         footer={[
           { text: "needs 100% width height" },
           { text: "overflow control" }

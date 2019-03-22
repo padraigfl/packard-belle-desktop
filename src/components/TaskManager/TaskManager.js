@@ -40,10 +40,13 @@ class TaskManager extends Component {
           >
             <SelectBox
               onClick={this.onSelect}
-              options={context.activePrograms.map(c => ({
-                title: c.title,
-                value: c // key is based on value
-              }))}
+              options={context.openOrder.map(pid => {
+                const prog = context.activePrograms.find(p => p.id === pid);
+                return {
+                  title: prog.title,
+                  value: prog // key is based on value
+                };
+              })}
               selected={[this.state.selected]}
             />
             <div className="TaskManager__buttons">

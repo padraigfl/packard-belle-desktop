@@ -11,7 +11,9 @@ class TaskBar extends Component {
         {context => (
           <TaskBarComponent
             options={context.startMenu}
-            openWindows={context.openWindows}
+            openWindows={context.openOrder.map(p =>
+              context.activePrograms.find(x => x.id === p)
+            )}
           />
         )}
       </ProgramContext.Consumer>
