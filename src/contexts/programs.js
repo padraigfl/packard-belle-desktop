@@ -93,16 +93,15 @@ class ProgramProvider extends Component {
     });
   };
 
-  close = program => {
+  close = (program, exit) => {
     if (!this.isProgramActive(program)) {
       return;
     }
 
-    const taskBar = this.state.openOrder.filter(p => p.id !== program.id);
+    const taskBar = this.state.openOrder.filter(p => p !== program.id);
     this.setState({ openOrder: taskBar });
-    // this.windowClose(program);
-
-    if (!program.background) {
+    debugger;
+    if (!program.background || exit) {
       this.exit(program);
     }
   };
@@ -113,7 +112,6 @@ class ProgramProvider extends Component {
         value={{
           ...this.state,
           onClose: this.close,
-          onExit: this.exit,
           moveToTop: this.moveToTop,
           toggleTaskManager: this.toggleTaskManager
         }}
