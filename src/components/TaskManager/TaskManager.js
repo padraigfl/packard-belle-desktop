@@ -15,7 +15,7 @@ class TaskManager extends Component {
 
   exit = () => {
     if (this.state.selected) {
-      this.context.onClose(this.state.selected);
+      this.context.onClose(this.state.selected, true);
     }
   };
 

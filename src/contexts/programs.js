@@ -61,7 +61,9 @@ class ProgramProvider extends Component {
 
   exit = program =>
     this.setState({
-      activePrograms: this.state.activePrograms.filter(notSameProgram(program))
+      activePrograms: this.state.activePrograms.filter(notSameProgram(program)),
+      openOrder: this.state.openOrder.filter(x => x !== program.id),
+      activeId: null
     });
 
   moveToTop = program => {
@@ -75,7 +77,8 @@ class ProgramProvider extends Component {
       activePrograms: [
         ...this.state.activePrograms.filter(notSameProgram(program)),
         program
-      ]
+      ],
+      activeId: program.id
     });
   };
 
@@ -89,7 +92,8 @@ class ProgramProvider extends Component {
     }
     this.setState({
       activePrograms: [...this.state.activePrograms, program],
-      openOrder: [...this.state.openOrder, program.id]
+      openOrder: [...this.state.openOrder, program.id],
+      activeId: program.id
     });
   };
 
@@ -100,7 +104,7 @@ class ProgramProvider extends Component {
 
     const taskBar = this.state.openOrder.filter(p => p !== program.id);
     this.setState({ openOrder: taskBar });
-    debugger;
+
     if (!program.background || exit) {
       this.exit(program);
     }

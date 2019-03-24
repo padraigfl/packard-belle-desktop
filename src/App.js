@@ -60,7 +60,12 @@ class Desktop extends Component {
                 <WindowManager />
                 <TaskManager />
               </Theme>
-              <button onClick={context.changeScale}>changeScale</button>
+              <button
+                style={{ position: "absolute" }}
+                onClick={context.changeScale}
+              >
+                changeScale
+              </button>
             </React.Fragment>
           )}
         </ScaleContext.Consumer>

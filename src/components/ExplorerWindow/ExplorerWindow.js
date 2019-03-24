@@ -18,6 +18,7 @@ const Explorer = props => (
         onRestore={rnd.restore}
         onMaximize={rnd.maximize}
         changingState={rnd.state.changingState}
+        className={props.isActive && "Window--active"}
       >
         Children
       </WindowExplorer>

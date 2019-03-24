@@ -10,10 +10,15 @@
   &__buttons {
     display: flex;
     align-items: center;
-    margin-left: auto;
-    margin-right: 4px;
+    padding-right: 4px;
+    padding-left: 4px;
+
+    .btn:first-child {
+      margin-left: auto;
+    }
     .btn {
-      margin-left: 2px;
+      margin-left: 4px;
+      width: 60px;
     }
   }
 }

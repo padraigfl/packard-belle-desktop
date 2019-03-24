@@ -14,6 +14,7 @@ class TaskBar extends Component {
             key={prog.id || prog.key}
             onClose={this.context.onClose}
             moveToTop={this.context.moveToTop}
+            isActive={prog.id === this.context.activeId}
           />
         ))}
       </>

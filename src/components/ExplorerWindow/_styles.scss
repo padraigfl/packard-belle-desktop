@@ -21,4 +21,7 @@
     width: calc(100% + 4px);
     height: calc(100% + 4px);
   }
+  &:not(.Window--active) {
+    filter: grayscale(100%);
+  }
 }
