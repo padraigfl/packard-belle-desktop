@@ -4,7 +4,11 @@ import Window from "../tools/Window";
 import "./_styles.scss";
 
 const Explorer = props => (
-  <Window {...props}>
+  <Window
+    {...props}
+    initialHeight={props.initialHeight || 200}
+    initialWidth={props.initialWidth || 200}
+  >
     {rnd => (
       <WindowExplorer
         title={props.title}
@@ -17,7 +21,7 @@ const Explorer = props => (
         onMinimize={() => {}}
         onRestore={rnd.restore}
         onMaximize={rnd.maximize}
-        changingState={rnd.state.changingState}
+        changingState={rnd.state.isDragging || rnd.state.isResizing}
         className={props.isActive && "Window--active"}
       >
         Children

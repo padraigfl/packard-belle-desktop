@@ -28,15 +28,22 @@ class TaskManager extends Component {
   render() {
     const { context, props } = this;
     return !context.taskManager ? (
-      <Window {...props} resizable={false}>
+      <Window
+        {...props}
+        resizable={false}
+        initialX={200}
+        initialY={150}
+        initialWidth={240}
+      >
         {rnd => (
           <WindowProgram
             title="Task Manager"
             className="TaskManager"
             onHelp={() => {}} // @todo
             onClose={context.toggleTaskManager}
-            changingState={rnd.state.changingState}
+            changingState={rnd.state.isDragging}
             resizable={false}
+            footer={[{}, {}]}
           >
             <SelectBox
               onClick={this.onSelect}
