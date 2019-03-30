@@ -9,7 +9,7 @@ class TaskBar extends Component {
     return (
       <>
         {this.context.activePrograms.map(prog => (
-          <ExplorerWindow
+          <prog.Component
             {...prog}
             key={prog.id || prog.key}
             onClose={this.context.onClose}

@@ -83,7 +83,7 @@ class ProgramProvider extends Component {
   };
 
   open = program => {
-    if (!program.component) {
+    if (!program.Component) {
       return;
     }
     if (this.isProgramActive(program) && !program.alwaysNew) {

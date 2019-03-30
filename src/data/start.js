@@ -1,5 +1,6 @@
 import * as icons from "../icons";
 import ExplorerWindow from "../components/ExplorerWindow";
+import IframeWindow from "../components/IframeWindow";
 
 const goTo = url => () => window.open(url);
 
@@ -7,9 +8,14 @@ const accessories = [
   { title: "Entertainment", icon: icons.folderProgram16, options: [] },
   { title: "Internet Tools", icon: icons.folderProgram16, options: [] },
   { title: "System Tools", icon: icons.folderProgram16, options: [] },
-  { title: "Calculator", icon: icons.calculator16 },
+  { title: "Calculator", icon: icons.calculator16, isDisabled: true },
   { title: "Notepad", icon: icons.notepad16 },
-  { title: "Paint", icon: icons.paint16 }
+  {
+    title: "Paint",
+    icon: icons.paint16,
+    Component: IframeWindow,
+    data: { src: "https://jspaint.app/" }
+  }
 ];
 
 const programs = [
@@ -17,8 +23,8 @@ const programs = [
   { title: "Online Services", icon: icons.folderProgram16, options: [] },
   { title: "StartUp", icon: icons.folderProgram16, options: [] },
   { title: "Internet Explorer", icon: icons.internetExplorere16 },
-  { title: "MS-DOS Prompt", icon: icons.msDos16 },
-  { title: "Outlook Express", icon: icons.outlook16 },
+  { title: "JS-DOS Prompt", icon: icons.msDos16, isDisabled: true },
+  { title: "Outlook Express", icon: icons.outlook16, isDisabled: true },
   { title: "Windows Explorer", icon: icons.windowsExplorer16 }
 ];
 
@@ -40,45 +46,54 @@ const favorites = [
 ];
 
 const find = [
-  { title: "Files or Folders...", icon: icons.findFiles16, onClick: goTo("") },
+  { title: "Files or Folders...", icon: icons.findFiles16, isDisabled: true },
   {
-    title: "Comuter...",
+    title: "Computer...",
     icon: icons.findComputer16,
-    onClick: goTo("")
+    isDisabled: true
   },
-  { title: "On the Internet...", icon: icons.findOnline16, onClick: goTo("") },
+  {
+    title: "On the Internet...",
+    icon: icons.findOnline16,
+    onClick: goTo("www.google.com")
+  },
   {
     title: "People...",
     icon: icons.findPeople16,
-    onClick: goTo("")
+    onClick: goTo("www.facebook.com")
   }
 ];
 
 const settings = [
   [
-    { title: "Control Panel", icon: icons.controlPanel16, onClick: goTo("") },
     {
-      title: "Printers",
+      title: "Control Panel",
       icon: icons.controlPanel16,
-      component: ExplorerWindow,
+      Component: ExplorerWindow,
       data: {},
       onClick: () => {}
     },
     {
+      title: "Printers",
+      icon: icons.controlPanel16,
+      Component: ExplorerWindow,
+      isDisabled: true
+    },
+    {
       title: "Taskbar & Start Menu...",
       icon: icons.settingsTaskbar16,
-      component: ExplorerWindow,
+      Component: ExplorerWindow,
       onClick: () => {}
     },
     {
       title: "Folder Options",
       icon: icons.folderOptions16,
-      onClick: goTo("")
+      isDisabled: true
     },
     {
       title: "Active Desktop",
       icon: icons.activeDesktop16,
-      onClick: goTo("")
+      onClick: goTo("") // minimize all
     }
   ],
   {
@@ -135,7 +150,8 @@ const startMenu = [
   ],
   {
     title: "Log Off",
-    icon: icons.logOff24
+    icon: icons.logOff24,
+    isDisabled: true
   },
   {
     title: "Shut Down...",

@@ -4,6 +4,7 @@ import { WindowProgram, SelectBox, ButtonForm } from "packard-belle";
 import Window from "../tools/Window";
 
 import "./_task-manager.scss";
+import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
 
 class TaskManager extends Component {
   static contextType = ProgramContext;
@@ -43,7 +44,10 @@ class TaskManager extends Component {
             onClose={context.toggleTaskManager}
             changingState={rnd.state.isDragging}
             resizable={false}
-            footer={[{}, {}]}
+            menuOptions={buildMenu({
+              ...props,
+              onClose: context.toggleTaskManager
+            })}
           >
             <SelectBox
               onClick={this.onSelect}
