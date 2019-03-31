@@ -6,7 +6,7 @@
   background-color: darkslategrey;
 }
 
-.desktop {
+.w98.desktop {
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
@@ -15,7 +15,7 @@
   height: 100%;
 }
 @media (min-width: 640px) and (min-height: 480px) {
-  .desktop {
+  .w98.desktop {
     width: 640px;
     height: 480px;
   }
