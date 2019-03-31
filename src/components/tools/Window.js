@@ -2,6 +2,25 @@ import React from "react";
 import { Rnd } from "react-rnd";
 import { ScaleContext } from "../../contexts/scale";
 
+const resizeStyles = pixels => {
+  const corners = pixels * 4;
+  const halved = pixels / 2;
+  return {
+    bottom: { height: pixels, bottom: -pixels },
+    bottomLeft: { height: corners, width: corners, left: -pixels },
+    bottomRight: {
+      height: corners,
+      width: corners,
+      right: -pixels * 2,
+      bottom: -pixels * 2
+    },
+    left: { width: pixels, right: -pixels },
+    right: { width: pixels, marginLeft: "100%" },
+    top: { height: pixels },
+    topLeft: { height: corners, width: corners, left: -pixels, top: -pixels }
+  };
+};
+
 class Window extends React.PureComponent {
   static contextType = ScaleContext;
   state = {
@@ -39,11 +58,12 @@ class Window extends React.PureComponent {
               topLeft: true,
               topRight: false
             },
+            resizeHandleStyles: resizeStyles(4),
             onResize: this.resize,
             onResizeStart: this.toggleResize(true),
             onResizeStop: this.toggleResize(false)
           }
-        : undefined;
+        : { resizeHandleStyles: resizeStyles(0) };
 
     const maximizedProps = this.state.maximized
       ? {
