@@ -61,7 +61,12 @@ class Desktop extends Component {
                 <TaskManager />
               </Theme>
               <button
-                style={{ right: "0px", position: "absolute" }}
+                style={{
+                  right: "0px",
+                  top: "0px",
+                  position: "absolute",
+                  marginBottom: "30px"
+                }}
                 onClick={context.changeScale}
               >
                 changeScale

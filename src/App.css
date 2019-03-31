@@ -2,7 +2,6 @@
   display: flex;
   align-content: center;
   align-items: center;
-  height: 100vh;
   background-color: darkslategrey;
 }
 
@@ -12,9 +11,13 @@
   overflow: hidden;
   background-color: cadetblue;
   width: 100vw;
-  height: 100vh;
+  height: 133vw;
 }
+
 @media (min-width: 640px) and (min-height: 480px) {
+  #root {
+    height: 100vh;
+  }
   .w98.desktop {
     width: 640px;
     height: 480px;
