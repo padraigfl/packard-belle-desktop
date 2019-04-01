@@ -5,6 +5,13 @@
   background-color: darkslategrey;
 }
 
+html,
+body,
+#root,
+.w98.desktop {
+  overscroll-behavior: none;
+}
+
 .w98.desktop {
   margin-left: auto;
   margin-right: auto;
