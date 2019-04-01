@@ -60,7 +60,7 @@ class Desktop extends Component {
                 <WindowManager />
                 <TaskManager />
               </Theme>
-              <button
+              {/* <button
                 style={{
                   right: "0px",
                   top: "0px",
@@ -70,7 +70,7 @@ class Desktop extends Component {
                 onClick={context.changeScale}
               >
                 changeScale
-              </button>
+              </button> */}
             </React.Fragment>
           )}
         </ScaleContext.Consumer>

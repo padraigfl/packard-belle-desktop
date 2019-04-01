@@ -5,11 +5,23 @@
   background-color: darkslategrey;
 }
 
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  height: 100%;
+  padding: 0;
+  overflow: auto;
+  margin: 0;
+}
+
 html,
 body,
 #root,
-.w98.desktop {
-  overscroll-behavior: none;
+.w98 {
+  overscroll-behavior: none !important;
 }
 
 .w98.desktop {

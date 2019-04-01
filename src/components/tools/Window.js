@@ -21,6 +21,19 @@ const resizeStyles = pixels => {
   };
 };
 
+const getMaxes = document => {
+  const holder = document.querySelector(".w98");
+
+  if (holder && (holder.offsetWidth < 640 || holder.offsetHeight < 480)) {
+    return {
+      maxWidth: Math.ceil(holder.offsetWidth - 5),
+      maxHeight: Math.ceil(holder.offsetHeight - 32)
+    };
+  }
+
+  return {};
+};
+
 class Window extends React.PureComponent {
   static contextType = ScaleContext;
   state = {
@@ -107,6 +120,7 @@ class Window extends React.PureComponent {
               }
               {...resizeProps}
               {...maximizedProps}
+              {...getMaxes(document)}
             >
               {this.props.children(this)}
             </Rnd>
@@ -120,8 +134,8 @@ class Window extends React.PureComponent {
 Window.defaultProps = {
   minWidth: 160,
   minHeight: 160,
-  maxWidth: 635,
   maxHeight: 448,
+  maxWidth: 635,
   resizable: true,
 
   scale: 1,

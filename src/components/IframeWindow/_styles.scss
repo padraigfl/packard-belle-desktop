@@ -3,7 +3,7 @@
     height: 100%;
   }
 
-  &--alert {
+  &--alert.WindowAlert {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -12,5 +12,14 @@
     -moz-transform: translateX(-50%) translateY(-50%);
     -o-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+    z-index: 8;
+  }
+}
+
+.react-draggable-dragging {
+  .IframeWindow {
+    iframe {
+      pointer-events: none;
+    }
   }
 }
