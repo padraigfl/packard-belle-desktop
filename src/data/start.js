@@ -9,7 +9,7 @@ const accessories = [
   { title: "Internet Tools", icon: icons.folderProgram16, options: [] },
   { title: "System Tools", icon: icons.folderProgram16, options: [] },
   { title: "Calculator", icon: icons.calculator16, isDisabled: true },
-  { title: "Notepad", icon: icons.notepad16 },
+  { title: "Notepad", icon: icons.notepad16, isDisabled: true },
   {
     title: "Paint",
     icon: icons.paint16,
@@ -25,7 +25,7 @@ const programs = [
   { title: "Internet Explorer", icon: icons.internetExplorere16 },
   { title: "JS-DOS Prompt", icon: icons.msDos16, isDisabled: true },
   { title: "Outlook Express", icon: icons.outlook16, isDisabled: true },
-  { title: "Windows Explorer", icon: icons.windowsExplorer16 }
+  { title: "Windows Explorer", icon: icons.windowsExplorer16, isDisabled: true }
 ];
 
 const favorites = [
@@ -42,7 +42,7 @@ const favorites = [
     icon: icons.htmlFile16,
     onClick: goTo("www.msn.com")
   },
-  { title: "Web Events", icon: icons.htmlFile16, onClick: goTo("www.msn.com") }
+  { title: "Web Events", icon: icons.htmlFile16, isDisabled: true }
 ];
 
 const find = [
@@ -70,36 +70,37 @@ const settings = [
       title: "Control Panel",
       icon: icons.controlPanel16,
       Component: ExplorerWindow,
-      data: {},
+      data: {
+        content: "Control panel stuff here"
+      },
       onClick: () => {}
     },
-    {
-      title: "Printers",
-      icon: icons.controlPanel16,
-      Component: ExplorerWindow,
-      isDisabled: true
-    },
+    // {
+    //   title: "Printers",
+    //   icon: icons.controlPanel16,
+    //   Component: ExplorerWindow,
+    //   isDisabled: true
+    // },
     {
       title: "Taskbar & Start Menu...",
       icon: icons.settingsTaskbar16,
       Component: ExplorerWindow,
       onClick: () => {}
-    },
-    {
-      title: "Folder Options",
-      icon: icons.folderOptions16,
-      isDisabled: true
-    },
-    {
-      title: "Active Desktop",
-      icon: icons.activeDesktop16,
-      onClick: goTo("") // minimize all
     }
+    // {
+    //   title: "Folder Options",
+    //   icon: icons.folderOptions16,
+    //   isDisabled: true
+    // },
+    // {
+    //   title: "Active Desktop",
+    //   icon: icons.activeDesktop16,
+    //    // minimize all
+    // }
   ],
   {
     title: "Windows Update...",
-    icon: icons.windowsUpdate16,
-    onClick: goTo("")
+    icon: icons.windowsUpdate16
   }
 ];
 
@@ -107,9 +108,10 @@ const startMenu = [
   {
     title: "Windows Update",
     icon: icons.windowsUpdate24,
-    onClick: () => {
-      window.location = "www.google.com";
-    }
+    isDisabled: true
+    // onClick: () => {
+    //   window.location = "www.google.com";
+    // }
   },
   [
     {

@@ -1,7 +1,10 @@
 import React from "react";
 import { WindowExplorer } from "packard-belle";
 import Window from "../tools/Window";
+import * as icons from "../../icons";
 import "./_styles.scss";
+
+const noop = () => {};
 
 export const buildMenu = props => [
   {
@@ -38,8 +41,49 @@ const Explorer = props => (
         changingState={rnd.state.isDragging || rnd.state.isResizing}
         className={props.isActive && "Window--active"}
         menuOptions={buildMenu(props)}
+        explorerOptions={[
+          {
+            icon: icons.back,
+            title: "Back",
+            onClick: noop
+          },
+          {
+            icon: icons.forward,
+            title: "Forward",
+            onClick: noop
+          },
+          {
+            icon: icons.upDir,
+            title: "Up",
+            onClick: noop
+          },
+          {
+            icon: icons.cut,
+            title: "Cut",
+            onClick: noop
+          },
+          {
+            icon: icons.copy,
+            title: "Copy",
+            onClick: noop
+          },
+          {
+            icon: icons.delete,
+            title: "Delete",
+            onClick: noop
+          },
+          {
+            icon: icons.properties,
+            title: "Properties",
+            onClick: noop
+          },
+          {
+            icon: icons.views,
+            title: "Views"
+          }
+        ]}
       >
-        Children
+        {props.title} and the content goes here
       </WindowExplorer>
     )}
   </Window>

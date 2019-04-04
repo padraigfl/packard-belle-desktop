@@ -38,3 +38,14 @@ export { default as windowsExplorer16 } from "./windowsExplorer16.png";
 export { default as windowsUpdate16 } from "./windowsUpdate16.png";
 export { default as windowsUpdate24 } from "./windowsUpdate24.png";
 export { default as wordpad16 } from "./wordpad16.png";
+
+export { default as back } from "./back.png";
+export { default as forward } from "./forward.png";
+export { default as cut } from "./cut.png";
+export { default as copy } from "./copy.png";
+export { default as paste } from "./paste.png";
+export { default as delete } from "./delete.png";
+export { default as properties } from "./properties.png";
+export { default as undo } from "./undo.png";
+export { default as upDir } from "./upDir.png";
+export { default as views } from "./views.png";
