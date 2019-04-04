@@ -8,6 +8,7 @@ import WindowManager from "./components/WindowManager";
 import ProgramProvider, { ProgramContext } from "./contexts/programs";
 import ScaleProvider, { ScaleContext } from "./contexts/scale";
 import TaskManager from "./components/TaskManager";
+import DesktopView from "./components/DesktopView";
 
 const testOptions = [
   {
@@ -51,11 +52,7 @@ class Desktop extends Component {
               <Theme
                 className={cx("desktop", { desktopX2: context.scale === 2 })}
               >
-                <ExplorerView options={testOptions}>
-                  {testOptions.map(option => (
-                    <ExplorerIcon key={option.title} {...option} />
-                  ))}
-                </ExplorerView>
+                <DesktopView />
                 <TaskBar />
                 <WindowManager />
                 <TaskManager />

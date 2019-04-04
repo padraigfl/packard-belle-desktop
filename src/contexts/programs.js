@@ -22,7 +22,13 @@ const addIdsToData = data =>
       })
     : undefined;
 const startWithIds = addIdsToData(startMenuData);
-const desktopWithIds = addIdsToData(desktopData);
+const desktopWithIds = addIdsToData(desktopData).map(entry => {
+  const { onClick, ...data } = entry;
+  return {
+    ...data,
+    onDoubleClick: onClick
+  };
+});
 
 const initialize = (open, data) =>
   Array.isArray(data)
@@ -48,7 +54,13 @@ const initialize = (open, data) =>
 class ProgramProvider extends Component {
   state = {
     startMenu: initialize(p => this.open(p), startWithIds),
-    desktop: initialize(this.open, desktopWithIds),
+    desktop: initialize(p => this.open(p), desktopWithIds).map(entry => {
+      const { onClick, ...data } = entry;
+      return {
+        ...data,
+        onDoubleClick: onClick
+      };
+    }),
     activePrograms: [],
     openOrder: []
   };
