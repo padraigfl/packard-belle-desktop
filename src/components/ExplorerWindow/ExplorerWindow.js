@@ -30,15 +30,13 @@ const Explorer = props => (
       <WindowExplorer
         title={props.title}
         icon={props.icon}
-        footer={[
-          { text: "needs 100% width height" },
-          { text: "overflow control" }
-        ]}
+        footer={[{ text: "" }, { text: "" }, { text: props.title }]}
         onClose={() => props.onClose(props)}
-        onMinimize={() => {}}
+        onMinimize={() => props.onMinimize(props)}
         onRestore={rnd.restore}
         onMaximize={rnd.maximize}
         changingState={rnd.state.isDragging || rnd.state.isResizing}
+        maximizeOnOpen={rnd.context.isMobile}
         className={props.isActive && "Window--active"}
         menuOptions={buildMenu(props)}
         explorerOptions={[

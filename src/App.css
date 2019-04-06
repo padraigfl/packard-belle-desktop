@@ -37,10 +37,11 @@ body,
   #root {
     height: 100vh;
   }
-  .w98.desktop {
-    width: 640px;
-    height: 480px;
-  }
+}
+
+.w98.desktop.notMobile {
+  width: 640px;
+  height: 480px;
 }
 
 .desktopX2 {
@@ -54,4 +55,9 @@ body,
 
 .StandardMenuItem__button {
   padding-top: 1px;
+}
+
+.Window.Window--maximized {
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
 }

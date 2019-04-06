@@ -42,18 +42,19 @@ const Notepad = props => {
             "Notepad--wrap": wrap,
             "Window--active": props.isActive
           })}
-          title={props.title || "Notepad"}
+          title={`${props.title || "Untitled"} - Notepad`}
           icon={notepad16}
           footer={[
             { text: "needs 100% width height" },
             { text: "overflow control" }
           ]}
           onClose={() => props.onClose(props)}
-          onMinimize={() => {}}
+          onMinimize={() => props.onMinimize(props)}
           onRestore={rnd.restore}
           onMaximize={rnd.maximize}
           changingState={rnd.state.isDragging || rnd.state.isResizing}
           menuOptions={buildMenu(props, { toggleWrap, wrap })}
+          maximizeOnOpen={rnd.context.isMobile}
         >
           <div className="Notepad__textarea">
             <textarea onChange={e => setText(e.target.value)}>{text}</textarea>

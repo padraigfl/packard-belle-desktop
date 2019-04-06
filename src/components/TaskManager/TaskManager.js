@@ -28,7 +28,7 @@ class TaskManager extends Component {
 
   render() {
     const { context, props } = this;
-    return !context.taskManager ? (
+    return context.taskManager ? (
       <Window
         {...props}
         resizable={false}

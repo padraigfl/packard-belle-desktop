@@ -1,25 +1,27 @@
 import React, { Component } from "react";
-import ExplorerWindow from "../ExplorerWindow";
 import { ProgramContext } from "../../contexts/programs";
 
-class TaskBar extends Component {
+class WindowManager extends Component {
   static contextType = ProgramContext;
 
   render() {
     return (
       <>
-        {this.context.activePrograms.map(prog => (
-          <prog.Component
-            {...prog}
-            key={prog.id || prog.key}
-            onClose={this.context.onClose}
-            moveToTop={this.context.moveToTop}
-            isActive={prog.id === this.context.activeId}
-          />
-        ))}
+        {this.context.activePrograms
+          .filter(prog => !prog.minimized)
+          .map(prog => (
+            <prog.Component
+              {...prog}
+              key={prog.id || prog.key}
+              onClose={this.context.onClose}
+              onMinimize={this.context.onMinimize}
+              moveToTop={this.context.moveToTop}
+              isActive={prog.id === this.context.activeId}
+            />
+          ))}
       </>
     );
   }
 }
 
-export default TaskBar;
+export default WindowManager;

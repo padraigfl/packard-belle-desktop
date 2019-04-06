@@ -10,12 +10,18 @@ const accessories = [
   { title: "Internet Tools", icon: icons.folderProgram16, options: [] },
   { title: "System Tools", icon: icons.folderProgram16, options: [] },
   { title: "Calculator", icon: icons.calculator16, isDisabled: true },
-  { title: "Notepad", icon: icons.notepad16, Component: Notepad },
+  {
+    title: "Notepad",
+    icon: icons.notepad16,
+    Component: Notepad,
+    multiWindow: true
+  },
   {
     title: "Paint",
     icon: icons.paint16,
     Component: IframeWindow,
-    data: { src: "https://jspaint.app/" }
+    data: { src: "https://jspaint.app/" },
+    multiWindow: true
   }
 ];
 
@@ -65,101 +71,25 @@ const find = [
   }
 ];
 
-const settings = [
-  [
-    {
-      title: "Control Panel",
-      icon: icons.controlPanel16,
-      Component: ExplorerWindow,
-      data: {
-        content: "Control panel stuff here"
-      },
-      onClick: () => {}
-    },
-    // {
-    //   title: "Printers",
-    //   icon: icons.controlPanel16,
-    //   Component: ExplorerWindow,
-    //   isDisabled: true
-    // },
-    {
-      title: "Taskbar & Start Menu...",
-      icon: icons.settingsTaskbar16,
-      Component: ExplorerWindow,
-      onClick: () => {}
-    }
-    // {
-    //   title: "Folder Options",
-    //   icon: icons.folderOptions16,
-    //   isDisabled: true
-    // },
-    // {
-    //   title: "Active Desktop",
-    //   icon: icons.activeDesktop16,
-    //    // minimize all
-    // }
-  ],
+export default [
   {
-    title: "Windows Update...",
-    icon: icons.windowsUpdate16
-  }
-];
-
-const startMenu = [
-  {
-    title: "Windows Update",
-    icon: icons.windowsUpdate24,
-    isDisabled: true
-    // onClick: () => {
-    //   window.location = "https://google.com";
-    // }
-  },
-  [
-    {
-      title: "Programs",
-      icon: icons.folderProgram24,
-      options: programs
-    },
-    {
-      title: "Favorites",
-      icon: icons.folderFavorites24,
-      options: favorites
-    },
-    {
-      title: "Documents",
-      icon: icons.folderOpen24,
-      options: []
-    },
-    {
-      title: "Settings",
-      icon: icons.settings24,
-      options: settings
-    },
-    {
-      title: "Find",
-      icon: icons.find24,
-      options: find
-    },
-    {
-      title: "Help",
-      icon: icons.help24,
-      options: []
-    },
-    {
-      title: "Run...",
-      icon: icons.run24,
-      options: []
-    }
-  ],
-  {
-    title: "Log Off",
-    icon: icons.logOff24,
-    isDisabled: true
+    title: "Programs",
+    icon: icons.folderProgram24,
+    options: programs
   },
   {
-    title: "Shut Down...",
-    icon: icons.shutDown24
+    title: "Favorites",
+    icon: icons.folderFavorites24,
+    options: favorites
+  },
+  {
+    title: "Documents",
+    icon: icons.folderOpen24,
+    options: []
+  },
+  {
+    title: "Find",
+    icon: icons.find24,
+    options: find
   }
 ];
-
-export default startMenu;

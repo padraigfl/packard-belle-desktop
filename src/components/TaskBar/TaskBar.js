@@ -12,7 +12,7 @@ const TaskBar = () => (
           const programIdx = activePrograms.findIndex(x => x.id === p);
           return {
             ...activePrograms[programIdx],
-            isActive: programIdx === activePrograms.length - 1,
+            isActive: p === context.activeId,
             onClick: () => context.moveToTop(activePrograms[programIdx])
           };
         })}

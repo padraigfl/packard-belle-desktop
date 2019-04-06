@@ -1,9 +1,87 @@
 import React, { Component, createContext } from "react";
 import nanoid from "nanoid";
-import startMenuData from "../data/start";
+import startMenuData, { find } from "../data/start";
 import desktopData from "../data/desktop";
+import * as icons from "../icons";
+import ExplorerWindow from "../components/ExplorerWindow";
 
 export const ProgramContext = createContext();
+
+const settings = (injectedData = []) => [
+  [
+    ...injectedData,
+    {
+      title: "Control Panel",
+      icon: icons.controlPanel16,
+      Component: ExplorerWindow,
+      data: {
+        content: "Control panel stuff here"
+      },
+      onClick: () => {}
+    },
+    // {
+    //   title: "Printers",
+    //   icon: icons.controlPanel16,
+    //   Component: ExplorerWindow,
+    //   isDisabled: true
+    // },
+    {
+      title: "Taskbar & Start Menu...",
+      icon: icons.settingsTaskbar16,
+      Component: ExplorerWindow,
+      onClick: () => {}
+    }
+    // {
+    //   title: "Folder Options",
+    //   icon: icons.folderOptions16,
+    //   isDisabled: true
+    // },
+    // {
+    //   title: "Active Desktop",
+    //   icon: icons.activeDesktop16,
+    //    // minimize all
+    // }
+  ],
+  {
+    title: "Windows Update...",
+    icon: icons.windowsUpdate16
+  }
+];
+
+const startMenu = (injectedData = [], set) => [
+  {
+    title: "Windows Update",
+    icon: icons.windowsUpdate24,
+    isDisabled: true
+  },
+  [
+    ...injectedData,
+    {
+      title: "Settings",
+      icon: icons.settings24,
+      options: settings(set)
+    },
+    {
+      title: "Help",
+      icon: icons.help24,
+      options: []
+    },
+    {
+      title: "Run...",
+      icon: icons.run24,
+      options: []
+    }
+  ],
+  {
+    title: "Log Off",
+    icon: icons.logOff24,
+    isDisabled: true
+  },
+  {
+    title: "Shut Down...",
+    icon: icons.shutDown24
+  }
+];
 
 const sameProgram = a => b => a.id === b.id;
 const notSameProgram = a => b => a.id !== b.id;
@@ -21,7 +99,7 @@ const addIdsToData = data =>
         };
       })
     : undefined;
-const startWithIds = addIdsToData(startMenuData);
+
 const desktopWithIds = addIdsToData(desktopData).map(entry => {
   const { onClick, ...data } = entry;
   return {
@@ -61,7 +139,15 @@ const initialize = (open, data, doubleClick) =>
 
 class ProgramProvider extends Component {
   state = {
-    startMenu: initialize(p => this.open(p), startWithIds),
+    startMenu: initialize(
+      p => this.open(p),
+      addIdsToData(
+        startMenu(startMenuData, [
+          { title: "Ctrl+Alt+Del", onClick: () => this.toggleTaskManager() },
+          { title: "Settings", onClick: () => this.toggleSettings() }
+        ])
+      )
+    ),
     desktop: initialize(p => this.open(p), desktopWithIds).map(entry => {
       const { onClick, ...data } = entry;
       return {
@@ -70,11 +156,14 @@ class ProgramProvider extends Component {
       };
     }),
     activePrograms: [],
-    openOrder: []
+    openOrder: [],
+    settingsDisplay: false
   };
 
   toggleTaskManager = () =>
-    this.setState({ taskManager: !this.state.taskManager });
+    this.setState(state => ({ taskManager: !state.taskManager }));
+  toggleSettings = () =>
+    this.setState(state => ({ settingsDisplay: !state.settingsDisplay }));
 
   isProgramActive = program =>
     this.state.activePrograms.some(sameProgram(program));
@@ -96,7 +185,10 @@ class ProgramProvider extends Component {
     this.setState({
       activePrograms: [
         ...this.state.activePrograms.filter(notSameProgram(program)),
-        program
+        {
+          ...program,
+          minimzed: false
+        }
       ],
       activeId: program.id
     });
@@ -106,14 +198,18 @@ class ProgramProvider extends Component {
     if (!program.Component) {
       return;
     }
-    if (this.isProgramActive(program) && !program.alwaysNew) {
+    if (this.isProgramActive(program) && !program.multiWindow) {
       this.moveToTop(program);
       return;
     }
+    const newProgram = {
+      ...program,
+      id: program.multiWindow ? nanoid() : program.id
+    };
     this.setState({
-      activePrograms: [...this.state.activePrograms, program],
-      openOrder: [...this.state.openOrder, program.id],
-      activeId: program.id
+      activePrograms: [...this.state.activePrograms, newProgram],
+      openOrder: [...this.state.openOrder, newProgram.id],
+      activeId: newProgram.id
     });
   };
 
@@ -130,6 +226,23 @@ class ProgramProvider extends Component {
     }
   };
 
+  minimize = program => {
+    if (!this.isProgramActive(program)) {
+      return;
+    } else {
+      this.setState({
+        activePrograms: [
+          {
+            ...program,
+            minimized: true
+          },
+          ...this.state.activePrograms.filter(prog => prog.id !== program.id)
+        ],
+        activeId: null
+      });
+    }
+  };
+
   render() {
     return (
       <ProgramContext.Provider
@@ -137,7 +250,9 @@ class ProgramProvider extends Component {
           ...this.state,
           onClose: this.close,
           moveToTop: this.moveToTop,
-          toggleTaskManager: this.toggleTaskManager
+          toggleTaskManager: this.toggleTaskManager,
+          toggleSettings: this.toggleSettings,
+          onMinimize: this.minimize
         }}
       >
         {this.props.children}

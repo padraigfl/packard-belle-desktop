@@ -9,6 +9,7 @@ import ProgramProvider, { ProgramContext } from "./contexts/programs";
 import SettingsProvider, { SettingsContext } from "./contexts/settings";
 import TaskManager from "./components/TaskManager";
 import DesktopView from "./components/DesktopView";
+import Settings from "./components/Settings";
 
 const testOptions = [
   {
@@ -43,27 +44,28 @@ const testOptions = [
 class Desktop extends Component {
   static contextType = SettingsContext;
 
+  componentDidMount() {
+    if (window.innerWidth < 800) {
+      this.context.toggleMobile(true);
+    }
+  }
+
   render() {
     const { context } = this;
     return (
       <ProgramProvider>
-        <Theme className={cx("desktop", { desktopX2: context.scale === 2 })}>
+        <Theme
+          className={cx("desktop", {
+            desktopX2: context.scale === 2,
+            notMobile: !context.isMobile
+          })}
+        >
           <DesktopView />
           <TaskBar />
           <WindowManager />
           <TaskManager />
+          <Settings />
         </Theme>
-        <button
-          style={{
-            right: "0px",
-            top: "0px",
-            position: "absolute",
-            marginBottom: "30px"
-          }}
-          onClick={context.changeScale}
-        >
-          changeSettings
-        </button>
       </ProgramProvider>
     );
   }

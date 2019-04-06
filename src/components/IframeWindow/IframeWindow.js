@@ -45,6 +45,7 @@ class IFrame extends Component {
               title={props.title}
               icon={props.icon}
               onClose={() => props.onClose(props)}
+              onMinimize={() => props.onMinimize(props)}
               onMinimize={() => {}}
               onRestore={rnd.restore}
               onMaximize={rnd.maximize}
@@ -53,6 +54,7 @@ class IFrame extends Component {
                 "Window--active": props.isActive
               })}
               menuOptions={props.data.useMenu && buildMenu(props)}
+              maximizeOnOpen={rnd.context.isMobile}
             >
               <iframe src={props.data.src} title={props.title} />
             </WindowProgram>

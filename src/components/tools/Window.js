@@ -18,7 +18,8 @@ const resizeStyles = pixels => {
     left: { width: pixels, right: -pixels },
     right: { width: pixels, marginLeft: "100%" },
     top: { height: pixels },
-    topLeft: { height: corners, width: corners, left: -pixels, top: -pixels }
+    topLeft: { height: corners, width: corners, left: -pixels, top: -pixels },
+    topRight: { width: 0, height: 0 }
   };
 };
 
@@ -37,14 +38,28 @@ const getMaxes = document => {
 
 const randomizeLaunchSpot = max => Math.ceil(Math.random() * max);
 
+const launchPositions = (propX, propY, isMobile) => {
+  const random = randomizeLaunchSpot(80);
+  const x = propX || random;
+  const y = propY || random;
+  return !isMobile
+    ? {
+        x,
+        y
+      }
+    : {
+        x: x / 2,
+        y: y / 2
+      };
+};
+
 class Window extends React.PureComponent {
   static contextType = SettingsContext;
   state = {
-    x: this.props.initialX || randomizeLaunchSpot(30),
-    y: this.props.initialY || randomizeLaunchSpot(30),
     height: this.props.initialHeight,
     width: this.props.initialWidth,
-    maximized: false
+    maximized: this.context.isMobile && this.props.resizable,
+    ...launchPositions(this.props.inintalX, this.props.initialY)
   };
 
   updateLocation = (a, b) =>
@@ -65,16 +80,6 @@ class Window extends React.PureComponent {
     const resizeProps =
       this.props.resizable && !this.state.maximized
         ? {
-            enableResizing: {
-              bottom: true,
-              bottomLeft: true,
-              bottomRight: true,
-              left: true,
-              right: true,
-              top: true,
-              topLeft: true,
-              topRight: false
-            },
             resizeHandleStyles: resizeStyles(4),
             onResize: this.resize,
             onResizeStart: this.toggleResize(true),
@@ -118,8 +123,8 @@ class Window extends React.PureComponent {
           bounds=".w98"
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
-          maxWidth={!this.state.maximized && this.props.maxWidth}
-          maxHeight={!this.state.maximized && this.props.maxHeight}
+          maxWidth={!this.state.maximized ? this.props.maxWidth : "105%"}
+          maxHeight={!this.state.maximized ? this.props.maxHeigh : "105%"}
           scale={context.scale}
           onMouseDown={
             this.props.moveToTop
@@ -140,8 +145,8 @@ class Window extends React.PureComponent {
 Window.defaultProps = {
   minWidth: 160,
   minHeight: 160,
-  maxHeight: 448,
-  maxWidth: 635,
+  // maxHeight: 448,
+  // maxWidth: 635,
   resizable: true,
 
   scale: 1,
