@@ -6,8 +6,9 @@ import "./App.css";
 import TaskBar from "./components/TaskBar";
 import WindowManager from "./components/WindowManager";
 import ProgramProvider, { ProgramContext } from "./contexts/programs";
-import ScaleProvider, { ScaleContext } from "./contexts/scale";
+import SettingsProvider, { SettingsContext } from "./contexts/settings";
 import TaskManager from "./components/TaskManager";
+import DesktopView from "./components/DesktopView";
 
 const testOptions = [
   {
@@ -40,49 +41,38 @@ const testOptions = [
 ];
 
 class Desktop extends Component {
-  static contextType = ProgramContext;
+  static contextType = SettingsContext;
 
   render() {
+    const { context } = this;
     return (
       <ProgramProvider>
-        <ScaleContext.Consumer>
-          {context => (
-            <React.Fragment>
-              <Theme
-                className={cx("desktop", { desktopX2: context.scale === 2 })}
-              >
-                <ExplorerView options={testOptions}>
-                  {testOptions.map(option => (
-                    <ExplorerIcon key={option.title} {...option} />
-                  ))}
-                </ExplorerView>
-                <TaskBar />
-                <WindowManager />
-                <TaskManager />
-              </Theme>
-              {/* <button
-                style={{
-                  right: "0px",
-                  top: "0px",
-                  position: "absolute",
-                  marginBottom: "30px"
-                }}
-                onClick={context.changeScale}
-              >
-                changeScale
-              </button> */}
-            </React.Fragment>
-          )}
-        </ScaleContext.Consumer>
+        <Theme className={cx("desktop", { desktopX2: context.scale === 2 })}>
+          <DesktopView />
+          <TaskBar />
+          <WindowManager />
+          <TaskManager />
+        </Theme>
+        <button
+          style={{
+            right: "0px",
+            top: "0px",
+            position: "absolute",
+            marginBottom: "30px"
+          }}
+          onClick={context.changeScale}
+        >
+          changeSettings
+        </button>
       </ProgramProvider>
     );
   }
 }
 
 const App = () => (
-  <ScaleProvider>
+  <SettingsProvider>
     <Desktop />
-  </ScaleProvider>
+  </SettingsProvider>
 );
 
 // include corner thing if resizable

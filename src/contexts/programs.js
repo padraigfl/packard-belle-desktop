@@ -22,24 +22,38 @@ const addIdsToData = data =>
       })
     : undefined;
 const startWithIds = addIdsToData(startMenuData);
-const desktopWithIds = addIdsToData(desktopData);
+const desktopWithIds = addIdsToData(desktopData).map(entry => {
+  const { onClick, ...data } = entry;
+  return {
+    ...data,
+    onDoubleClick: onClick
+  };
+});
 
-const initialize = (open, data) =>
+const initialize = (open, data, doubleClick) =>
   Array.isArray(data)
     ? data.map(d => {
         if (Array.isArray(d)) {
           return initialize(open, d);
         }
-        return {
-          ...d,
-          onClick: !d.options
-            ? (...params) => {
+        const { onClick, ...nestedData } = d;
+        const onClickAction = !d.options
+          ? (...params) => {
+              if (d.Component) {
                 open(d);
-                if (d.onClick) {
-                  d.onClick(...params);
-                }
               }
-            : undefined,
+              if (d.onClick) {
+                d.onClick(...params);
+              }
+              if (d.onDoubleClick) {
+                d.onDoubleClick(...params);
+              }
+            }
+          : undefined;
+        return {
+          ...nestedData,
+          onClick: !doubleClick ? onClickAction : undefined,
+          onDoubleClick: doubleClick ? onClick : undefined,
           options: initialize(open, d.options)
         };
       })
@@ -48,7 +62,13 @@ const initialize = (open, data) =>
 class ProgramProvider extends Component {
   state = {
     startMenu: initialize(p => this.open(p), startWithIds),
-    desktop: initialize(this.open, desktopWithIds),
+    desktop: initialize(p => this.open(p), desktopWithIds).map(entry => {
+      const { onClick, ...data } = entry;
+      return {
+        ...data,
+        onDoubleClick: onClick
+      };
+    }),
     activePrograms: [],
     openOrder: []
   };

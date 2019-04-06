@@ -1,0 +1,33 @@
+@import "../../../node_modules/packard-belle/src/_scss/w98/mixins/box-shadows.scss";
+
+@font-face {
+  font-family: "FixedSys";
+  src: url("../../assets/FixedsysStripped.woff2") format("woff2");
+}
+
+.Notepad {
+  &__textarea {
+    @include shadow-input;
+    padding: 4px 2px;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-grow: 1;
+    margin-bottom: 2px;
+  }
+  textarea {
+    font-family: "FixedSys", "Courier New", Courier, monospace;
+    resize: none;
+    white-space: nowrap;
+    outline: none;
+    min-height: 100%;
+    border: none;
+    flex-grow: 1;
+  }
+  &--wrap {
+    textarea {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+}

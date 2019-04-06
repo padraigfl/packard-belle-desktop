@@ -1,6 +1,7 @@
 import * as icons from "../icons";
 import ExplorerWindow from "../components/ExplorerWindow";
 import IframeWindow from "../components/IframeWindow";
+import Notepad from "../components/Notepad";
 
 const goTo = url => () => window.open(url);
 
@@ -9,7 +10,7 @@ const accessories = [
   { title: "Internet Tools", icon: icons.folderProgram16, options: [] },
   { title: "System Tools", icon: icons.folderProgram16, options: [] },
   { title: "Calculator", icon: icons.calculator16, isDisabled: true },
-  { title: "Notepad", icon: icons.notepad16, isDisabled: true },
+  { title: "Notepad", icon: icons.notepad16, Component: Notepad },
   {
     title: "Paint",
     icon: icons.paint16,
@@ -36,11 +37,11 @@ const favorites = [
   },
   { title: "Links", icon: icons.folder16, options: [] },
   { title: "Media", icon: icons.folder16, options: [] },
-  { title: "MSN", icon: icons.htmlFile16, onClick: goTo("www.msn.com") },
+  { title: "MSN", icon: icons.htmlFile16, onClick: goTo("https://msn.com") },
   {
     title: "Radio Station Guide",
     icon: icons.htmlFile16,
-    onClick: goTo("www.msn.com")
+    onClick: goTo("https://msn.com")
   },
   { title: "Web Events", icon: icons.htmlFile16, isDisabled: true }
 ];
@@ -55,12 +56,12 @@ const find = [
   {
     title: "On the Internet...",
     icon: icons.findOnline16,
-    onClick: goTo("www.google.com")
+    onClick: goTo("https://google.com")
   },
   {
     title: "People...",
     icon: icons.findPeople16,
-    onClick: goTo("www.facebook.com")
+    onClick: goTo("https://facebook.com")
   }
 ];
 
@@ -110,7 +111,7 @@ const startMenu = [
     icon: icons.windowsUpdate24,
     isDisabled: true
     // onClick: () => {
-    //   window.location = "www.google.com";
+    //   window.location = "https://google.com";
     // }
   },
   [
