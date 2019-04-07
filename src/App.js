@@ -9,6 +9,7 @@ import SettingsProvider, { SettingsContext } from "./contexts/settings";
 import TaskManager from "./components/TaskManager";
 import DesktopView from "./components/DesktopView";
 import Settings from "./components/Settings";
+import CRTOverlay from "./components/tools/CRT";
 
 class Desktop extends Component {
   static contextType = SettingsContext;
@@ -24,9 +25,11 @@ class Desktop extends Component {
     return (
       <ProgramProvider>
         <Theme
-          className={cx("desktop", {
+          className={cx("desktop screen", {
             desktopX2: context.scale === 2,
-            notMobile: !context.isMobile
+            desktopX1_5: context.scale === 1.5,
+            notMobile: !context.isMobile,
+            fullScreen: context.fullScreen
           })}
         >
           <DesktopView />
@@ -34,6 +37,7 @@ class Desktop extends Component {
           <WindowManager />
           <TaskManager />
           <Settings />
+          {context.crt && <CRTOverlay />}
         </Theme>
       </ProgramProvider>
     );

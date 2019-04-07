@@ -2,14 +2,18 @@ import React, { Component, createContext } from "react";
 
 export const SettingsContext = createContext();
 
-const toggle = (dis, key) => value => {
-  dis.setState(state => ({ [key]: value || !state[key] }));
+const toggle = (dis, key) => () => {
+  dis.setState(state => ({ [key]: !state[key] }));
+};
+
+const setKeyValue = (dis, key) => val => {
+  dis.setState(state => ({ [key]: val }));
 };
 
 class SettingsProvider extends Component {
   state = {
     scale: 1,
-    crt: false,
+    crt: true,
     fullScreen: false,
     isMobile: false
   };
@@ -17,7 +21,7 @@ class SettingsProvider extends Component {
   toggleCrt = toggle(this, "crt");
   toggleFullScreen = toggle(this, "fullScreen");
   toggleMobile = toggle(this, "isMobile");
-  changeScale = toggle(this, "scale");
+  changeScale = setKeyValue(this, "scale");
 
   render() {
     const { changeScale, toggleCrt, toggleFullScreen, toggleMobile } = this;

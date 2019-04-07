@@ -1,0 +1,164 @@
+// @import "compass/css3";
+
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$screen-background: #121010;
+
+@keyframes flicker {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      opacity: random();
+    }
+  }
+}
+.container {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 100;
+  pointer-events: none;
+
+  // flicker
+  &::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: transparentize($screen-background, 0.98);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  // scanlines
+  &::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+        transparentize($screen-background, 1) 50%,
+        transparentize(darken($screen-background, 10), 0.75) 50%
+      ),
+      linear-gradient(
+        90deg,
+        transparentize(#ff0000, 0.94),
+        transparentize(#00ff00, 0.98),
+        transparentize(#0000ff, 0.94)
+      );
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+}
+.container::after {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes turn-on {
+  0% {
+    transform: scale(1, 0.8) translate3d(0, 0, 0);
+    -webkit-filter: brightness(30);
+    filter: brightness(30);
+    opacity: 1;
+  }
+  3.5% {
+    transform: scale(1, 0.8) translate3d(0, 100%, 0);
+  }
+
+  3.6% {
+    transform: scale(1, 0.8) translate3d(0, -100%, 0);
+    opacity: 1;
+  }
+
+  9% {
+    transform: scale(1.3, 0.6) translate3d(0, 100%, 0);
+    -webkit-filter: brightness(30);
+    filter: brightness(30);
+    opacity: 0;
+  }
+
+  11% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    -webkit-filter: contrast(0) brightness(0);
+    filter: contrast(0) brightness(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    -webkit-filter: contrast(1) brightness(1.2) saturate(1.3);
+    filter: contrast(1) brightness(1.2) saturate(1.3);
+    opacity: 1;
+  }
+}
+@keyframes turn-off {
+  0% {
+    transform: scale(1, 1.3) translate3d(0, 0, 0);
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.3, 0.001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(10);
+    filter: brightness(10);
+  }
+  100% {
+    animation-timing-function: $ease-in-quint;
+    transform: scale(0, 0.0001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(50);
+    filter: brightness(50);
+  }
+}
+.screen {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.container > .screen {
+  animation: turn-off 0.55s $ease-out-quint;
+  animation-fill-mode: forwards;
+}
+.container > .screen {
+  animation: turn-on 4s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes overlay-anim {
+  0% {
+    visibility: hidden;
+  }
+  20% {
+    visibility: hidden;
+  }
+  21% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+.overlay {
+  color: #00ff00;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 60px;
+  //text-shadow:2px 2px black,-2px -2px black, -2px 2px black, 2px -2px black;
+  visibility: hidden;
+  pointer-events: none;
+}
+.container .overlay {
+  animation: overlay-anim 5s linear;
+  animation-fill-mode: forwards;
+}

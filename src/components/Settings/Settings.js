@@ -82,8 +82,8 @@ class Settings extends Component {
                     <Checkbox
                       id="Fullscreen"
                       label="Fullscreen"
-                      onChange={context.toggleCrt}
-                      checked={context.crt === true}
+                      onChange={context.toggleFullScreen}
+                      checked={context.fullScreen === true}
                     />
                   </DetailsSection>
                   <DetailsSection title="Scale Options">

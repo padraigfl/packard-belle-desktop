@@ -44,8 +44,16 @@ body,
   height: 480px;
 }
 
+.w98.desktop.fullScreen {
+  width: 100%;
+  height: 100%;
+}
+
 .desktopX2 {
   transform: scale(2);
+}
+.desktopX1_5 {
+  transform: scale(1.5);
 }
 
 .react-draggable > .Window {
