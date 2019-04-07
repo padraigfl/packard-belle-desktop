@@ -20,13 +20,13 @@ export default [
   },
   {
     title: "Paint",
-    icon: icons.paint16,
+    icon: icons.paint32,
     Component: IframeWindow,
     data: { src: "https://jspaint.app/" }
   },
   {
     title: "facepalm",
-    icon: icons.notepad16,
+    icon: icons.notepadFile32,
     Component: Notepad,
     data: {
       content: facepalm

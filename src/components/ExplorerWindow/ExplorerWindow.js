@@ -11,7 +11,7 @@ export const buildMenu = props => [
     title: "File",
     options: [
       { title: "Open", isDisabled: true },
-      { title: "Close", onClick: () => props.onClose(props) }
+      { title: "Close", onClick: () => props.onClose(props.id) }
     ]
   },
   {
@@ -31,8 +31,8 @@ const Explorer = props => (
         title={props.title}
         icon={props.icon}
         footer={[{ text: "" }, { text: "" }, { text: props.title }]}
-        onClose={() => props.onClose(props)}
-        onMinimize={() => props.onMinimize(props)}
+        onClose={() => props.onClose(props.id)}
+        onMinimize={() => props.onMinimize(props.id)}
         onRestore={rnd.restore}
         onMaximize={rnd.maximize}
         changingState={rnd.state.isDragging || rnd.state.isResizing}

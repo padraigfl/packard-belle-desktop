@@ -10,7 +10,8 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-rnd": "^9.1.2",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "safe-eval": "^0.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

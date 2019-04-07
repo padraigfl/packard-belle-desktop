@@ -18,7 +18,7 @@ class IFrame extends Component {
     const commonProps = {
       title: props.title,
       icon: props.icon,
-      onClose: () => props.onClose(props)
+      onClose: () => props.onClose(props.id)
     };
 
     if (state.displayAlert) {
@@ -38,15 +38,19 @@ class IFrame extends Component {
     }
 
     return (
-      <Window {...props} resizable={!state.displayAlert}>
+      <Window
+        {...props}
+        resizable={!state.displayAlert}
+        initialHeight={380}
+        initialWidth={440}
+      >
         {rnd => {
           return (
             <WindowProgram
               title={props.title}
               icon={props.icon}
-              onClose={() => props.onClose(props)}
-              onMinimize={() => props.onMinimize(props)}
-              onMinimize={() => {}}
+              onClose={() => props.onClose(props.id)}
+              onMinimize={() => props.onMinimize(props.id)}
               onRestore={rnd.restore}
               onMaximize={rnd.maximize}
               changingState={rnd.state.isDragging || rnd.state.isResizing}

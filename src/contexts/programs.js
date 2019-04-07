@@ -1,6 +1,6 @@
 import React, { Component, createContext } from "react";
 import nanoid from "nanoid";
-import startMenuData, { find } from "../data/start";
+import startMenuData from "../data/start";
 import desktopData from "../data/desktop";
 import * as icons from "../icons";
 import ExplorerWindow from "../components/ExplorerWindow";
@@ -11,36 +11,21 @@ const settings = (injectedData = []) => [
   [
     ...injectedData,
     {
-      title: "Control Panel",
-      icon: icons.controlPanel16,
+      title: "Printers",
+      icon: icons.settingsPrinters16,
       Component: ExplorerWindow,
-      data: {
-        content: "Control panel stuff here"
-      },
-      onClick: () => {}
+      isDisabled: true
     },
-    // {
-    //   title: "Printers",
-    //   icon: icons.controlPanel16,
-    //   Component: ExplorerWindow,
-    //   isDisabled: true
-    // },
     {
-      title: "Taskbar & Start Menu...",
-      icon: icons.settingsTaskbar16,
-      Component: ExplorerWindow,
-      onClick: () => {}
+      title: "Folder Options",
+      icon: icons.folderOptions16,
+      isDisabled: true
+    },
+    {
+      title: "Active Desktop",
+      icon: icons.activeDesktop16,
+      isDisabled: true
     }
-    // {
-    //   title: "Folder Options",
-    //   icon: icons.folderOptions16,
-    //   isDisabled: true
-    // },
-    // {
-    //   title: "Active Desktop",
-    //   icon: icons.activeDesktop16,
-    //    // minimize all
-    // }
   ],
   {
     title: "Windows Update...",
@@ -83,8 +68,8 @@ const startMenu = (injectedData = [], set) => [
   }
 ];
 
-const sameProgram = a => b => a.id === b.id;
-const notSameProgram = a => b => a.id !== b.id;
+const sameProgram = a => b => a === b.id;
+const notSameProgram = a => b => a !== b.id;
 
 const addIdsToData = data =>
   Array.isArray(data)
@@ -144,7 +129,11 @@ class ProgramProvider extends Component {
       addIdsToData(
         startMenu(startMenuData, [
           { title: "Ctrl+Alt+Del", onClick: () => this.toggleTaskManager() },
-          { title: "Settings", onClick: () => this.toggleSettings() }
+          {
+            title: "Control Panel",
+            onClick: () => this.toggleSettings(),
+            icon: icons.controlPanel16
+          }
         ])
       )
     ),
@@ -155,6 +144,13 @@ class ProgramProvider extends Component {
         onDoubleClick: onClick
       };
     }),
+    quickLaunch: [
+      {
+        onClick: () => this.minimizeAll(),
+        icon: icons.activeDesktop16,
+        title: "Display Desktop"
+      }
+    ],
     activePrograms: [],
     openOrder: [],
     settingsDisplay: false
@@ -165,32 +161,34 @@ class ProgramProvider extends Component {
   toggleSettings = () =>
     this.setState(state => ({ settingsDisplay: !state.settingsDisplay }));
 
-  isProgramActive = program =>
-    this.state.activePrograms.some(sameProgram(program));
+  isProgramActive = programId =>
+    this.state.activePrograms.some(sameProgram(programId));
 
-  exit = program =>
+  exit = programId =>
     this.setState({
-      activePrograms: this.state.activePrograms.filter(notSameProgram(program)),
-      openOrder: this.state.openOrder.filter(x => x !== program.id),
+      activePrograms: this.state.activePrograms.filter(
+        notSameProgram(programId)
+      ),
+      openOrder: this.state.openOrder.filter(x => x !== programId),
       activeId: null
     });
 
-  moveToTop = program => {
+  moveToTop = programId => {
     const programIndex = this.state.activePrograms.findIndex(
-      sameProgram(program)
+      sameProgram(programId)
     );
     if (programIndex === -1) {
       return;
     }
     this.setState({
       activePrograms: [
-        ...this.state.activePrograms.filter(notSameProgram(program)),
+        ...this.state.activePrograms.filter(notSameProgram(programId)),
         {
-          ...program,
-          minimzed: false
+          ...this.state.activePrograms[programIndex],
+          minimized: false
         }
       ],
-      activeId: program.id
+      activeId: programId
     });
   };
 
@@ -226,22 +224,33 @@ class ProgramProvider extends Component {
     }
   };
 
-  minimize = program => {
-    if (!this.isProgramActive(program)) {
+  minimize = programId => {
+    if (!this.isProgramActive(programId)) {
       return;
     } else {
+      const programIndex = this.state.activePrograms.findIndex(
+        sameProgram(programId)
+      );
       this.setState({
         activePrograms: [
           {
-            ...program,
+            ...this.state.activePrograms[programIndex],
             minimized: true
           },
-          ...this.state.activePrograms.filter(prog => prog.id !== program.id)
+          ...this.state.activePrograms.filter(prog => prog.id !== programId)
         ],
         activeId: null
       });
     }
   };
+  minimizeAll = () =>
+    this.setState(state => ({
+      activePrograms: state.activePrograms.map(p => ({
+        ...p,
+        minimized: true
+      })),
+      activeId: null
+    }));
 
   render() {
     return (

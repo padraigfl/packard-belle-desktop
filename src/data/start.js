@@ -1,7 +1,7 @@
 import * as icons from "../icons";
-import ExplorerWindow from "../components/ExplorerWindow";
 import IframeWindow from "../components/IframeWindow";
 import Notepad from "../components/Notepad";
+import JSDos from "../components/JSDos";
 
 const goTo = url => () => window.open(url);
 
@@ -30,7 +30,12 @@ const programs = [
   { title: "Online Services", icon: icons.folderProgram16, options: [] },
   { title: "StartUp", icon: icons.folderProgram16, options: [] },
   { title: "Internet Explorer", icon: icons.internetExplorere16 },
-  { title: "JS-DOS Prompt", icon: icons.msDos16, isDisabled: true },
+  {
+    title: "JS-DOS Prompt",
+    icon: icons.msDos16,
+    Component: JSDos,
+    multiWindow: true
+  },
   { title: "Outlook Express", icon: icons.outlook16, isDisabled: true },
   { title: "Windows Explorer", icon: icons.windowsExplorer16, isDisabled: true }
 ];
@@ -52,7 +57,7 @@ const favorites = [
   { title: "Web Events", icon: icons.htmlFile16, isDisabled: true }
 ];
 
-const find = [
+export const find = [
   { title: "Files or Folders...", icon: icons.findFiles16, isDisabled: true },
   {
     title: "Computer...",
@@ -86,10 +91,5 @@ export default [
     title: "Documents",
     icon: icons.folderOpen24,
     options: []
-  },
-  {
-    title: "Find",
-    icon: icons.find24,
-    options: find
   }
 ];

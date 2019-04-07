@@ -7,13 +7,18 @@ const TaskBar = () => (
     {context => (
       <TaskBarComponent
         options={context.startMenu}
+        quickLaunch={context.quickLaunch}
         openWindows={context.openOrder.map(p => {
           const { activePrograms } = context;
           const programIdx = activePrograms.findIndex(x => x.id === p);
+          const isActive = p === context.activeId;
+          const onClick = isActive ? context.onMinimize : context.moveToTop;
+          const { title, icon } = activePrograms[programIdx];
           return {
-            ...activePrograms[programIdx],
-            isActive: p === context.activeId,
-            onClick: () => context.moveToTop(activePrograms[programIdx])
+            title,
+            icon,
+            isActive,
+            onClick: () => onClick(p)
           };
         })}
       />

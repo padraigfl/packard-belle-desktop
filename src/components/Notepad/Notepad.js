@@ -5,14 +5,12 @@ import Window from "../tools/Window";
 import { notepad16 } from "../../icons";
 import "./_styles.scss";
 
-const noop = () => {};
-
 export const buildMenu = (props, state) => [
   {
     title: "File",
     options: [
       { title: "Open", isDisabled: true },
-      { title: "Close", onClick: () => props.onClose(props) },
+      { title: "Close", onClick: () => props.onClose(props.id) },
       {
         title: "Wrap",
         onClick: () => state.toggleWrap(!state.wrap),
@@ -42,14 +40,16 @@ const Notepad = props => {
             "Notepad--wrap": wrap,
             "Window--active": props.isActive
           })}
-          title={`${props.title || "Untitled"} - Notepad`}
+          title={`${
+            props.title !== "Notepad" ? props.title : "Untitled"
+          } - Notepad`}
           icon={notepad16}
           footer={[
             { text: "needs 100% width height" },
             { text: "overflow control" }
           ]}
-          onClose={() => props.onClose(props)}
-          onMinimize={() => props.onMinimize(props)}
+          onClose={() => props.onClose(props.id)}
+          onMinimize={() => props.onMinimize(props.id)}
           onRestore={rnd.restore}
           onMaximize={rnd.maximize}
           changingState={rnd.state.isDragging || rnd.state.isResizing}

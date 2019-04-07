@@ -5,7 +5,6 @@ import "./_window.scss";
 
 const resizeStyles = pixels => {
   const corners = pixels * 4;
-  const halved = pixels / 2;
   return {
     bottom: { height: pixels, bottom: -pixels },
     bottomLeft: { height: corners, width: corners, left: -pixels },

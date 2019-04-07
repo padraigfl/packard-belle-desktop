@@ -5,3 +5,5 @@ Full readme coming once I figure out what it includes
 # Logging Hacks
 
 Hack styles should either be flagged or placed within the root css file
+
+All resizable windows feature a lot of repetition atm

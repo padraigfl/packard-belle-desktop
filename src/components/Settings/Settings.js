@@ -55,7 +55,7 @@ class Settings extends Component {
             >
               {rnd => (
                 <AbstractWindow
-                  title="Task Manager"
+                  title="Control Panel"
                   className="Settings"
                   onHelp={() => {}} // @todo
                   onClose={() => program.toggleSettings(false)}

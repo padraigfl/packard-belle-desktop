@@ -55,7 +55,7 @@ class TaskManager extends Component {
                 const prog = context.activePrograms.find(p => p.id === pid);
                 return {
                   title: prog.title,
-                  value: prog // key is based on value
+                  value: prog.id // key is based on value
                 };
               })}
               selected={[this.state.selected]}
