@@ -42,7 +42,9 @@ class JSDos extends Component {
     e.preventDefault();
     let response;
     try {
-      response = safeEval(this.state.value) || "Err... check your console?";
+      response =
+        safeEval(this.state.value) ||
+        "Err... if nothing happened then maybe check your console?";
     } catch (e) {
       if (this.state.content.length % 3) {
         response = "Maybe try some JavaScript?";
