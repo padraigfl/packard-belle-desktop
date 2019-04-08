@@ -1,0 +1,51 @@
+$grey-checkered: "data:image/gif;base64,R0lGODlhAgACAJEAAAAAAP///8zMzP///yH5BAEAAAMALAAAAAACAAIAAAID1CYFADs=";
+
+.ShutDown {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 15;
+
+  &:after {
+    transition: all linear 2s;
+    background-repeat: repeat;
+    background-image: url($grey-checkered);
+    position: absolute;
+    width: 100%;
+    height: 1%;
+    content: "";
+    filter: brightness(0.2);
+  }
+
+  &.animation:after {
+    height: 100%;
+  }
+  .Window {
+    margin: auto;
+    z-index: 16;
+  }
+  .Radio {
+    margin: 6px;
+    display: block;
+  }
+  &__content {
+    display: flex;
+    margin: 15px;
+    img {
+      height: 32px;
+      margin-right: 12px;
+    }
+  }
+  &__buttons {
+    display: flex;
+    margin-top: 12px;
+    .ButtonForm {
+      margin-left: 4px;
+      flex-grow: 1;
+    }
+  }
+}

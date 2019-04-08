@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import { Rnd } from "react-rnd";
 import { SettingsContext } from "../../contexts/settings";
 import "./_window.scss";
@@ -75,7 +76,7 @@ class Window extends React.PureComponent {
   toggleResize = val => () => this.setState({ isResizing: val });
 
   render() {
-    const { context } = this;
+    const { context, props } = this;
     const resizeProps =
       this.props.resizable && !this.state.maximized
         ? {
@@ -101,10 +102,12 @@ class Window extends React.PureComponent {
             position={{ x: this.state.x, y: this.state.y }}
             scale={context.scale}
           >
-            {this.props.children({
-              ...this,
-              state: { ...this.state, isDragging: false }
-            })}
+            <props.Component
+              {...props}
+              {...this.state}
+              isDragging={false}
+              className="Window--active"
+            />
           </Rnd>
         )}
         <Rnd
@@ -134,7 +137,27 @@ class Window extends React.PureComponent {
           {...maximizedProps}
           {...getMaxes(document)}
         >
-          {this.props.children(this)}
+          <props.Component
+            title={props.title}
+            icon={props.icon}
+            footer={props.footer}
+            onOpen={props.multiWindow && (() => props.onOpen(props.id))}
+            onClose={() => props.onClose(props.id)}
+            onMinimize={() => props.onMinimize(props.id)}
+            onRestore={this.restore}
+            onMaximize={this.maximize}
+            changingState={this.state.isDragging || this.state.isResizing}
+            maximizeOnOpen={this.context.isMobile}
+            className={cx(props.className, {
+              "Window--active": props.isActive
+            })}
+            menuOptions={props.menuOptions}
+            hasMenu={props.hasMenu}
+            explorerOptions={props.explorerOptions}
+            data={props.data}
+          >
+            {props.children}
+          </props.Component>
         </Rnd>
       </>
     );
@@ -144,6 +167,8 @@ class Window extends React.PureComponent {
 Window.defaultProps = {
   minWidth: 160,
   minHeight: 160,
+  initialHeight: 250,
+  initialWidth: 250,
   // maxHeight: 448,
   // maxWidth: 635,
   resizable: true,

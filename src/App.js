@@ -10,6 +10,7 @@ import TaskManager from "./components/TaskManager";
 import DesktopView from "./components/DesktopView";
 import Settings from "./components/Settings";
 import CRTOverlay from "./components/tools/CRT";
+import ShutDown from "./components/ShutDown/ShutDown";
 
 class Desktop extends Component {
   static contextType = SettingsContext;
@@ -37,6 +38,7 @@ class Desktop extends Component {
           <WindowManager />
           <TaskManager />
           <Settings />
+          <ShutDown />
           {context.crt && <CRTOverlay />}
         </Theme>
       </ProgramProvider>

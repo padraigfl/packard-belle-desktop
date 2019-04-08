@@ -1,5 +1,5 @@
 import React from "react";
-import StandardWindow from "../tools/StandardWindow";
+import Window from "../tools/Window";
 import cx from "classnames";
 import { notepad16 } from "../../icons";
 import "./_styles.scss";
@@ -38,7 +38,7 @@ const Notepad = props => {
   const [text, setText] = React.useState(props.data.content || "");
 
   return (
-    <StandardWindow
+    <Window
       {...props}
       icon={notepad16}
       footer={[
@@ -46,9 +46,8 @@ const Notepad = props => {
         { text: "overflow control" }
       ]}
       menuOptions={buildMenu(props, { toggleWrap, wrap })}
-      className={cx("Notepad", {
-        "Notepad--wrap": wrap,
-        "Window--active": props.isActive
+      className={cx("Notepad", props.className, {
+        "Notepad--wrap": wrap
       })}
       title={`${
         props.title !== "Notepad" ? props.title : "Untitled"
@@ -58,7 +57,7 @@ const Notepad = props => {
       <div className="Notepad__textarea">
         <textarea onChange={e => setText(e.target.value)}>{text}</textarea>
       </div>
-    </StandardWindow>
+    </Window>
   );
 };
 

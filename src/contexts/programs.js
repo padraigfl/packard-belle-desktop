@@ -33,7 +33,7 @@ const settings = (injectedData = []) => [
   }
 ];
 
-const startMenu = (injectedData = [], set) => [
+const startMenu = (injectedData = [], set, shutDown) => [
   {
     title: "Windows Update",
     icon: icons.windowsUpdate24,
@@ -64,7 +64,8 @@ const startMenu = (injectedData = [], set) => [
   },
   {
     title: "Shut Down...",
-    icon: icons.shutDown24
+    icon: icons.shutDown24,
+    onClick: shutDown
   }
 ];
 
@@ -127,14 +128,18 @@ class ProgramProvider extends Component {
     startMenu: initialize(
       p => this.open(p),
       addIdsToData(
-        startMenu(startMenuData, [
-          { title: "Ctrl+Alt+Del", onClick: () => this.toggleTaskManager() },
-          {
-            title: "Control Panel",
-            onClick: () => this.toggleSettings(),
-            icon: icons.controlPanel16
-          }
-        ])
+        startMenu(
+          startMenuData,
+          [
+            { title: "Ctrl+Alt+Del", onClick: () => this.toggleTaskManager() },
+            {
+              title: "Control Panel",
+              onClick: () => this.toggleSettings(),
+              icon: icons.controlPanel16
+            }
+          ],
+          () => this.toggleShutDownMenu()
+        )
       )
     ),
     desktop: initialize(p => this.open(p), desktopWithIds).map(entry => {
@@ -153,13 +158,24 @@ class ProgramProvider extends Component {
     ],
     activePrograms: [],
     openOrder: [],
-    settingsDisplay: false
+    settingsDisplay: false,
+    shutDownMenu: false
   };
 
+  toggleShutDownMenu = () =>
+    this.setState(state => ({ shutDownMenu: !state.shutDownMenu }));
   toggleTaskManager = () =>
     this.setState(state => ({ taskManager: !state.taskManager }));
   toggleSettings = () =>
     this.setState(state => ({ settingsDisplay: !state.settingsDisplay }));
+
+  shutDown = () => {
+    const desktop = document.querySelector(".desktop");
+    if (desktop) {
+      desktop.innerHTML = "";
+      desktop.classList.add("itIsNowSafeToTurnOffYourComputer");
+    }
+  };
 
   isProgramActive = programId =>
     this.state.activePrograms.some(sameProgram(programId));
@@ -262,6 +278,8 @@ class ProgramProvider extends Component {
           moveToTop: this.moveToTop,
           toggleTaskManager: this.toggleTaskManager,
           toggleSettings: this.toggleSettings,
+          toggleShutDownMenu: this.toggleShutDownMenu,
+          shutDown: this.shutDown,
           onMinimize: this.minimize
         }}
       >

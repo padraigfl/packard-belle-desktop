@@ -1,3 +1,8 @@
+@font-face {
+  font-family: AMIBios;
+  src: url("./assets/ami_bios1.woff2") format("woff2");
+}
+
 #root {
   display: flex;
   align-content: center;
@@ -68,4 +73,17 @@ body,
 .Window.Window--maximized {
   width: calc(100% + 4px);
   height: calc(100% + 4px);
+}
+
+.itIsNowSafeToTurnOffYourComputer {
+  background-color: #000000 !important;
+  display: flex;
+}
+.itIsNowSafeToTurnOffYourComputer:after {
+  content: "It is now safe to turn off your computer";
+  text-align: center;
+  color: orange;
+  margin: auto;
+  font-size: 24px;
+  font-family: AMIBios, "Courier New", Courier, monospace;
 }

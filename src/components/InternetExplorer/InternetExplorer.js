@@ -1,8 +1,9 @@
 import React from "react";
+import cx from "classnames";
 import * as icons from "../../icons";
 import "./_styles.scss";
 import { WindowExplorer } from "packard-belle";
-import StandardWindow from "../tools/StandardWindow";
+import Window from "../tools/Window";
 
 const noop = () => {};
 
@@ -21,10 +22,10 @@ export const buildMenu = props => [
 ];
 
 const InternetExplorer = props => (
-  <StandardWindow
+  <Window
     {...props}
     Component={WindowExplorer}
-    className="InternetExplorer"
+    className={cx("Internet Explorer", props.className)}
     title={`${
       props.data.title || props.title !== "Internet Explorer"
         ? `${props.data.title || props.title} - `
@@ -98,7 +99,7 @@ const InternetExplorer = props => (
         importance="low"
       />
     )}
-  </StandardWindow>
+  </Window>
 );
 
 export default InternetExplorer;

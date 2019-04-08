@@ -3,7 +3,7 @@ import { WindowProgram, WindowAlert } from "packard-belle";
 import cx from "classnames";
 import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
 import "./_styles.scss";
-import StandardWindow from "../tools/StandardWindow";
+import Window from "../tools/Window";
 
 class IFrame extends Component {
   state = {
@@ -38,7 +38,7 @@ class IFrame extends Component {
     }
 
     return (
-      <StandardWindow
+      <Window
         {...props}
         className={cx("IframeWindow", {
           "Window--active": props.isActive
@@ -49,7 +49,7 @@ class IFrame extends Component {
         Component={WindowProgram}
       >
         <iframe src={props.data.src} title={props.title} />
-      </StandardWindow>
+      </Window>
     );
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { WindowExplorer } from "packard-belle";
 import * as icons from "../../icons";
 import "./_styles.scss";
-import StandardWindow from "../tools/StandardWindow";
+import Window from "../tools/Window";
 
 export const buildMenu = props => [
   {
@@ -20,7 +20,7 @@ export const buildMenu = props => [
 const noop = () => {};
 
 const Explorer = props => (
-  <StandardWindow
+  <Window
     {...props}
     Component={WindowExplorer}
     explorerOptions={[

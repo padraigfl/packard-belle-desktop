@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { WindowProgram } from "packard-belle";
 import cx from "classnames";
 import safeEval from "safe-eval";
-import StandardWindow from "../tools/StandardWindow";
+import Window from "../tools/Window";
 import { msDos16 } from "../../icons";
 import "./_styles.scss";
 
@@ -63,7 +63,7 @@ class JSDos extends Component {
   render() {
     const { props } = this;
     return (
-      <StandardWindow
+      <Window
         {...props}
         title="JS DOS Prompt"
         icon={msDos16}
@@ -71,7 +71,9 @@ class JSDos extends Component {
         Component={WindowProgram}
         initialHeight={200}
         initialWidth={400}
-        className={cx("JSDos", { "Window--active": props.isActive })}
+        className={cx("JSDos", props.className, {
+          "Window--active": props.isActive
+        })}
       >
         <form name="hiddenForm" onSubmit={this.processEntry}>
           <input
@@ -95,7 +97,7 @@ class JSDos extends Component {
             <span>{this.state.value}</span>
           </div>
         </div>
-      </StandardWindow>
+      </Window>
     );
   }
 }
