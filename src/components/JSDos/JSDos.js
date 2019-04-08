@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { WindowProgram } from "packard-belle";
 import cx from "classnames";
 import safeEval from "safe-eval";
-import Window from "../tools/Window";
+import StandardWindow from "../tools/StandardWindow";
 import { msDos16 } from "../../icons";
 import "./_styles.scss";
 
@@ -63,47 +63,39 @@ class JSDos extends Component {
   render() {
     const { props } = this;
     return (
-      <>
-        <Window {...props} initialHeight={200} initialWidth={400}>
-          {rnd => (
-            <WindowProgram
-              title="JS DOS Prompt"
-              icon={msDos16}
-              onClose={() => props.onClose(props.id)}
-              onMinimize={() => props.onMinimize(props.id)}
-              onRestore={rnd.restore}
-              onMaximize={rnd.maximize}
-              changingState={rnd.state.isDragging || rnd.state.isResizing}
-              maximizeOnOpen={rnd.context.isMobile}
-              className={cx("JSDos", { "Window--active": props.isActive })}
-              menuOptions={buildMenu(props)}
-            >
-              <form name="hiddenForm" onSubmit={this.processEntry}>
-                <input
-                  type="text"
-                  value={this.state.value}
-                  ref={this.input}
-                  onChange={this.onInputChange}
-                  onBlur={this.onInputBlur}
-                />
-              </form>
-              <div className="terminal" onClick={this.focusInput}>
-                <div>Microsoft(R) Windows 98 </div>
-                <div style={{ marginRight: "12px", marginBottom: "6px" }}>
-                  (C)Copyright Microsoft Corp 1981-1999.
-                </div>
-                <div className="terminal__content">
-                  {this.state.content.map(entry => (
-                    <div>{entry}</div>
-                  ))}
-                  {lineStart}
-                  <span>{this.state.value}</span>
-                </div>
-              </div>
-            </WindowProgram>
-          )}
-        </Window>
-      </>
+      <StandardWindow
+        {...props}
+        title="JS DOS Prompt"
+        icon={msDos16}
+        menuOptions={buildMenu(props)}
+        Component={WindowProgram}
+        initialHeight={200}
+        initialWidth={400}
+        className={cx("JSDos", { "Window--active": props.isActive })}
+      >
+        <form name="hiddenForm" onSubmit={this.processEntry}>
+          <input
+            type="text"
+            value={this.state.value}
+            ref={this.input}
+            onChange={this.onInputChange}
+            onBlur={this.onInputBlur}
+          />
+        </form>
+        <div className="terminal" onClick={this.focusInput}>
+          <div>Microsoft(R) Windows 98 </div>
+          <div style={{ marginLeft: "12px", marginBottom: "6px" }}>
+            (C)Copyright Microsoft Corp 1981-1999.
+          </div>
+          <div className="terminal__content">
+            {this.state.content.map(entry => (
+              <div>{entry}</div>
+            ))}
+            {lineStart}
+            <span>{this.state.value}</span>
+          </div>
+        </div>
+      </StandardWindow>
     );
   }
 }

@@ -1,15 +1,24 @@
 import React from "react";
-import { WindowProgram } from "packard-belle";
+import StandardWindow from "../tools/StandardWindow";
 import cx from "classnames";
-import Window from "../tools/Window";
 import { notepad16 } from "../../icons";
 import "./_styles.scss";
+import { WindowProgram } from "packard-belle";
 
 export const buildMenu = (props, state) => [
   {
     title: "File",
     options: [
-      { title: "Open", isDisabled: true },
+      {
+        title: "New",
+        isDisabled: !props.multiWindow && !props.onOpen,
+        onClick: () => props.onOpen(props.id)
+      },
+      {
+        title: "Open",
+        isDisabled: true,
+        onClick: () => props.onOpen(props.id)
+      },
       { title: "Close", onClick: () => props.onClose(props.id) },
       {
         title: "Wrap",
@@ -29,39 +38,27 @@ const Notepad = props => {
   const [text, setText] = React.useState(props.data.content || "");
 
   return (
-    <Window
+    <StandardWindow
       {...props}
-      initialHeight={props.initialHeight || 200}
-      initialWidth={props.initialWidth || 200}
+      icon={notepad16}
+      footer={[
+        { text: "needs 100% width height" },
+        { text: "overflow control" }
+      ]}
+      menuOptions={buildMenu(props, { toggleWrap, wrap })}
+      className={cx("Notepad", {
+        "Notepad--wrap": wrap,
+        "Window--active": props.isActive
+      })}
+      title={`${
+        props.title !== "Notepad" ? props.title : "Untitled"
+      } - Notepad`}
+      Component={WindowProgram}
     >
-      {rnd => (
-        <WindowProgram
-          className={cx("Notepad", {
-            "Notepad--wrap": wrap,
-            "Window--active": props.isActive
-          })}
-          title={`${
-            props.title !== "Notepad" ? props.title : "Untitled"
-          } - Notepad`}
-          icon={notepad16}
-          footer={[
-            { text: "needs 100% width height" },
-            { text: "overflow control" }
-          ]}
-          onClose={() => props.onClose(props.id)}
-          onMinimize={() => props.onMinimize(props.id)}
-          onRestore={rnd.restore}
-          onMaximize={rnd.maximize}
-          changingState={rnd.state.isDragging || rnd.state.isResizing}
-          menuOptions={buildMenu(props, { toggleWrap, wrap })}
-          maximizeOnOpen={rnd.context.isMobile}
-        >
-          <div className="Notepad__textarea">
-            <textarea onChange={e => setText(e.target.value)}>{text}</textarea>
-          </div>
-        </WindowProgram>
-      )}
-    </Window>
+      <div className="Notepad__textarea">
+        <textarea onChange={e => setText(e.target.value)}>{text}</textarea>
+      </div>
+    </StandardWindow>
   );
 };
 

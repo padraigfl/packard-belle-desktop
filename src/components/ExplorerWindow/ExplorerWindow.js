@@ -1,10 +1,8 @@
 import React from "react";
 import { WindowExplorer } from "packard-belle";
-import Window from "../tools/Window";
 import * as icons from "../../icons";
 import "./_styles.scss";
-
-const noop = () => {};
+import StandardWindow from "../tools/StandardWindow";
 
 export const buildMenu = props => [
   {
@@ -19,72 +17,58 @@ export const buildMenu = props => [
     options: [{ title: `About ${props.title}`, isDisabled: true }]
   }
 ];
+const noop = () => {};
 
 const Explorer = props => (
-  <Window
+  <StandardWindow
     {...props}
-    initialHeight={props.initialHeight || 200}
-    initialWidth={props.initialWidth || 200}
-  >
-    {rnd => (
-      <WindowExplorer
-        title={props.title}
-        icon={props.icon}
-        footer={[{ text: "" }, { text: "" }, { text: props.title }]}
-        onClose={() => props.onClose(props.id)}
-        onMinimize={() => props.onMinimize(props.id)}
-        onRestore={rnd.restore}
-        onMaximize={rnd.maximize}
-        changingState={rnd.state.isDragging || rnd.state.isResizing}
-        maximizeOnOpen={rnd.context.isMobile}
-        className={props.isActive && "Window--active"}
-        menuOptions={buildMenu(props)}
-        explorerOptions={[
-          {
-            icon: icons.back,
-            title: "Back",
-            onClick: noop
-          },
-          {
-            icon: icons.forward,
-            title: "Forward",
-            onClick: noop
-          },
-          {
-            icon: icons.upDir,
-            title: "Up",
-            onClick: noop
-          },
-          {
-            icon: icons.cut,
-            title: "Cut",
-            onClick: noop
-          },
-          {
-            icon: icons.copy,
-            title: "Copy",
-            onClick: noop
-          },
-          {
-            icon: icons.delete,
-            title: "Delete",
-            onClick: noop
-          },
-          {
-            icon: icons.properties,
-            title: "Properties",
-            onClick: noop
-          },
-          {
-            icon: icons.views,
-            title: "Views"
-          }
-        ]}
-      >
-        {props.title} and the content goes here
-      </WindowExplorer>
-    )}
-  </Window>
+    Component={WindowExplorer}
+    explorerOptions={[
+      {
+        icon: icons.back,
+        title: "Back",
+        onClick: noop
+      },
+      {
+        icon: icons.forward,
+        title: "Forward",
+        onClick: noop
+      },
+      {
+        icon: icons.upDir,
+        title: "Up",
+        onClick: noop
+      },
+      {
+        icon: icons.cut,
+        title: "Cut",
+        onClick: noop
+      },
+      {
+        icon: icons.copy,
+        title: "Copy",
+        onClick: noop
+      },
+      {
+        icon: icons.delete,
+        title: "Delete",
+        onClick: noop
+      },
+      {
+        icon: icons.properties,
+        title: "Properties",
+        onClick: noop
+      },
+      {
+        icon: icons.views,
+        title: "Views"
+      }
+    ]}
+    menuOptions={buildMenu(props)}
+  />
 );
 
 export default Explorer;
+
+// initialHeight, initialWidth, title, icon, footer, id,
+// onClose, onMaximize, isActive, explorerOptions, chidlren, data, customSelect, Component

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { WindowProgram, WindowAlert } from "packard-belle";
 import cx from "classnames";
-import Window from "../tools/Window";
 import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
 import "./_styles.scss";
+import StandardWindow from "../tools/StandardWindow";
 
 class IFrame extends Component {
   state = {
@@ -38,33 +38,18 @@ class IFrame extends Component {
     }
 
     return (
-      <Window
+      <StandardWindow
         {...props}
-        resizable={!state.displayAlert}
+        className={cx("IframeWindow", {
+          "Window--active": props.isActive
+        })}
         initialHeight={380}
         initialWidth={440}
+        menuOptions={props.data.useMenu && buildMenu(props)}
+        Component={WindowProgram}
       >
-        {rnd => {
-          return (
-            <WindowProgram
-              title={props.title}
-              icon={props.icon}
-              onClose={() => props.onClose(props.id)}
-              onMinimize={() => props.onMinimize(props.id)}
-              onRestore={rnd.restore}
-              onMaximize={rnd.maximize}
-              changingState={rnd.state.isDragging || rnd.state.isResizing}
-              className={cx("IframeWindow", {
-                "Window--active": props.isActive
-              })}
-              menuOptions={props.data.useMenu && buildMenu(props)}
-              maximizeOnOpen={rnd.context.isMobile}
-            >
-              <iframe src={props.data.src} title={props.title} />
-            </WindowProgram>
-          );
-        }}
-      </Window>
+        <iframe src={props.data.src} title={props.title} />
+      </StandardWindow>
     );
   }
 }

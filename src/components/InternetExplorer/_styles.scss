@@ -1,0 +1,14 @@
+.InternetExplorer {
+  .WindowExplorer__view {
+    position: relative;
+  }
+
+  iframe {
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    left: -50%;
+    top: -50%;
+    position: absolute;
+  }
+}

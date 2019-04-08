@@ -257,6 +257,7 @@ class ProgramProvider extends Component {
       <ProgramContext.Provider
         value={{
           ...this.state,
+          onOpen: this.open,
           onClose: this.close,
           moveToTop: this.moveToTop,
           toggleTaskManager: this.toggleTaskManager,

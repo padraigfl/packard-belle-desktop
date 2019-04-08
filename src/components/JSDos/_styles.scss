@@ -1,12 +1,13 @@
 @import "../../../node_modules/packard-belle/src/_scss/w98/mixins/box-shadows.scss";
 
 @font-face {
-  font-family: "pixelmix";
+  font-family: pixelmix;
   src: url("../../assets/pixelmix.woff2") format("woff2");
+  font-weight: normal;
 }
 
 @font-face {
-  font-family: "FixedSys";
+  font-family: FixedSys;
   src: url("../../assets/FixedsysStripped.woff2") format("woff2");
 }
 
@@ -19,7 +20,10 @@
   .terminal {
     @include shadow-input;
     flex-grow: 1;
-    font-family: "pixelmix", "FixedSys", "Courier New", Courier, monospace;
+    * {
+      font-family: pixelmix, FixedSys, MSSansSerif, "Courier New", Courier,
+        monospace;
+    }
     background-color: black;
     color: white;
     font-size: 8px;

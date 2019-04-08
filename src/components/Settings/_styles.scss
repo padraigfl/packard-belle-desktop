@@ -1,0 +1,12 @@
+.Settings {
+  .DetailsSection {
+    display: flex;
+    flex-direction: column;
+  }
+  .Checkbox {
+    margin: 4px;
+  }
+  .Radio {
+    margin: auto 2px;
+  }
+}

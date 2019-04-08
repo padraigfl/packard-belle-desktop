@@ -11,6 +11,8 @@ import Window from "../tools/Window";
 
 import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
 
+import "./_styles.scss";
+
 class Settings extends Component {
   static contextType = SettingsContext;
   state = {
@@ -66,10 +68,11 @@ class Settings extends Component {
                     onClose: program.toggleSettings
                   })}
                 >
-                  <DetailsSection title="customise">
+                  Best avoid all these other than CRT on mobile
+                  <DetailsSection title="Customise">
                     <Checkbox
-                      id="Mobile View"
-                      label="Mobile View"
+                      id="Mobile Portrait View"
+                      label="Mobile Portrait View"
                       onChange={context.toggleMobile}
                       checked={context.isMobile === true}
                     />
@@ -86,24 +89,26 @@ class Settings extends Component {
                       checked={context.fullScreen === true}
                     />
                   </DetailsSection>
-                  <DetailsSection title="Scale Options">
-                    <div className="options-row">
-                      {[1, 1.5, 2].map(scale => (
-                        <Radio
-                          id={scale}
-                          label={`${scale * 100}%`}
-                          value={scale}
-                          onChange={e => {
-                            this.tempChange(
-                              () => context.changeScale(+e.target.value),
-                              () => context.changeScale(context.scale)
-                            );
-                          }}
-                          checked={context.scale === scale}
-                        />
-                      ))}
-                    </div>
-                  </DetailsSection>
+                  {!context.isMobile && (
+                    <DetailsSection title="Scale Options (5 second preview)">
+                      <div className="options-row">
+                        {[1, 1.5, 2].map(scale => (
+                          <Radio
+                            id={scale}
+                            label={`${scale * 100}%`}
+                            value={scale}
+                            onChange={e => {
+                              this.tempChange(
+                                () => context.changeScale(+e.target.value),
+                                () => context.changeScale(context.scale)
+                              );
+                            }}
+                            checked={context.scale === scale}
+                          />
+                        ))}
+                      </div>
+                    </DetailsSection>
+                  )}
                   {this.state.tempChange && "Previewing Changes"}
                 </AbstractWindow>
               )}

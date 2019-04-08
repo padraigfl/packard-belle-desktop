@@ -52,3 +52,13 @@ export { default as properties } from "./properties-min.png";
 export { default as undo } from "./undo-min.png";
 export { default as upDir } from "./upDir-min.png";
 export { default as views } from "./views-min.png";
+
+export { default as ieFavorites } from "./ie-favorites-min.png";
+export { default as ieGo } from "./ie-go-min.png";
+export { default as ieHistory } from "./ie-history-min.png";
+export { default as ieMail } from "./ie-mail-min.png";
+export { default as ieHome } from "./ie-home-min.png";
+export { default as ieRefresh } from "./ie-refresh-min.png";
+export { default as iePrint } from "./ie-print-min.png";
+export { default as ieSearch } from "./ie-search-min.png";
+export { default as ieStop } from "./ie-stop-min.png";

@@ -2,6 +2,7 @@ import * as icons from "../icons";
 import IframeWindow from "../components/IframeWindow";
 import Notepad from "../components/Notepad";
 import JSDos from "../components/JSDos";
+import InternetExplorer from "../components/InternetExplorer/InternetExplorer";
 
 const goTo = url => () => window.open(url);
 
@@ -29,7 +30,12 @@ const programs = [
   { title: "Accessories", icon: icons.folderProgram16, options: accessories },
   { title: "Online Services", icon: icons.folderProgram16, options: [] },
   { title: "StartUp", icon: icons.folderProgram16, options: [] },
-  { title: "Internet Explorer", icon: icons.internetExplorere16 },
+  {
+    title: "Internet Explorer",
+    icon: icons.internetExplorere16,
+    Component: InternetExplorer,
+    data: { src: "https://www.spacejam.com/archive/spacejam/movie/jam.htm" }
+  },
   {
     title: "JS-DOS Prompt",
     icon: icons.msDos16,
