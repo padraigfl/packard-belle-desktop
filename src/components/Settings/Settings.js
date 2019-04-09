@@ -50,68 +50,65 @@ class Settings extends Component {
           program.settingsDisplay && (
             <Window
               {...props}
-              resizable={false}
               initialX={200}
               initialY={150}
               initialWidth={240}
+              initialHeight={240}
+              Component={AbstractWindow}
+              title="Control Panel"
+              className="Settings"
+              onHelp={() => {}} // @todo
+              onClose={() => program.toggleSettings(false)}
+              resizable={false}
+              menuOptions={buildMenu({
+                ...props,
+                onClose: program.toggleSettings
+              })}
             >
-              {rnd => (
-                <AbstractWindow
-                  title="Control Panel"
-                  className="Settings"
-                  onHelp={() => {}} // @todo
-                  onClose={() => program.toggleSettings(false)}
-                  changingState={rnd.state.isDragging}
-                  resizable={false}
-                  menuOptions={buildMenu({
-                    ...props,
-                    onClose: program.toggleSettings
-                  })}
-                >
-                  Best avoid all these other than CRT on mobile
-                  <DetailsSection title="Customise">
-                    <Checkbox
-                      id="Mobile Portrait View"
-                      label="Mobile Portrait View"
-                      onChange={context.toggleMobile}
-                      checked={context.isMobile === true}
-                    />
-                    <Checkbox
-                      id="CRT Effect"
-                      label="CRT Effect"
-                      onChange={context.toggleCrt}
-                      checked={context.crt === true}
-                    />
-                    <Checkbox
-                      id="Fullscreen"
-                      label="Fullscreen"
-                      onChange={context.toggleFullScreen}
-                      checked={context.fullScreen === true}
-                    />
-                  </DetailsSection>
-                  {!context.isMobile && (
-                    <DetailsSection title="Scale Options (5 second preview)">
-                      <div className="options-row">
-                        {[1, 1.5, 2].map(scale => (
-                          <Radio
-                            id={scale}
-                            label={`${scale * 100}%`}
-                            value={scale}
-                            onChange={e => {
-                              this.tempChange(
-                                () => context.changeScale(+e.target.value),
-                                () => context.changeScale(context.scale)
-                              );
-                            }}
-                            checked={context.scale === scale}
-                          />
-                        ))}
-                      </div>
-                    </DetailsSection>
-                  )}
-                  {this.state.tempChange && "Previewing Changes"}
-                </AbstractWindow>
+              <DetailsSection>
+                Best avoid all these other than CRT on mobile
+              </DetailsSection>
+              <DetailsSection title="Customise">
+                <Checkbox
+                  id="Mobile Portrait View"
+                  label="Mobile Portrait View"
+                  onChange={context.toggleMobile}
+                  checked={context.isMobile === true}
+                />
+                <Checkbox
+                  id="CRT Effect"
+                  label="CRT Effect"
+                  onChange={context.toggleCrt}
+                  checked={context.crt === true}
+                />
+                <Checkbox
+                  id="Fullscreen"
+                  label="Fullscreen"
+                  onChange={context.toggleFullScreen}
+                  checked={context.fullScreen === true}
+                />
+              </DetailsSection>
+              {!context.isMobile && (
+                <DetailsSection title="Scale Options (5 second preview)">
+                  <div className="options-row">
+                    {[1, 1.5, 2].map(scale => (
+                      <Radio
+                        id={scale}
+                        label={`${scale * 100}%`}
+                        value={scale}
+                        onChange={e => {
+                          this.tempChange(
+                            () => context.changeScale(+e.target.value),
+                            () => context.changeScale(context.scale)
+                          );
+                        }}
+                        checked={context.scale === scale}
+                      />
+                    ))}
+                  </div>
+                </DetailsSection>
               )}
+              {this.state.tempChange && "Previewing Changes"}
             </Window>
           )
         }

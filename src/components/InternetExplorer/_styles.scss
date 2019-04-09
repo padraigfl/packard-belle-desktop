@@ -1,9 +1,10 @@
 .InternetExplorer {
   .WindowExplorer__view {
     position: relative;
+    overflow: scroll;
   }
 
-  iframe {
+  iframe.crossOrigin {
     width: 200%;
     height: 200%;
     transform: scale(0.5);

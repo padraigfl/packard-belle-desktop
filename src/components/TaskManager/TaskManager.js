@@ -35,38 +35,34 @@ class TaskManager extends Component {
         initialX={200}
         initialY={150}
         initialWidth={240}
+        initialHeight={240}
+        Component={WindowProgram}
+        title="Task Manager"
+        className="TaskManager"
+        onHelp={() => {}} // @todo
+        onClose={context.toggleTaskManager}
+        resizable={false}
+        menuOptions={buildMenu({
+          ...props,
+          onClose: context.toggleTaskManager
+        })}
       >
-        {rnd => (
-          <WindowProgram
-            title="Task Manager"
-            className="TaskManager"
-            onHelp={() => {}} // @todo
-            onClose={context.toggleTaskManager}
-            changingState={rnd.state.isDragging}
-            resizable={false}
-            menuOptions={buildMenu({
-              ...props,
-              onClose: context.toggleTaskManager
-            })}
-          >
-            <SelectBox
-              onClick={this.onSelect}
-              options={context.openOrder.map(pid => {
-                const prog = context.activePrograms.find(p => p.id === pid);
-                return {
-                  title: prog.title,
-                  value: prog.id // key is based on value
-                };
-              })}
-              selected={[this.state.selected]}
-            />
-            <div className="TaskManager__buttons">
-              <ButtonForm onClick={this.exit}>End Task</ButtonForm>
-              <ButtonForm onClick={this.moveToTop}>Switch To</ButtonForm>
-              <ButtonForm isDisabled>New Task</ButtonForm>
-            </div>
-          </WindowProgram>
-        )}
+        <SelectBox
+          onClick={this.onSelect}
+          options={context.openOrder.map(pid => {
+            const prog = context.activePrograms.find(p => p.id === pid);
+            return {
+              title: prog.title,
+              value: prog.id // key is based on value
+            };
+          })}
+          selected={[this.state.selected]}
+        />
+        <div className="TaskManager__buttons">
+          <ButtonForm onClick={this.exit}>End Task</ButtonForm>
+          <ButtonForm onClick={this.moveToTop}>Switch To</ButtonForm>
+          <ButtonForm isDisabled>New Task</ButtonForm>
+        </div>
       </Window>
     ) : null;
   }

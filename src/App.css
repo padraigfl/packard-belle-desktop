@@ -80,10 +80,23 @@ body,
   display: flex;
 }
 .itIsNowSafeToTurnOffYourComputer:after {
-  content: "It is now safe to turn off your computer";
+  content: "It's now safe to turn off your computer.";
+  padding: 16px;
   text-align: center;
   color: orange;
   margin: auto;
-  font-size: 24px;
+  font-size: 22px;
   font-family: AMIBios, "Courier New", Courier, monospace;
+}
+.desktop.windowsShuttingDown {
+  background-color: #a6c7df;
+  background-image: url("./assets/windowsShuttingDown-min.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+@media (min-width: 640px) and (min-height: 480px) {
+  .windowsShuttingDown {
+    background-size: cover;
+  }
 }

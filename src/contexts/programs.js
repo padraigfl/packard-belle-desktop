@@ -173,7 +173,13 @@ class ProgramProvider extends Component {
     const desktop = document.querySelector(".desktop");
     if (desktop) {
       desktop.innerHTML = "";
-      desktop.classList.add("itIsNowSafeToTurnOffYourComputer");
+      desktop.classList.add("windowsShuttingDown");
+      setTimeout(() => {
+        desktop.classList.replace(
+          "windowsShuttingDown",
+          "itIsNowSafeToTurnOffYourComputer"
+        );
+      }, 3000);
     }
   };
 

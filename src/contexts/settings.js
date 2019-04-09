@@ -13,7 +13,7 @@ const setKeyValue = (dis, key) => val => {
 class SettingsProvider extends Component {
   state = {
     scale: 1,
-    crt: false,
+    crt: true,
     fullScreen: false,
     isMobile: false
   };
