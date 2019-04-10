@@ -22,10 +22,189 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Windows 98 -- Packard Belle</title>
+    <style>
+      @font-face {
+        font-family: AMIBios;
+        src: "./static/AMI_BIOS1_small.woff2";
+      }
+      #root {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        background-color: darkslategrey;
+      }
+
+      html {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+      body {
+        height: 100%;
+        padding: 0;
+        overflow: auto;
+        margin: 0;
+      }
+
+      html,
+      body,
+      #root,
+      .w98,
+      .BIOSWrapper {
+        overscroll-behavior: none !important;
+      }
+
+      .BIOSWrapper,
+      .WindowsLaunchWrapper {
+        position: absolute;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        display: flex;
+      }
+
+      .WindowsLaunchWrapper {
+        visibility: hidden;
+      }
+      .WindowsLaunchWrapper.visible {
+        visibility: visible;
+      }
+      .BIOS,
+      .WindowsLaunch {
+        background-color: black;
+        color: white;
+        font-family: AMIBios;
+        z-index: 1;
+        width: 640px;
+        height: 480px;
+        margin: auto;
+        padding: 16px;
+      }
+      .WindowsLaunch {
+        background-color: #a6c7df;
+        background-image: url("./static/windowsLaunch.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .BIOSWrapper.hide {
+        display: none;
+      }
+      .BIOS > div {
+        margin-bottom: 16px;
+        visibility: hidden;
+      }
+      .BIOS > div.visible {
+        visibility: visible;
+      }
+      .BIOS__logo {
+        float: right;
+        width: 40%;
+        height: 48px;
+        background-image: url(./static/packard.png);
+        background-repeat: no-repeat;
+        background-position: right;
+      }
+      @media (max-width: 500px), (max-height: 500px) {
+        .BIOS,
+        .WindowsLaunch {
+          height: 100%;
+          width: 100%;
+          margin-top: 0px;
+          background-position: center;
+        }
+        .WindowsLaunch {
+          background-size: contain;
+        }
+        .BIOS__logo {
+          width: 100%;
+        }
+      }
+    </style>
+    <script>
+      function hideBios() {
+        document.getElementsByClassName("BIOSWrapper")[0].classList.add("hide");
+      }
+      function windowsLogo() {
+        hideBios();
+        const windowsLaunch = document.getElementsByClassName(
+          "WindowsLaunchWrapper"
+        )[0];
+        windowsLaunch.classList.add("visible");
+        setTimeout(
+          () => windowsLaunch.parentNode.removeChild(windowsLaunch),
+          3000
+        );
+        window.localStorage.setItem("loggedIn", "true");
+      }
+
+      function staggerElements(elems, entry) {
+        if (!elems[entry]) {
+          windowsLogo();
+        }
+        elems[entry].classList.add("visible");
+
+        setTimeout(() => staggerElements(elems, entry + 1), 1000);
+      }
+
+      function loadScreen() {
+        var biosElem = document.querySelector(".BIOS");
+        biosElem.classList.remove("initial");
+        if (window.localStorage.getItem("loggedIn")) {
+          hideBios();
+          return;
+        }
+        biosElem.classList.add("visible");
+
+        staggerElements(biosElem.getElementsByTagName("div"), 0);
+      }
+
+      setTimeout(loadScreen, 1500);
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="BIOSWrapper initial">
+      <div class="BIOS">
+        <div class="BIOS__logo"></div>
+        <div class="BIOS__bootHeader">
+          <p>AMII BIOS (C) 1992-2019</p>
+          <p>BIOS Version 16.8.3.REACT</p>
+        </div>
+        <div class="BIOS__bootMessage1">
+          Press &lt;?&gt; key if you want to run setup
+        </div>
+        <div class="BIOS__bootMessage2">Keyboard... <span>detected</span></div>
+        <div class="BIOS__bootMessage3">
+          Mouse/digitizer... <span>detected</span>
+        </div>
+        <div class="BIOS__bootMessage4">
+          <p>
+            This project is by
+            <a href="https://github.com/padraigfl">Padraig Flood</a>
+          </p>
+          <p>
+            London based frontend developer, contactable via
+            <a href="https://www.linkedin.com/in/padraig-f-334b8764/"
+              >LinkedIn</a
+            >
+          </p>
+          <p>
+            Likes films and stuff
+            <a href="https://letterboxd.com/padraig">Letterboxd</a>
+          </p>
+          <p>
+            Is unwilling to link his Twitter because he can't remember whether
+            anything he tweeted is embarrassing
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="WindowsLaunchWrapper">
+      <div class="WindowsLaunch"></div>
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.

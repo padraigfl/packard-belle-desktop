@@ -23,6 +23,13 @@ const accessories = [
     Component: IframeWindow,
     data: { src: "https://jspaint.app/" },
     multiWindow: true
+  },
+  {
+    title: "SkiFree",
+    icon: icons.folderProgram16,
+    Component: IframeWindow,
+    data: { src: "https://basicallydan.github.io/skifree.js/" },
+    multiWindow: true
   }
 ];
 

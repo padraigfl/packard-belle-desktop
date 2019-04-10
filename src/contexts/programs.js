@@ -179,6 +179,7 @@ class ProgramProvider extends Component {
           "windowsShuttingDown",
           "itIsNowSafeToTurnOffYourComputer"
         );
+        window.localStorage.removeItem("loggedIn");
       }, 3000);
     }
   };

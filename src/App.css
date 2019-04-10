@@ -3,32 +3,6 @@
   src: url("./assets/ami_bios1.woff2") format("woff2");
 }
 
-#root {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  background-color: darkslategrey;
-}
-
-html {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-body {
-  height: 100%;
-  padding: 0;
-  overflow: auto;
-  margin: 0;
-}
-
-html,
-body,
-#root,
-.w98 {
-  overscroll-behavior: none !important;
-}
-
 .w98.desktop {
   margin-left: auto;
   margin-right: auto;
@@ -54,10 +28,11 @@ body,
   height: 100%;
 }
 
-.desktopX2 {
+.desktop.desktopX2 {
   transform: scale(2);
 }
-.desktopX1_5 {
+
+.desktop.desktopX1_5 {
   transform: scale(1.5);
 }
 
