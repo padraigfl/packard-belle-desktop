@@ -41,7 +41,6 @@ class TaskManager extends Component {
         className="TaskManager"
         onHelp={() => {}} // @todo
         onClose={context.toggleTaskManager}
-        resizable={false}
         menuOptions={buildMenu({
           ...props,
           onClose: context.toggleTaskManager

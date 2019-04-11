@@ -142,13 +142,20 @@ class ProgramProvider extends Component {
         )
       )
     ),
-    desktop: initialize(p => this.open(p), desktopWithIds).map(entry => {
-      const { onClick, ...data } = entry;
-      return {
-        ...data,
-        onDoubleClick: onClick
-      };
-    }),
+    desktop: [
+      ...initialize(p => this.open(p), desktopWithIds).map(entry => {
+        const { onClick, ...data } = entry;
+        return {
+          ...data,
+          onDoubleClick: onClick
+        };
+      }),
+      {
+        title: "Control Panel",
+        icon: icons.controlPanel16,
+        onDoubleClick: () => this.toggleSettings(true)
+      }
+    ],
     quickLaunch: [
       {
         onClick: () => this.minimizeAll(),
@@ -166,8 +173,10 @@ class ProgramProvider extends Component {
     this.setState(state => ({ shutDownMenu: !state.shutDownMenu }));
   toggleTaskManager = () =>
     this.setState(state => ({ taskManager: !state.taskManager }));
-  toggleSettings = () =>
-    this.setState(state => ({ settingsDisplay: !state.settingsDisplay }));
+  toggleSettings = val =>
+    this.setState(state => ({
+      settingsDisplay: val || !state.settingsDisplay
+    }));
 
   shutDown = () => {
     const desktop = document.querySelector(".desktop");

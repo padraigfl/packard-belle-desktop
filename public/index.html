@@ -24,10 +24,28 @@
     -->
     <title>Windows 98 -- Packard Belle</title>
     <style>
+      @keyframes Gradient {
+        0% {
+          background-position: 0%;
+        }
+        100% {
+          background-position: 100%;
+        }
+      }
       @font-face {
         font-family: AMIBios;
-        src: "./static/AMI_BIOS1_small.woff2";
+        src: url("./assets/ami_bios1.woff2") format("woff2");
       }
+
+      body {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        margin: 0;
+        background-color: darkslategrey;
+      }
+
       #root {
         display: flex;
         align-content: center;
@@ -35,24 +53,36 @@
         background-color: darkslategrey;
       }
 
-      html {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-      }
-      body {
-        height: 100%;
-        padding: 0;
-        overflow: auto;
-        margin: 0;
-      }
-
       html,
       body,
       #root,
       .w98,
-      .BIOSWrapper {
-        overscroll-behavior: none !important;
+      .desktop,
+      .BIOSWrapper,
+      .WindowsLaunchWrapper,
+      * {
+        overscroll-behavior: none;
+      }
+
+      .screen,
+      .w98.desktop {
+        width: 100vw;
+        height: 80vh;
+      }
+      .desktop,
+      .BIOSWrapper,
+      .WindowsLaunchWrapper {
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        background-color: cadetblue;
+        width: 100vw;
+        height: 80vh;
+      }
+
+      .desktop.notMobile {
+        width: 640px;
+        height: 480px;
       }
 
       .BIOSWrapper,
@@ -65,32 +95,37 @@
         left: 0px;
         display: flex;
       }
-
-      .WindowsLaunchWrapper {
-        visibility: hidden;
-      }
-      .WindowsLaunchWrapper.visible {
-        visibility: visible;
-      }
       .BIOS,
       .WindowsLaunch {
-        background-color: black;
         color: white;
-        font-family: AMIBios;
+        font-family: AMIBios !important;
         z-index: 1;
         width: 640px;
         height: 480px;
         margin: auto;
         padding: 16px;
       }
+      .BIOS {
+        background-color: #000000;
+      }
+      .WindowsLaunchWrapper {
+        background: linear-gradient(
+          -90deg,
+          #a6c7df,
+          #ffffff,
+          #a6c7df,
+          #c9d9ef,
+          #a6c7df,
+          #ffffff
+        );
+        background-size: 400% 400%;
+        animation: Gradient 5s ease infinite;
+        z-index: 1;
+      }
       .WindowsLaunch {
-        background-color: #a6c7df;
         background-image: url("./static/windowsLaunch.png");
         background-size: cover;
         background-repeat: no-repeat;
-      }
-      .BIOSWrapper.hide {
-        display: none;
       }
       .BIOS > div {
         margin-bottom: 16px;
@@ -107,13 +142,13 @@
         background-repeat: no-repeat;
         background-position: right;
       }
-      @media (max-width: 500px), (max-height: 500px) {
+      @media (max-width: 600px), (max-height: 600px) {
         .BIOS,
         .WindowsLaunch {
-          height: 100%;
-          width: 100%;
           margin-top: 0px;
           background-position: center;
+          width: 100vw;
+          height: 80vh;
         }
         .WindowsLaunch {
           background-size: contain;
@@ -122,10 +157,18 @@
           width: 100%;
         }
       }
+      .visible {
+        visibility: visible;
+      }
+      .hidden {
+        display: none;
+      }
     </style>
     <script>
       function hideBios() {
-        document.getElementsByClassName("BIOSWrapper")[0].classList.add("hide");
+        document
+          .getElementsByClassName("BIOSWrapper")[0]
+          .classList.add("hidden");
       }
       function windowsLogo() {
         hideBios();
@@ -133,16 +176,19 @@
           "WindowsLaunchWrapper"
         )[0];
         windowsLaunch.classList.add("visible");
-        setTimeout(
-          () => windowsLaunch.parentNode.removeChild(windowsLaunch),
-          3000
-        );
+        windowsLaunch.classList.remove("hidden");
         window.localStorage.setItem("loggedIn", "true");
+        setTimeout(() => {
+          windowsLaunch.classList.remove("visible");
+          windowsLaunch.classList.add("hidden");
+        }, 5000);
       }
 
       function staggerElements(elems, entry) {
         if (!elems[entry]) {
+          document.querySelector(".BIOS").classList.add("hidden");
           windowsLogo();
+          return;
         }
         elems[entry].classList.add("visible");
 
@@ -199,10 +245,13 @@
             Is unwilling to link his Twitter because he can't remember whether
             anything he tweeted is embarrassing
           </p>
+          <p>
+            Is sorry about how this works weird on tablets
+          </p>
         </div>
       </div>
     </div>
-    <div class="WindowsLaunchWrapper">
+    <div class="WindowsLaunchWrapper hidden">
       <div class="WindowsLaunch"></div>
     </div>
     <div id="root"></div>

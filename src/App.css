@@ -3,29 +3,30 @@
   src: url("./assets/ami_bios1.woff2") format("woff2");
 }
 
-.w98.desktop {
-  margin-left: auto;
-  margin-right: auto;
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
   overflow: hidden;
-  background-color: cadetblue;
-  width: 100vw;
-  height: 133vw;
+  margin: 0;
+  background-color: darkslategrey;
 }
 
-@media (min-width: 640px) and (min-height: 480px) {
+#root {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.screen,
+.w98.desktop {
+  width: 100vw;
+  height: 80vh;
+}
+
+@media (min-width: 640px) and (min-height: 500px) {
   #root {
     height: 100vh;
   }
-}
-
-.w98.desktop.notMobile {
-  width: 640px;
-  height: 480px;
-}
-
-.w98.desktop.fullScreen {
-  width: 100%;
-  height: 100%;
 }
 
 .desktop.desktopX2 {
@@ -34,6 +35,17 @@
 
 .desktop.desktopX1_5 {
   transform: scale(1.5);
+}
+
+.desktop.notMobile {
+  width: 640px;
+  height: 480px;
+}
+
+.desktop.fullScreen {
+  height: 100vh;
+  width: 100vw;
+  transform: scale(1);
 }
 
 .react-draggable > .Window {

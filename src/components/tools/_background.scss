@@ -1,0 +1,32 @@
+.Background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  div {
+    height: 100%;
+    width: 100%;
+  }
+  pointer-events: none;
+
+  &--tiled {
+    div {
+      background-size: 40px;
+      background-repeat: repeat;
+    }
+  }
+  &--contain {
+    div {
+      background-size: 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+  &--stretch {
+    div {
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+  }
+}

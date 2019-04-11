@@ -94,6 +94,7 @@ class Window extends React.PureComponent {
           disableDragging: true
         }
       : undefined;
+    debugger;
     return (
       <>
         {this.state.isDragging && (
@@ -143,14 +144,15 @@ class Window extends React.PureComponent {
             footer={props.footer}
             onOpen={props.multiWindow && (() => props.onOpen(props.id))}
             onClose={() => props.onClose(props.id)}
-            onMinimize={() => props.onMinimize(props.id)}
-            onRestore={this.restore}
-            onMaximize={this.maximize}
+            onMinimize={props.onMinimize && (() => props.onMinimize(props.id))}
+            onRestore={props.resizable && this.restore}
+            onMaximize={props.resizable && this.maximize}
             changingState={this.state.isDragging || this.state.isResizing}
             maximizeOnOpen={this.context.isMobile}
             className={cx(props.className, {
               "Window--active": props.isActive
             })}
+            resizable={props.resizable}
             menuOptions={props.menuOptions}
             hasMenu={props.hasMenu}
             explorerOptions={props.explorerOptions}

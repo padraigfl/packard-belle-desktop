@@ -15,7 +15,9 @@ class SettingsProvider extends Component {
     scale: 1,
     crt: true,
     fullScreen: false,
-    isMobile: false
+    isMobile: false,
+    bgImg: window && window.localStorage.getItem("bgImg"),
+    bgStyle: window && window.localStorage.getItem("bgStyle")
   };
 
   toggleCrt = toggle(this, "crt");
@@ -23,14 +25,31 @@ class SettingsProvider extends Component {
   toggleMobile = toggle(this, "isMobile");
   changeScale = setKeyValue(this, "scale");
 
+  updateBackgroundImage = () => {
+    if (window && window.localStorage) {
+      const bgImg = window.localStorage.getItem("bgImg");
+      const bgStyle = window.localStorage.getItem("bgStyle");
+      if (bgImg) {
+        this.setState({ bgImg, bgStyle });
+      }
+    }
+  };
+
   render() {
-    const { changeScale, toggleCrt, toggleFullScreen, toggleMobile } = this;
+    const {
+      changeScale,
+      toggleCrt,
+      toggleFullScreen,
+      toggleMobile,
+      updateBackgroundImage
+    } = this;
     const context = {
       ...this.state,
       changeScale,
       toggleCrt,
       toggleFullScreen,
-      toggleMobile
+      toggleMobile,
+      updateBackgroundImage
     };
     return (
       <SettingsContext.Provider value={context}>

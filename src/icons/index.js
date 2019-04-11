@@ -3,6 +3,7 @@ export { default as addressBook16 } from "./addressBook16-min.png";
 export { default as calculator16 } from "./calculator16-min.png";
 export { default as computer32 } from "./computer32-min.png";
 export { default as controlPanel16 } from "./controlPanel16-min.png";
+export { default as controlPanel32 } from "./controlPanel32-min.png";
 export { default as find24 } from "./find24-min.png";
 export { default as findComputer16 } from "./findComputer16-min.png";
 export { default as findFiles16 } from "./findFiles16-min.png";

@@ -5,7 +5,8 @@ import {
   Window as AbstractWindow,
   DetailsSection,
   Checkbox,
-  Radio
+  Radio,
+  ButtonForm
 } from "packard-belle";
 import Window from "../tools/Window";
 
@@ -16,8 +17,12 @@ import "./_styles.scss";
 class Settings extends Component {
   static contextType = SettingsContext;
   state = {
-    selected: null
+    selected: null,
+    bgImg: this.context.bgImg,
+    bgStyle: this.context.bgStyle
   };
+  timeout;
+  fileReader;
 
   onSelect = selected => this.setState({ selected });
 
@@ -35,12 +40,36 @@ class Settings extends Component {
 
   tempChange = (func, revertFunc) => {
     func();
-    this.setState(state => ({ tempChange: true }));
     setTimeout(() => {
-      this.setState(state => ({ tempChange: false }));
+      if (window.confirm("Please confirm this change looks okay")) {
+        return;
+      }
       revertFunc();
-    }, 5000);
+    }, 500);
   };
+
+  updateBackground = () => {
+    window.localStorage.setItem("bgImg", this.state.bgImg);
+    window.localStorage.setItem("bgStyle", this.state.bgStyle);
+    this.context.updateBackgroundImage(this.state.bgImg, this.state.bgStyle);
+  };
+
+  handleFileRead = () => {
+    const content = this.fileReader.result;
+    if (content.length < 70000) {
+      this.setState({ bgImg: content });
+    } else {
+      window.alert("50kb or less please, sorry =/");
+    }
+  };
+
+  handleFileChosen = ({ target: { files } }) => {
+    this.fileReader = new FileReader();
+    this.fileReader.onloadend = this.handleFileRead;
+    this.fileReader.readAsDataURL(files[0]);
+  };
+
+  selectStyle = e => this.setState({ bgStyle: e.target.value });
 
   render() {
     const { context, props } = this;
@@ -51,19 +80,21 @@ class Settings extends Component {
             <Window
               {...props}
               initialX={200}
-              initialY={150}
-              initialWidth={240}
-              initialHeight={240}
+              initialY={100}
+              initialWidth={280}
+              initialHeight={320}
               Component={AbstractWindow}
               title="Control Panel"
               className="Settings"
               onHelp={() => {}} // @todo
               onClose={() => program.toggleSettings(false)}
-              resizable={false}
               menuOptions={buildMenu({
                 ...props,
                 onClose: program.toggleSettings
               })}
+              resizable={false}
+              onMinimize={null}
+              onMaximize={null}
             >
               <DetailsSection>
                 Best avoid all these other than CRT on mobile
@@ -89,7 +120,7 @@ class Settings extends Component {
                 />
               </DetailsSection>
               {!context.isMobile && (
-                <DetailsSection title="Scale Options (5 second preview)">
+                <DetailsSection title="Scale Options (Confirmation Prompt)">
                   <div className="options-row">
                     {[1, 1.5, 2].map(scale => (
                       <Radio
@@ -103,11 +134,38 @@ class Settings extends Component {
                           );
                         }}
                         checked={context.scale === scale}
+                        isDisabled={context.fullScreen}
                       />
                     ))}
                   </div>
                 </DetailsSection>
               )}
+              <DetailsSection title="Background">
+                <input
+                  type="file"
+                  onChange={this.handleFileChosen}
+                  name="bgImg"
+                  id="bgImg"
+                />
+                <div>
+                  {["tile", "stretch", "contain"].map(v => (
+                    <Radio
+                      key={v}
+                      id={v}
+                      label={v}
+                      value={v}
+                      onChange={this.selectStyle}
+                      checked={this.state.bgStyle === v}
+                    />
+                  ))}
+                  <ButtonForm
+                    onClick={this.updateBackground}
+                    isDisabled={!this.state.bgImg}
+                  >
+                    Upload Image
+                  </ButtonForm>
+                </div>
+              </DetailsSection>
               {this.state.tempChange && "Previewing Changes"}
             </Window>
           )
