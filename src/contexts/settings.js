@@ -25,13 +25,34 @@ class SettingsProvider extends Component {
   toggleMobile = toggle(this, "isMobile");
   changeScale = setKeyValue(this, "scale");
 
-  updateBackgroundImage = () => {
+  updateLocalStorage = (key, val) => {
     if (window && window.localStorage) {
-      const bgImg = window.localStorage.getItem("bgImg");
-      const bgStyle = window.localStorage.getItem("bgStyle");
-      if (bgImg) {
-        this.setState({ bgImg, bgStyle });
+      window.localStorage.setItem(key, val);
+      if (val) {
+        this.setState({ [key]: val });
       }
+    }
+  };
+  removeLocalStorage = key => {
+    let keys = key;
+    if (!Array.isArray(key)) {
+      keys = [key];
+    }
+    if (keys.length < 1) {
+      return;
+    }
+    if (window && window.localStorage) {
+      keys.map(k => window.localStorage.removeItem(k));
+
+      this.setState(
+        keys.reduce(
+          (acc, val) => ({
+            ...acc,
+            [val]: null
+          }),
+          {}
+        )
+      );
     }
   };
 
@@ -41,7 +62,8 @@ class SettingsProvider extends Component {
       toggleCrt,
       toggleFullScreen,
       toggleMobile,
-      updateBackgroundImage
+      updateLocalStorage,
+      removeLocalStorage
     } = this;
     const context = {
       ...this.state,
@@ -49,7 +71,8 @@ class SettingsProvider extends Component {
       toggleCrt,
       toggleFullScreen,
       toggleMobile,
-      updateBackgroundImage
+      updateLocalStorage,
+      removeLocalStorage
     };
     return (
       <SettingsContext.Provider value={context}>

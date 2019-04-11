@@ -39,7 +39,7 @@ const canAccessIframe = id => {
 
 class InternetExplorer extends Component {
   id = "b".concat(nanoid()).replace("-", "");
-  state = {};
+  state = { dimensions: { width: 800, height: 400 } };
 
   componentDidMount() {
     setTimeout(this.getIframeDimension, 3000);
@@ -63,6 +63,7 @@ class InternetExplorer extends Component {
             : ""
         }Internet Explorer`}
         menuOptions={buildMenu(props)}
+        initialWidth="500"
         explorerOptions={[
           {
             icon: icons.back,
@@ -131,6 +132,8 @@ class InternetExplorer extends Component {
                 src={"http://localhost:3000/" || props.data.src}
                 title={props.data.src}
                 importance="low"
+                height="480"
+                width="640"
                 {...this.state.dimensions}
               />
             </div>
@@ -142,6 +145,8 @@ class InternetExplorer extends Component {
               src={"http://localhost:3000/" || props.data.src}
               title={props.data.src}
               importance="low"
+              height="480"
+              width="640"
             />
           ))}
       </Window>

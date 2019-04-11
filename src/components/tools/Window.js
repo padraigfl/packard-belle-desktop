@@ -94,7 +94,7 @@ class Window extends React.PureComponent {
           disableDragging: true
         }
       : undefined;
-    debugger;
+
     return (
       <>
         {this.state.isDragging && (

@@ -49,9 +49,17 @@ class Settings extends Component {
   };
 
   updateBackground = () => {
-    window.localStorage.setItem("bgImg", this.state.bgImg);
-    window.localStorage.setItem("bgStyle", this.state.bgStyle);
-    this.context.updateBackgroundImage(this.state.bgImg, this.state.bgStyle);
+    this.context.updateLocalStorage("bgImg", this.state.bgImg);
+  };
+
+  updateBackgroundStyle = e => {
+    const val = e.target.value;
+    this.context.updateLocalStorage("bgStyle", val);
+  };
+
+  removeBackground = () => {
+    this.context.removeLocalStorage(["bgImg", "bgStyle"]);
+    this.setState({ bgImg: null, bgStyle: null });
   };
 
   handleFileRead = () => {
@@ -68,8 +76,6 @@ class Settings extends Component {
     this.fileReader.onloadend = this.handleFileRead;
     this.fileReader.readAsDataURL(files[0]);
   };
-
-  selectStyle = e => this.setState({ bgStyle: e.target.value });
 
   render() {
     const { context, props } = this;
@@ -141,30 +147,42 @@ class Settings extends Component {
                 </DetailsSection>
               )}
               <DetailsSection title="Background">
-                <input
-                  type="file"
-                  onChange={this.handleFileChosen}
-                  name="bgImg"
-                  id="bgImg"
-                />
-                <div>
-                  {["tile", "stretch", "contain"].map(v => (
-                    <Radio
-                      key={v}
-                      id={v}
-                      label={v}
-                      value={v}
-                      onChange={this.selectStyle}
-                      checked={this.state.bgStyle === v}
+                {this.context.bgImg ? (
+                  <>
+                    <div>
+                      {["tile", "stretch", "contain"].map(v => (
+                        <Radio
+                          key={v}
+                          id={v}
+                          label={v}
+                          value={v}
+                          onChange={this.updateBackgroundStyle}
+                          checked={this.context.bgStyle === v}
+                        />
+                      ))}
+                    </div>
+                    <ButtonForm onClick={this.removeBackground}>
+                      Reset Background
+                    </ButtonForm>
+                  </>
+                ) : (
+                  <div>
+                    <input
+                      type="file"
+                      onChange={this.handleFileChosen}
+                      name="bgImg"
+                      id="bgImg"
                     />
-                  ))}
-                  <ButtonForm
-                    onClick={this.updateBackground}
-                    isDisabled={!this.state.bgImg}
-                  >
-                    Upload Image
-                  </ButtonForm>
-                </div>
+                    <div>
+                      <ButtonForm
+                        onClick={this.updateBackground}
+                        isDisabled={!this.state.bgImg}
+                      >
+                        Upload Image
+                      </ButtonForm>
+                    </div>
+                  </div>
+                )}
               </DetailsSection>
               {this.state.tempChange && "Previewing Changes"}
             </Window>
