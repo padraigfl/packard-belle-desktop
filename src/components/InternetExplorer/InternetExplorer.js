@@ -39,9 +39,16 @@ const canAccessIframe = id => {
 
 class InternetExplorer extends Component {
   id = "b".concat(nanoid()).replace("-", "");
-  state = { dimensions: { width: 800, height: 400 } };
+  state = {};
 
   componentDidMount() {
+    const desktop = document.querySelector(".desktop");
+    this.setState({
+      dimensions: {
+        height: desktop.innerHeight > 640 ? desktop.innerHeight : 640,
+        width: desktop.innerWidth > 640 ? desktop.innerWidth : 640
+      }
+    });
     setTimeout(this.getIframeDimension, 3000);
   }
   getIframeDimension = () => {

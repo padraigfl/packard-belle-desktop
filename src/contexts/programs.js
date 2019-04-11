@@ -1,9 +1,9 @@
 import React, { Component, createContext } from "react";
 import nanoid from "nanoid";
-import startMenuData from "../data/start";
-import desktopData from "../data/desktop";
 import * as icons from "../icons";
 import ExplorerWindow from "../components/ExplorerWindow";
+import startMenuData from "../data/start";
+import desktopData from "../data/desktop";
 
 export const ProgramContext = createContext();
 
@@ -92,13 +92,14 @@ const addIdsToData = data =>
       })
     : undefined;
 
-const desktopWithIds = addIdsToData(desktopData).map(entry => {
-  const { onClick, ...data } = entry;
-  return {
-    ...data,
-    onDoubleClick: onClick
-  };
-});
+const desktopWithIds = desktopData =>
+  addIdsToData(desktopData).map(entry => {
+    const { onClick, ...data } = entry;
+    return {
+      ...data,
+      onDoubleClick: onClick
+    };
+  });
 
 const initialize = (open, data, doubleClick) =>
   Array.isArray(data)
@@ -130,12 +131,16 @@ const initialize = (open, data, doubleClick) =>
     : undefined;
 
 class ProgramProvider extends Component {
+  static defaultProps = {
+    startMenuData,
+    desktopData
+  };
   state = {
     startMenu: initialize(
       p => this.open(p),
       addIdsToData(
         startMenu(
-          startMenuData,
+          this.props.startMenuData,
           [
             { title: "Ctrl+Alt+Del", onClick: () => this.toggleTaskManager() },
             {
@@ -149,7 +154,10 @@ class ProgramProvider extends Component {
       )
     ),
     desktop: [
-      ...initialize(p => this.open(p), desktopWithIds).map(entry => {
+      ...initialize(
+        p => this.open(p),
+        desktopWithIds(this.props.desktopData)
+      ).map(entry => {
         const { onClick, ...data } = entry;
         return {
           ...data,

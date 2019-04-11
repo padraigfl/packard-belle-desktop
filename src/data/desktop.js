@@ -16,7 +16,7 @@ export default [
   },
   {
     title: "Component Library that I made for this thing",
-    icon: icons.internetExplorere32,
+    icon: icons.htmlFile32,
     type: "ExternalLink",
     onClick: () => {
       if (window.confirm("This will open a new tab, is that okay?")) {
