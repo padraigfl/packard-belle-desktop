@@ -98,7 +98,7 @@ class Window extends React.PureComponent {
       : undefined;
 
     return (
-      <>
+      <React.Fragment>
         {this.state.isDragging && (
           <Rnd
             size={{ width: this.state.width, height: this.state.height }}
@@ -164,7 +164,7 @@ class Window extends React.PureComponent {
             {props.children}
           </props.Component>
         </Rnd>
-      </>
+      </React.Fragment>
     );
   }
 }
