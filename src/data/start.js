@@ -3,6 +3,7 @@ import IframeWindow from "../components/IframeWindow";
 import Notepad from "../components/Notepad";
 import JSDos from "../components/JSDos";
 import InternetExplorer from "../components/InternetExplorer/InternetExplorer";
+import google1999 from "./textFiles/google1999";
 
 const goTo = url => () => window.open(url);
 
@@ -31,6 +32,13 @@ const accessories = [
     data: { src: "https://basicallydan.github.io/skifree.js/" },
     multiWindow: true
   }
+  // {
+  //   title: "Minesweeper",
+  //   icon: icons.folderProgram16,
+  //   Component: IframeWindow,
+  //   data: { src: "https://mines.now.sh/", height: 200, width: 150 },
+  //   multiWindow: true
+  // }
 ];
 
 const programs = [
@@ -38,10 +46,10 @@ const programs = [
   { title: "Online Services", icon: icons.folderProgram16, options: [] },
   { title: "StartUp", icon: icons.folderProgram16, options: [] },
   {
-    title: "Internet Explorer",
+    title: "InternetExplorer(BROKEN)",
     icon: icons.internetExplorere16,
     Component: InternetExplorer,
-    data: { src: "https://www.spacejam.com/archive/spacejam/movie/jam.htm" }
+    data: { __html: google1999 }
   },
   {
     title: "JS-DOS Prompt",
@@ -59,15 +67,50 @@ const favorites = [
     options: [],
     icon: icons.folder16
   },
-  { title: "Links", icon: icons.folder16, options: [] },
-  { title: "Media", icon: icons.folder16, options: [] },
-  { title: "MSN", icon: icons.htmlFile16, onClick: goTo("https://msn.com") },
   {
-    title: "Radio Station Guide",
-    icon: icons.htmlFile16,
-    onClick: goTo("https://msn.com")
+    title: "Links",
+    icon: icons.folder16,
+    options: [
+      {
+        title: "MySpace",
+        type: "ExternalLink",
+        icon: icons.htmlFile16,
+        onClick: () => {
+          if (window.confirm("This will open a new tab, is that okay?")) {
+            window.open(
+              "https://web.archive.org/web/20080320075546/www.myspace.com/my_address"
+            );
+          }
+        }
+      }
+    ]
   },
-  { title: "Web Events", icon: icons.htmlFile16, isDisabled: true }
+  {
+    title: "Media",
+    icon: icons.folder16,
+    options: [
+      {
+        title: "My Big List of Films",
+        type: "ExternalLink",
+        icon: icons.htmlFile16,
+        onClick: () => {
+          if (window.confirm("This will open a new tab, is that okay?")) {
+            window.open("https://letterboxd.com/padraig");
+          }
+        }
+      }
+    ]
+  },
+  {
+    title: "My Github",
+    type: "ExternalLink",
+    icon: icons.htmlFile16,
+    onClick: () => {
+      if (window.confirm("This will open a new tab, is that okay?")) {
+        window.open("https://github.com/padraigfl");
+      }
+    }
+  }
 ];
 
 export const find = [

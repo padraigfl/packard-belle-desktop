@@ -36,19 +36,22 @@ class IFrame extends Component {
         </WindowAlert>
       );
     }
-
+    debugger;
     return (
       <Window
         {...props}
         className={cx("IframeWindow", {
           "Window--active": props.isActive
         })}
-        initialHeight={380}
-        initialWidth={440}
+        initialHeight={props.data.height || 380}
+        initialWidth={props.data.width || 440}
         menuOptions={props.data.useMenu && buildMenu(props)}
         Component={WindowProgram}
+        resizable={!(props.data.width || props.data.height)}
       >
-        <iframe src={props.data.src} title={props.title} />
+        <div style={props.data && props.data.style}>
+          <iframe src={props.data.src} title={props.title} />
+        </div>
       </Window>
     );
   }

@@ -58,7 +58,9 @@ class Window extends React.PureComponent {
   state = {
     height: this.props.initialHeight,
     width: this.props.initialWidth,
-    maximized: this.context.isMobile && this.props.resizable,
+    maximized:
+      (this.context.isMobile && this.props.resizable) ||
+      this.props.maximizeOnOpen,
     ...launchPositions(this.props.inintalX, this.props.initialY)
   };
 
@@ -107,7 +109,7 @@ class Window extends React.PureComponent {
               {...props}
               {...this.state}
               isDragging={false}
-              className="Window--active"
+              className={cx(props.className, "Window--active")}
             />
           </Rnd>
         )}
@@ -148,7 +150,7 @@ class Window extends React.PureComponent {
             onRestore={props.resizable && this.restore}
             onMaximize={props.resizable && this.maximize}
             changingState={this.state.isDragging || this.state.isResizing}
-            maximizeOnOpen={this.context.isMobile}
+            maximizeOnOpen={this.context.isMobile || this.props.maximizeOnOpen}
             className={cx(props.className, {
               "Window--active": props.isActive
             })}
@@ -157,6 +159,7 @@ class Window extends React.PureComponent {
             hasMenu={props.hasMenu}
             explorerOptions={props.explorerOptions}
             data={props.data}
+            style={props.style}
           >
             {props.children}
           </props.Component>
@@ -167,10 +170,10 @@ class Window extends React.PureComponent {
 }
 
 Window.defaultProps = {
-  minWidth: 160,
-  minHeight: 160,
-  initialWidth: 160,
-  initialHeight: 160,
+  minWidth: 200,
+  minHeight: 200,
+  initialWidth: 250,
+  initialHeight: 250,
   // maxHeight: 448,
   // maxWidth: 635,
   resizable: true,

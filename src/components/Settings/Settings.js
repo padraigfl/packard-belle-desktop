@@ -64,10 +64,10 @@ class Settings extends Component {
 
   handleFileRead = () => {
     const content = this.fileReader.result;
-    if (content.length < 70000) {
+    if (content.length < 120000) {
       this.setState({ bgImg: content });
     } else {
-      window.alert("50kb or less please, sorry =/");
+      window.alert("100kb or less please, sorry =/");
     }
   };
 

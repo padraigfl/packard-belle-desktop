@@ -63,7 +63,8 @@ class InternetExplorer extends Component {
             : ""
         }Internet Explorer`}
         menuOptions={buildMenu(props)}
-        initialWidth="500"
+        minHeight={300}
+        minWidth={300}
         explorerOptions={[
           {
             icon: icons.back,
@@ -120,16 +121,17 @@ class InternetExplorer extends Component {
         ]}
         maximizeOnOpen
       >
-        {props.data.html && <div dangerouslySetInnerHTML={props.data.html} />}
+        {props.data.__html && <div dangerouslySetInnerHTML={props.data} />}
         {props.children}
         {props.data &&
+          !props.data.html &&
           props.data.src &&
           (this.state.dimensions ? (
             <div style={{ ...this.state.dimensions }}>
               <iframe
                 className={this.id}
                 frameBorder="0"
-                src={"http://localhost:3000/" || props.data.src}
+                src={props.data.src}
                 title={props.data.src}
                 importance="low"
                 height="480"

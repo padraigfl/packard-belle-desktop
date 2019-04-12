@@ -11,7 +11,7 @@ const Background = props => (
         <div
           className={cx("Background", {
             "Background--tiled": context.bgStyle === "tile",
-            "Background--center": context.bgStyle === "contain",
+            "Background--contain": context.bgStyle === "contain",
             "Background--stretch": context.bgStyle === "stretch"
           })}
         >

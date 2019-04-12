@@ -3,6 +3,7 @@ import ExplorerWindow from "../components/ExplorerWindow";
 import IframeWindow from "../components/IframeWindow";
 import Notepad from "../components/Notepad";
 import facepalm from "./textFiles/facepalm";
+import resume from "./textFiles/resume";
 
 export default [
   {
@@ -16,13 +17,26 @@ export default [
   {
     title: "Component Library that I made for this thing",
     icon: icons.internetExplorere32,
-    onClick: () => window.open("https://github.com/padraigfl/packard-belle")
+    type: "ExternalLink",
+    onClick: () => {
+      if (window.confirm("This will open a new tab, is that okay?")) {
+        window.open("https://github.com/padraigfl/packard-belle");
+      }
+    }
   },
   {
     title: "Paint",
     icon: icons.paint32,
     Component: IframeWindow,
     data: { src: "https://jspaint.app/" }
+  },
+  {
+    title: "resume draft 31 final last",
+    icon: icons.notepadFile32,
+    Component: Notepad,
+    data: {
+      content: resume
+    }
   },
   {
     title: "facepalm",

@@ -1,4 +1,9 @@
 .IframeWindow {
+  > div:not(.Window__heading),
+  iframe {
+    width: 100%;
+    flex-grow: 1;
+  }
   iframe {
     height: 100%;
   }
@@ -18,6 +23,7 @@
 
 .react-draggable-dragging {
   .IframeWindow {
+    > div,
     iframe {
       pointer-events: none;
     }
