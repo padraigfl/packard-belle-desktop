@@ -148,7 +148,7 @@ class Settings extends Component {
               )}
               <DetailsSection title="Background">
                 {this.context.bgImg ? (
-                  <>
+                  <React.Fragment>
                     <div>
                       {["tile", "stretch", "contain"].map(v => (
                         <Radio
@@ -164,7 +164,7 @@ class Settings extends Component {
                     <ButtonForm onClick={this.removeBackground}>
                       Reset Background
                     </ButtonForm>
-                  </>
+                  </React.Fragment>
                 ) : (
                   <div>
                     <input

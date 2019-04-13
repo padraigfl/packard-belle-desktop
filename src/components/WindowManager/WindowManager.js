@@ -6,7 +6,7 @@ class WindowManager extends Component {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         {this.context.activePrograms
           .filter(prog => !prog.minimized)
           .map(prog => (
@@ -19,7 +19,7 @@ class WindowManager extends Component {
               isActive={prog.id === this.context.activeId}
             />
           ))}
-      </>
+      </React.Fragment>
     );
   }
 }
