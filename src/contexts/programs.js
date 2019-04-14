@@ -51,7 +51,7 @@ const startMenu = (injectedData = [], set, shutDown) => [
       icon: icons.help24,
       options: [
         {
-          title: "Suport Me?",
+          title: "Support Me?",
           icon: icons.htmlFile16,
           onClick: () => window.open("https://www.buymeacoffee.com/padraig")
         }
