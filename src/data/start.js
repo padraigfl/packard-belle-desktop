@@ -22,23 +22,35 @@ const accessories = [
     title: "Paint",
     icon: icons.paint16,
     Component: IframeWindow,
-    data: { src: "https://jspaint.app/" },
+    data: { src: "https://jspaint.app/", creator: "https://github.com/1j01" },
     multiWindow: true
   },
   {
     title: "SkiFree",
     icon: icons.folderProgram16,
     Component: IframeWindow,
-    data: { src: "https://basicallydan.github.io/skifree.js/" },
+    data: {
+      src: "https://basicallydan.github.io/skifree.js/"
+    },
+    multiWindow: true
+  },
+  {
+    title: "Minesweeper",
+    icon: icons.folderProgram16,
+    Component: IframeWindow,
+    data: {
+      src: "https://mines.now.sh/",
+      creator: "https://github.com/ShizukuIchi",
+      height: 225,
+      width: 150,
+      style: {
+        transform: "scale(0.5) translateX(-50%) translateY(-50%)",
+        width: "300px",
+        height: "400px"
+      }
+    },
     multiWindow: true
   }
-  // {
-  //   title: "Minesweeper",
-  //   icon: icons.folderProgram16,
-  //   Component: IframeWindow,
-  //   data: { src: "https://mines.now.sh/", height: 200, width: 150 },
-  //   multiWindow: true
-  // }
 ];
 
 const programs = [

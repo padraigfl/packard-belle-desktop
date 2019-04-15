@@ -144,8 +144,8 @@ class Window extends React.PureComponent {
             title={props.title}
             icon={props.icon}
             footer={props.footer}
-            onOpen={props.multiWindow && (() => props.onOpen(props.id))}
-            onClose={() => props.onClose(props.id)}
+            onOpen={props.multiWindow && (() => props.onOpen(props))}
+            onClose={() => props.onClose(props)}
             onMinimize={props.onMinimize && (() => props.onMinimize(props.id))}
             onRestore={props.resizable && this.restore}
             onMaximize={props.resizable && this.maximize}

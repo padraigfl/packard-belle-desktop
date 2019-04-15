@@ -13,7 +13,7 @@ export const buildMenu = props => [
     title: "File",
     options: [
       { title: "Open", isDisabled: true },
-      { title: "Close", onClick: () => props.onClose(props.id) }
+      { title: "Close", onClick: () => props.onClose(props) }
     ]
   },
   {

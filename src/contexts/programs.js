@@ -234,8 +234,8 @@ class ProgramProvider extends Component {
     if (!program.Component) {
       return;
     }
-    if (this.isProgramActive(program) && !program.multiWindow) {
-      this.moveToTop(program);
+    if (this.isProgramActive(program.id) && !program.multiWindow) {
+      this.moveToTop(program.id);
       return;
     }
     const newProgram = {
@@ -250,15 +250,14 @@ class ProgramProvider extends Component {
   };
 
   close = (program, exit) => {
-    if (!this.isProgramActive(program)) {
+    if (!this.isProgramActive(program.id)) {
       return;
     }
-
     const taskBar = this.state.openOrder.filter(p => p !== program.id);
     this.setState({ openOrder: taskBar });
 
     if (!program.background || exit) {
-      this.exit(program);
+      this.exit(program.id);
     }
   };
 

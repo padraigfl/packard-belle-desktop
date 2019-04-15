@@ -18,7 +18,7 @@ class IFrame extends Component {
     const commonProps = {
       title: props.title,
       icon: props.icon,
-      onClose: () => props.onClose(props.id)
+      onClose: () => props.onClose(props)
     };
 
     if (state.displayAlert) {
@@ -30,13 +30,14 @@ class IFrame extends Component {
           className="IframeWindow--alert"
         >
           {props.data.disclaimer ||
-            `The Following is an iframe displaying, content belongs to the original creator at ${
+            `The Following is an iframe displaying, content belongs to ${props
+              .data.creator || "the original creator"} at ${
               props.data.src
-            }`}
+            }. `}{" "}
+          Behaviour will be inconsistent with rest of system.
         </WindowAlert>
       );
     }
-    debugger;
     return (
       <Window
         {...props}
@@ -45,6 +46,8 @@ class IFrame extends Component {
         })}
         initialHeight={props.data.height || 380}
         initialWidth={props.data.width || 440}
+        minWidth={props.data.width}
+        minHeight={props.data.height}
         menuOptions={props.data.useMenu && buildMenu(props)}
         Component={WindowProgram}
         resizable={!(props.data.width || props.data.height)}

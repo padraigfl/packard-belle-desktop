@@ -12,14 +12,14 @@ export const buildMenu = (props, state) => [
       {
         title: "New",
         isDisabled: !props.multiWindow && !props.onOpen,
-        onClick: () => props.onOpen(props.id)
+        onClick: () => props.onOpen(props)
       },
       {
         title: "Open",
         isDisabled: true,
-        onClick: () => props.onOpen(props.id)
+        onClick: () => props.onOpen(props)
       },
-      { title: "Close", onClick: () => props.onClose(props.id) },
+      { title: "Close", onClick: () => props.onClose(props) },
       {
         title: "Wrap",
         onClick: () => state.toggleWrap(!state.wrap),

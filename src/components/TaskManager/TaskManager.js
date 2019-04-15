@@ -16,7 +16,10 @@ class TaskManager extends Component {
 
   exit = () => {
     if (this.state.selected) {
-      this.context.onClose(this.state.selected, true);
+      const prog = this.context.activePrograms.find(
+        p => p.id === this.state.selected
+      );
+      this.context.onClose(prog, true);
     }
   };
 
