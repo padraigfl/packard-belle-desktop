@@ -12,7 +12,7 @@ import Window from "../tools/Window";
 
 import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
 
-import "./_styles.scss";
+import styles from "./_styles.scss";
 
 class Settings extends Component {
   static contextType = SettingsContext;
@@ -102,7 +102,7 @@ class Settings extends Component {
               onMinimize={null}
               onMaximize={null}
             >
-              <DetailsSection>
+              <DetailsSection className={styles.DetailsSection}>
                 Best avoid all these other than CRT on mobile
               </DetailsSection>
               <DetailsSection title="Customise">
@@ -111,18 +111,21 @@ class Settings extends Component {
                   label="Mobile Portrait View"
                   onChange={context.toggleMobile}
                   checked={context.isMobile === true}
+                  className={styles.Checkbox}
                 />
                 <Checkbox
                   id="CRT Effect"
                   label="CRT Effect"
                   onChange={context.toggleCrt}
                   checked={context.crt === true}
+                  className={styles.Checkbox}
                 />
                 <Checkbox
                   id="Fullscreen"
                   label="Fullscreen"
                   onChange={context.toggleFullScreen}
                   checked={context.fullScreen === true}
+                  className={styles.Checkbox}
                 />
               </DetailsSection>
               {!context.isMobile && (
@@ -141,6 +144,7 @@ class Settings extends Component {
                         }}
                         checked={context.scale === scale}
                         isDisabled={context.fullScreen}
+                        className={styles.Radio}
                       />
                     ))}
                   </div>
@@ -158,6 +162,7 @@ class Settings extends Component {
                           value={v}
                           onChange={this.updateBackgroundStyle}
                           checked={this.context.bgStyle === v}
+                          className={styles.Radio}
                         />
                       ))}
                     </div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Theme } from "packard-belle";
 import cx from "classnames";
-import "./App.css";
 import TaskBar from "./components/TaskBar";
 import WindowManager from "./components/WindowManager";
 import ProgramProvider from "./contexts/programs";
@@ -12,6 +11,7 @@ import Settings from "./components/Settings";
 import CRTOverlay from "./components/tools/CRT";
 import ShutDown from "./components/ShutDown/ShutDown";
 import Background from "./components/tools/Background";
+import "./App.css";
 
 class Desktop extends Component {
   static contextType = SettingsContext;

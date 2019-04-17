@@ -2,7 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { Rnd } from "react-rnd";
 import { SettingsContext } from "../../contexts/settings";
-import "./_window.scss";
+import styles from "./_window.scss";
 
 const resizeStyles = pixels => {
   const corners = pixels * 4;
@@ -104,17 +104,20 @@ class Window extends React.PureComponent {
             size={{ width: this.state.width, height: this.state.height }}
             position={{ x: this.state.x, y: this.state.y }}
             scale={context.scale}
+            className={styles["react-draggable"]}
           >
             <props.Component
               {...props}
               {...this.state}
               isDragging={false}
-              className={cx(props.className, "Window--active")}
+              className={cx(props.className, styles.Window, "Window--active")}
             />
           </Rnd>
         )}
         <Rnd
-          className={this.state.maximized && "react-draggable-maximized-hack"}
+          className={cx(styles["react-draggable"], {
+            [styles["react-draggable-maximized-hack"]]: this.state.maximized
+          })}
           size={
             !this.state.maximized && {
               width: this.state.width,
@@ -151,8 +154,8 @@ class Window extends React.PureComponent {
             onMaximize={props.resizable && this.maximize}
             changingState={this.state.isDragging || this.state.isResizing}
             maximizeOnOpen={this.context.isMobile || this.props.maximizeOnOpen}
-            className={cx(props.className, {
-              "Window--active": props.isActive
+            className={cx(props.className, styles.Window, {
+              [styles["Window--active"]]: props.isActive
             })}
             resizable={props.resizable}
             menuOptions={props.menuOptions}

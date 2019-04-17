@@ -45,8 +45,8 @@
     "nanoid": "^2.0.1",
     "node-sass": "^4.11.0",
     "packard-belle": "github:padraigfl/packard-belle#0.3.2",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-rnd": "^9.1.2",
     "react-scripts": "2.1.5",
     "safe-eval": "^0.4.1"

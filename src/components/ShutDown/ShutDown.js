@@ -4,7 +4,7 @@ import { Window, Radio, ButtonForm } from "packard-belle";
 import { ProgramContext } from "../../contexts/programs";
 import { shutDown24 } from "../../icons";
 
-import "./_styles.scss";
+import styles from "./_styles.scss";
 
 const OPTIONS = ["Shut Down", "Restart", "That third option I forget"];
 
@@ -39,17 +39,17 @@ class ShutDown extends Component {
     const { context, props } = this;
     return context.shutDownMenu ? (
       <div
-        className={cx("ShutDown", props.className, {
-          animation: this.state.display
+        className={cx(styles.ShutDown, props.className, {
+          [styles.animation]: this.state.display
         })}
       >
         <Window
-          className="ShutDown__window"
+          className={styles.ShutDown__window}
           title="Shut Down Windows"
           onClose={context.toggleShutDownMenu}
           resizable={false}
         >
-          <div className="ShutDown__content">
+          <div className={styles.ShutDown__content}>
             <img src={shutDown24} alt="shut down" />
             <div>
               What do you want your computer to do?
@@ -63,7 +63,7 @@ class ShutDown extends Component {
                   isDisabled
                 />
               ))}
-              <div className="ShutDown__buttons">
+              <div className={styles.ShutDown__buttons}>
                 <ButtonForm onClick={this.process}>OK</ButtonForm>
                 <ButtonForm onClick={context.toggleShutDownMenu}>
                   Cancel

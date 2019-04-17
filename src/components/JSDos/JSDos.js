@@ -4,7 +4,7 @@ import cx from "classnames";
 import safeEval from "safe-eval";
 import Window from "../tools/Window";
 import { msDos16 } from "../../icons";
-import "./_styles.scss";
+import styles from "./_styles.scss";
 
 export const buildMenu = props => [
   {
@@ -71,9 +71,7 @@ class JSDos extends Component {
         Component={WindowProgram}
         initialHeight={200}
         initialWidth={400}
-        className={cx("JSDos", props.className, {
-          "Window--active": props.isActive
-        })}
+        className={cx(styles.JSDos, props.className)}
       >
         <form name="hiddenForm" onSubmit={this.processEntry}>
           <input
@@ -84,12 +82,12 @@ class JSDos extends Component {
             onBlur={this.onInputBlur}
           />
         </form>
-        <div className="terminal" onClick={this.focusInput}>
+        <div className={styles.terminal} onClick={this.focusInput}>
           <div>Microsoft(R) Windows 98 </div>
           <div style={{ marginLeft: "12px", marginBottom: "6px" }}>
             (C)Copyright Microsoft Corp 1981-1999.
           </div>
-          <div className="terminal__content">
+          <div className={styles.terminal__content}>
             {this.state.content.map(entry => (
               <div>{entry}</div>
             ))}

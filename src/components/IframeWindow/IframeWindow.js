@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { WindowProgram, WindowAlert } from "packard-belle";
-import cx from "classnames";
 import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
-import "./_styles.scss";
+import styles from "./_styles.scss";
 import Window from "../tools/Window";
 
 class IFrame extends Component {
@@ -27,7 +26,7 @@ class IFrame extends Component {
           {...commonProps}
           onOK={this.confirm}
           onCancel={commonProps.onClose}
-          className="IframeWindow--alert"
+          className={styles["IframeWindow--alert"]}
         >
           {props.data.disclaimer ||
             `The Following is an iframe displaying, content belongs to the original creator at ${
@@ -40,9 +39,7 @@ class IFrame extends Component {
     return (
       <Window
         {...props}
-        className={cx("IframeWindow", {
-          "Window--active": props.isActive
-        })}
+        className={styles.IframeWindow}
         initialHeight={props.data.height || 380}
         initialWidth={props.data.width || 440}
         menuOptions={props.data.useMenu && buildMenu(props)}

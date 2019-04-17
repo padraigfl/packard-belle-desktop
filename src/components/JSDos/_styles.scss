@@ -1,14 +1,16 @@
 @import "../../../node_modules/packard-belle/src/_scss/w98/mixins/box-shadows.scss";
 
-@font-face {
-  font-family: pixelmix;
-  src: url("../../assets/pixelmix.woff2") format("woff2");
-  font-weight: normal;
-}
+:global {
+  @font-face {
+    font-family: pixelmix;
+    src: url("../../assets/pixelmix.woff2") format("woff2");
+    font-weight: normal;
+  }
 
-@font-face {
-  font-family: FixedSys;
-  src: url("../../assets/FixedsysStripped.woff2") format("woff2");
+  @font-face {
+    font-family: FixedSys;
+    src: url("../../assets/FixedsysStripped.woff2") format("woff2");
+  }
 }
 
 .JSDos {

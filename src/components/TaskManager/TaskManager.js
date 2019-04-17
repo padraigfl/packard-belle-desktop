@@ -3,7 +3,7 @@ import { ProgramContext } from "../../contexts/programs";
 import { WindowProgram, SelectBox, ButtonForm } from "packard-belle";
 import Window from "../tools/Window";
 
-import "./_task-manager.scss";
+import styles from "./_task-manager.scss";
 import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
 
 class TaskManager extends Component {
@@ -38,7 +38,7 @@ class TaskManager extends Component {
         initialHeight={240}
         Component={WindowProgram}
         title="Task Manager"
-        className="TaskManager"
+        className={styles.TaskManager}
         onHelp={() => {}} // @todo
         onClose={context.toggleTaskManager}
         menuOptions={buildMenu({
@@ -47,6 +47,7 @@ class TaskManager extends Component {
         })}
       >
         <SelectBox
+          className={styles.SelectBox}
           onClick={this.onSelect}
           options={context.openOrder.map(pid => {
             const prog = context.activePrograms.find(p => p.id === pid);
@@ -57,7 +58,7 @@ class TaskManager extends Component {
           })}
           selected={[this.state.selected]}
         />
-        <div className="TaskManager__buttons">
+        <div className={styles.TaskManager__buttons}>
           <ButtonForm onClick={this.exit}>End Task</ButtonForm>
           <ButtonForm onClick={this.moveToTop}>Switch To</ButtonForm>
           <ButtonForm isDisabled>New Task</ButtonForm>

@@ -1,9 +1,9 @@
 import React from "react";
+import { WindowProgram } from "packard-belle";
 import Window from "../tools/Window";
 import cx from "classnames";
 import { notepad16 } from "../../icons";
-import "./_styles.scss";
-import { WindowProgram } from "packard-belle";
+import styles from "./_styles.scss";
 
 export const buildMenu = (props, state) => [
   {
@@ -33,38 +33,49 @@ export const buildMenu = (props, state) => [
   }
 ];
 
-const Notepad = props => {
-  const [wrap, toggleWrap] = React.useState(false);
-  const [text, setText] = React.useState(props.data.content || "");
+class Notepad extends React.Component {
+  static defaultProps = {
+    data: {
+      content: ""
+    }
+  };
 
-  return (
-    <Window
-      {...props}
-      icon={notepad16}
-      footer={[
-        { text: "needs 100% width height" },
-        { text: "overflow control" }
-      ]}
-      menuOptions={buildMenu(props, { toggleWrap, wrap })}
-      className={cx("Notepad", props.className, {
-        "Notepad--wrap": wrap
-      })}
-      title={`${
-        props.title !== "Notepad" ? props.title : "Untitled"
-      } - Notepad`}
-      Component={WindowProgram}
-    >
-      <div className="Notepad__textarea">
-        <textarea onChange={e => setText(e.target.value)}>{text}</textarea>
-      </div>
-    </Window>
-  );
-};
+  state = this.props.data
+    ? {
+        text: this.props.data.content,
+        wrap: this.props.data.wrap
+      }
+    : {};
 
-Notepad.defaultProps = {
-  data: {
-    content: ""
+  toggleWrap = val => this.setState({ wrap: val });
+  setText = text => this.setState({ text });
+
+  render() {
+    const { props, toggleWrap, setText } = this;
+    const { wrap, text } = this.state;
+    return (
+      <Window
+        {...props}
+        icon={notepad16}
+        footer={[
+          { text: "needs 100% width height" },
+          { text: "overflow control" }
+        ]}
+        menuOptions={buildMenu(props, { toggleWrap, wrap })}
+        className={cx(styles.Notepad, props.className, {
+          "Notepad--wrap": wrap
+        })}
+        title={`${
+          props.title !== "Notepad" ? props.title : "Untitled"
+        } - Notepad`}
+        Component={WindowProgram}
+      >
+        <div className={styles.Notepad__textarea}>
+          <textarea onChange={e => setText(e.target.value)}>{text}</textarea>
+        </div>
+      </Window>
+    );
   }
-};
+}
 
 export default Notepad;

@@ -1,9 +1,9 @@
 import React from "react";
-import "./_crt.scss";
+import style from "./_crt.scss";
 
 const CRTOverlay = props => (
-  <div className="container">
-    <div className="screen" />
+  <div className={style.container}>
+    <div className={style.screen} />
   </div>
 );
 

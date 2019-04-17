@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 
-import "./_background.scss";
+import styles from "./_background.scss";
 import { SettingsContext } from "../../contexts/settings";
 
 const Background = props => (
@@ -9,10 +9,10 @@ const Background = props => (
     {context =>
       context.bgImg ? (
         <div
-          className={cx("Background", {
-            "Background--tiled": context.bgStyle === "tile",
-            "Background--contain": context.bgStyle === "contain",
-            "Background--stretch": context.bgStyle === "stretch"
+          className={cx(styles.Background, {
+            [styles["Background--tiled"]]: context.bgStyle === "tile",
+            [styles["Background--contain"]]: context.bgStyle === "contain",
+            [styles["Background--stretch"]]: context.bgStyle === "stretch"
           })}
         >
           <div style={{ backgroundImage: `url(${context.bgImg})` }} />

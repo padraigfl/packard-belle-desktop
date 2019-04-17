@@ -1,7 +1,6 @@
 import React from "react";
 import { WindowExplorer } from "packard-belle";
 import * as icons from "../../icons";
-import "./_styles.scss";
 import Window from "../tools/Window";
 
 export const buildMenu = props => [
