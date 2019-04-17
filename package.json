@@ -51,6 +51,14 @@
     "react-scripts": "2.1.5",
     "safe-eval": "^0.4.1"
   },
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "nanoid": "^2.0.1",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-rnd": "^9.1.2",
+    "safe-eval": "^0.4.1"
+  },
   "scripts": {
     "start_": "react-scripts start",
     "build_": "react-scripts build",

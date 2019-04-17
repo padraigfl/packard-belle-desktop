@@ -36,7 +36,7 @@ class IFrame extends Component {
         </WindowAlert>
       );
     }
-    debugger;
+
     return (
       <Window
         {...props}
