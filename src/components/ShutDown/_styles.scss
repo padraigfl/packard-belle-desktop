@@ -24,11 +24,11 @@ $grey-checkered: "data:image/gif;base64,R0lGODlhAgACAJEAAAAAAP///8zMzP///yH5BAEA
   &.animation:after {
     height: 100%;
   }
-  .Window {
+  &__Window {
     margin: auto;
     z-index: 16;
   }
-  .Radio {
+  &__Radio {
     margin: 6px;
     display: block;
   }
@@ -38,6 +38,10 @@ $grey-checkered: "data:image/gif;base64,R0lGODlhAgACAJEAAAAAAP///8zMzP///yH5BAEA
     img {
       height: 32px;
       margin-right: 12px;
+    }
+    > div {
+      display: flex;
+      flex-direction: column;
     }
   }
   &__buttons {

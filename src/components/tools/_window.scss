@@ -19,6 +19,19 @@
   }
 }
 
+.react-draggable-dragging {
+  .IframeWindow {
+    > div,
+    iframe,
+    .pointerIssues {
+      pointer-events: none;
+    }
+  }
+  iframe {
+    pointer-events: none;
+  }
+}
+
 .Window {
   height: 100%;
   width: 100%;

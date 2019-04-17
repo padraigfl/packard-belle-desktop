@@ -11,7 +11,7 @@ import Settings from "./components/Settings";
 import CRTOverlay from "./components/tools/CRT";
 import ShutDown from "./components/ShutDown/ShutDown";
 import Background from "./components/tools/Background";
-import "./App.css";
+import "./App.scss";
 
 class Desktop extends Component {
   static contextType = SettingsContext;

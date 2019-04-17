@@ -44,7 +44,7 @@ class ShutDown extends Component {
         })}
       >
         <Window
-          className={styles.ShutDown__window}
+          className={styles.ShutDown__Window}
           title="Shut Down Windows"
           onClose={context.toggleShutDownMenu}
           resizable={false}
@@ -55,6 +55,7 @@ class ShutDown extends Component {
               What do you want your computer to do?
               {OPTIONS.map(option => (
                 <Radio
+                  className={styles.ShutDown__Radio}
                   key={option}
                   value={option}
                   label={option}
@@ -64,11 +65,21 @@ class ShutDown extends Component {
                 />
               ))}
               <div className={styles.ShutDown__buttons}>
-                <ButtonForm onClick={this.process}>OK</ButtonForm>
-                <ButtonForm onClick={context.toggleShutDownMenu}>
+                <ButtonForm
+                  className={styles.ButtonForm}
+                  onClick={this.process}
+                >
+                  OK
+                </ButtonForm>
+                <ButtonForm
+                  className={styles.ButtonForm}
+                  onClick={context.toggleShutDownMenu}
+                >
                   Cancel
                 </ButtonForm>
-                <ButtonForm isDisabled>Help</ButtonForm>
+                <ButtonForm className={styles.ButtonForm} isDisabled>
+                  Help
+                </ButtonForm>
               </div>
             </div>
           </div>

@@ -96,7 +96,6 @@ class Window extends React.PureComponent {
           disableDragging: true
         }
       : undefined;
-
     return (
       <React.Fragment>
         {this.state.isDragging && (
@@ -110,7 +109,11 @@ class Window extends React.PureComponent {
               {...props}
               {...this.state}
               isDragging={false}
-              className={cx(props.className, styles.Window, "Window--active")}
+              className={cx(
+                props.className,
+                styles.Window,
+                styles["Window--active"]
+              )}
             />
           </Rnd>
         )}
@@ -136,7 +139,7 @@ class Window extends React.PureComponent {
           scale={context.scale}
           onMouseDown={
             this.props.moveToTop
-              ? () => this.props.moveToTop(this.props)
+              ? () => this.props.moveToTop(this.props.id)
               : undefined
           }
           {...resizeProps}
@@ -155,7 +158,8 @@ class Window extends React.PureComponent {
             changingState={this.state.isDragging || this.state.isResizing}
             maximizeOnOpen={this.context.isMobile || this.props.maximizeOnOpen}
             className={cx(props.className, styles.Window, {
-              [styles["Window--active"]]: props.isActive
+              [styles["Window--active"]]: props.isActive,
+              [styles["react-draggable-dragging"]]: this.state.isDragging
             })}
             resizable={props.resizable}
             menuOptions={props.menuOptions}
