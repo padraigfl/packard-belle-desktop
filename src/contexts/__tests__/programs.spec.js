@@ -1,4 +1,4 @@
-import ProgramProvider from "../programs";
+import ProgramProvider, { addIdsToData, initialize } from "../programs";
 
 const defaults = {
   activePrograms: [
@@ -13,16 +13,42 @@ const defaults = {
 describe("ProgramProvider", () => {
   const component = new ProgramProvider();
   component.setState = val => {
-    component.state = {
-      ...component.state,
-      ...val
-    };
+    if (typeof val !== "function") {
+      component.state = {
+        ...component.state,
+        ...val
+      };
+    } else {
+      component.state = {
+        ...component.state,
+        ...val(component.state)
+      };
+    }
   };
   component.state = defaults;
 
   beforeEach(() => {
     component.setState(defaults);
   });
+  it("toggleSettings", () => {
+    component.toggleSettings();
+    expect(component.state.settingsDisplay).toEqual(true);
+    component.toggleSettings("test");
+    expect(component.state.settingsDisplay).toEqual("test");
+  });
+  it("toggleTaskManager", () => {
+    component.toggleTaskManager();
+    expect(component.state.taskManager).toEqual(true);
+    component.toggleTaskManager();
+    expect(component.state.taskManager).toEqual(false);
+  });
+  it("toggleShutDownMenu", () => {
+    component.toggleShutDownMenu();
+    expect(component.state.shutDownMenu).toEqual(true);
+    component.toggleShutDownMenu();
+    expect(component.state.shutDownMenu).toEqual(false);
+  });
+  xit("shutDown", () => {});
   it("isProgramActive", () => {
     expect(component.isProgramActive(3)).toEqual(true);
     expect(component.isProgramActive(4)).toEqual(false);
@@ -64,5 +90,29 @@ describe("ProgramProvider", () => {
   it("close", () => {
     component.close({ id: 2 }, true);
     expect(component.isProgramActive(2)).toEqual(false);
+  });
+  it("minimize", () => {
+    component.minimize(2);
+    expect(component.state.activePrograms[0].minimized).toEqual(true);
+  });
+  it("minimizeAll", () => {
+    component.minimizeAll();
+    component.state.activePrograms.forEach(p => {
+      expect(p.minimized).toEqual(true);
+    });
+  });
+});
+
+describe("helper functions", () => {
+  it("addIdsToData", () => {
+    expect(addIdsToData([{}, {}]).map(d => !!d.id)).toEqual([true, true]);
+  });
+  it("desktopWithIds (doubleClick)", () => {
+    const func = jest.fn();
+    const func2 = (a, b) => a + b;
+    let desktop = initialize(func, [{ onClick: func2 }], true);
+    expect(desktop.map(d => !!d.onDoubleClick)).toEqual([true]);
+    desktop = initialize(func, [{ onClick: func2, Component: "b" }]);
+    expect(desktop.map(d => d.onClick)).not.toEqual([func2]);
   });
 });

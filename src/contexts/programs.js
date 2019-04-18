@@ -78,7 +78,7 @@ const startMenu = (injectedData = [], set, shutDown) => [
 const sameProgram = a => b => a === b.id;
 const notSameProgram = a => b => a !== b.id;
 
-const addIdsToData = data =>
+export const addIdsToData = data =>
   Array.isArray(data)
     ? data.map(d => {
         if (Array.isArray(d)) {
@@ -92,7 +92,7 @@ const addIdsToData = data =>
       })
     : undefined;
 
-const desktopWithIds = addIdsToData(desktopData).map(entry => {
+export const desktopWithIds = addIdsToData(desktopData).map(entry => {
   const { onClick, ...data } = entry;
   return {
     ...data,
@@ -100,7 +100,7 @@ const desktopWithIds = addIdsToData(desktopData).map(entry => {
   };
 });
 
-const initialize = (open, data, doubleClick) =>
+export const initialize = (open, data, doubleClick) =>
   Array.isArray(data)
     ? data.map(d => {
         if (Array.isArray(d)) {
@@ -202,15 +202,6 @@ class ProgramProvider extends Component {
   isProgramActive = programId =>
     this.state.activePrograms.some(sameProgram(programId));
 
-  exit = programId =>
-    this.setState({
-      activePrograms: this.state.activePrograms.filter(
-        notSameProgram(programId)
-      ),
-      openOrder: this.state.openOrder.filter(x => x !== programId),
-      activeId: null
-    });
-
   moveToTop = programId => {
     const programIndex = this.state.activePrograms.findIndex(
       sameProgram(programId)
@@ -260,6 +251,15 @@ class ProgramProvider extends Component {
       this.exit(program.id);
     }
   };
+
+  exit = programId =>
+    this.setState({
+      activePrograms: this.state.activePrograms.filter(
+        notSameProgram(programId)
+      ),
+      openOrder: this.state.openOrder.filter(x => x !== programId),
+      activeId: null
+    });
 
   minimize = programId => {
     if (!this.isProgramActive(programId)) {
