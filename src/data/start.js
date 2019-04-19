@@ -58,7 +58,7 @@ const programs = [
   { title: "Online Services", icon: icons.folderProgram16, options: [] },
   { title: "StartUp", icon: icons.folderProgram16, options: [] },
   {
-    title: "InternetExplorer(BROKEN)",
+    title: "IE4(BROKEN)",
     icon: icons.internetExplorere16,
     Component: InternetExplorer,
     data: { __html: google1999 }
