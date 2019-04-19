@@ -63,3 +63,6 @@ export { default as ieRefresh } from "./ie-refresh-min.png";
 export { default as iePrint } from "./ie-print-min.png";
 export { default as ieSearch } from "./ie-search-min.png";
 export { default as ieStop } from "./ie-stop-min.png";
+
+export { default as minesweeper16 } from "./minesweeper16-min.png";
+export { default as skifree } from "./skifree-min.png";

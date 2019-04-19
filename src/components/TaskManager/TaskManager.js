@@ -38,7 +38,7 @@ class TaskManager extends Component {
         initialX={200}
         initialY={150}
         initialWidth={240}
-        initialHeight={240}
+        initialHeight={200}
         Component={WindowProgram}
         title="Task Manager"
         className="TaskManager"

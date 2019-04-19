@@ -27,7 +27,7 @@ const accessories = [
   },
   {
     title: "SkiFree",
-    icon: icons.folderProgram16,
+    icon: icons.skifree,
     Component: IframeWindow,
     data: {
       src: "https://basicallydan.github.io/skifree.js/"
@@ -36,7 +36,7 @@ const accessories = [
   },
   {
     title: "Minesweeper",
-    icon: icons.folderProgram16,
+    icon: icons.minesweeper16,
     Component: IframeWindow,
     data: {
       src: "https://mines.now.sh/",

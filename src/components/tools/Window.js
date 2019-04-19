@@ -129,7 +129,7 @@ class Window extends React.PureComponent {
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
           maxWidth={!this.state.maximized ? this.props.maxWidth : "105%"}
-          maxHeight={!this.state.maximized ? this.props.maxHeigh : "105%"}
+          maxHeight={!this.state.maximized ? this.props.maxHeight : "105%"}
           scale={context.scale}
           onMouseDown={
             this.props.moveToTop
