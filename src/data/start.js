@@ -1,11 +1,10 @@
 import * as icons from "../icons";
-import IframeWindow from "../components/IframeWindow";
-import Notepad from "../components/Notepad";
-import JSDos from "../components/JSDos";
-import InternetExplorer from "../components/InternetExplorer/InternetExplorer";
 import google1999 from "./textFiles/google1999";
-
-const goTo = url => () => window.open(url);
+import facepalm from "./textFiles/facepalm";
+import squirtel from "./textFiles/squirtel";
+import rollin from "./textFiles/rollin";
+import sunscreen from "./textFiles/sunscreen";
+import allStarTabs from "./textFiles/allStarTabs";
 
 const accessories = [
   { title: "Entertainment", icon: icons.folderProgram16, options: [] },
@@ -15,29 +14,29 @@ const accessories = [
   {
     title: "Notepad",
     icon: icons.notepad16,
-    Component: Notepad,
-    multiWindow: true
+    component: "Notepad",
+    multiInstance: true
   },
   {
     title: "Paint",
     icon: icons.paint16,
-    Component: IframeWindow,
+    component: "IframeWindow",
     data: { src: "https://jspaint.app/", creator: "https://github.com/1j01" },
-    multiWindow: true
+    multiInstance: true
   },
   {
     title: "SkiFree",
     icon: icons.skifree,
-    Component: IframeWindow,
+    component: "IframeWindow",
     data: {
       src: "https://basicallydan.github.io/skifree.js/"
     },
-    multiWindow: true
+    multiInstance: true
   },
   {
     title: "Minesweeper",
     icon: icons.minesweeper16,
-    Component: IframeWindow,
+    component: "IframeWindow",
     data: {
       src: "https://mines.now.sh/",
       creator: "https://github.com/ShizukuIchi",
@@ -49,7 +48,7 @@ const accessories = [
         height: "400px"
       }
     },
-    multiWindow: true
+    multiInstance: true
   }
 ];
 
@@ -60,14 +59,14 @@ const programs = [
   {
     title: "IE4(BROKEN)",
     icon: icons.internetExplorere16,
-    Component: InternetExplorer,
+    component: "InternetExplorer",
     data: { __html: google1999 }
   },
   {
     title: "JS-DOS Prompt",
     icon: icons.msDos16,
-    Component: JSDos,
-    multiWindow: true
+    component: "JSDos",
+    multiInstance: true
   },
   { title: "Outlook Express", icon: icons.outlook16, isDisabled: true },
   { title: "Windows Explorer", icon: icons.windowsExplorer16, isDisabled: true }
@@ -87,13 +86,8 @@ const favorites = [
         title: "MySpace",
         type: "ExternalLink",
         icon: icons.htmlFile16,
-        onClick: () => {
-          if (window.confirm("This will open a new tab, is that okay?")) {
-            window.open(
-              "https://web.archive.org/web/20080320075546/www.myspace.com/my_address"
-            );
-          }
-        }
+        href:
+          "https://web.archive.org/web/20080320075546/www.myspace.com/my_address"
       }
     ]
   },
@@ -105,11 +99,7 @@ const favorites = [
         title: "My Big List of Films",
         type: "ExternalLink",
         icon: icons.htmlFile16,
-        onClick: () => {
-          if (window.confirm("This will open a new tab, is that okay?")) {
-            window.open("https://letterboxd.com/padraig");
-          }
-        }
+        href: "https://letterboxd.com/padraig"
       }
     ]
   },
@@ -117,11 +107,7 @@ const favorites = [
     title: "My Github",
     type: "ExternalLink",
     icon: icons.htmlFile16,
-    onClick: () => {
-      if (window.confirm("This will open a new tab, is that okay?")) {
-        window.open("https://github.com/padraigfl");
-      }
-    }
+    href: "https://github.com/padraigfl"
   }
 ];
 
@@ -135,12 +121,14 @@ export const find = [
   {
     title: "On the Internet...",
     icon: icons.findOnline16,
-    onClick: goTo("https://google.com")
+    type: "ExternalLink",
+    href: "https://google.com"
   },
   {
     title: "People...",
     icon: icons.findPeople16,
-    onClick: goTo("https://facebook.com")
+    type: "ExternalLink",
+    href: "https://facebook.com"
   }
 ];
 
@@ -158,6 +146,73 @@ export default [
   {
     title: "Documents",
     icon: icons.folderOpen24,
-    options: []
+    options: [
+      {
+        title: "ASCII Art",
+        options: [
+          {
+            title: "facepalm",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: facepalm
+            }
+          },
+          {
+            title: "squirtel",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: squirtel
+            }
+          }
+        ],
+        icon: icons.folder16
+      },
+      {
+        title: "Lyrics",
+        options: [
+          {
+            title: "sunscreen",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: sunscreen
+            }
+          },
+          {
+            title: "all star lyrics",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: allStarTabs
+            }
+          }
+        ],
+        icon: icons.folder16
+      },
+      {
+        title: "Guitar Tabs",
+        options: [
+          {
+            title: "rollin guitar tabs",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: rollin
+            }
+          },
+          {
+            title: "all star",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: allStarTabs
+            }
+          }
+        ],
+        icon: icons.folder16
+      }
+    ]
   }
 ];

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { ProgramContext } from "../../contexts/programs";
+import { ProgramContext } from "../../contexts";
 import { WindowProgram, SelectBox, ButtonForm } from "packard-belle";
 import Window from "../tools/Window";
 
 import "./_task-manager.scss";
-import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
+import buildMenu from "../../helpers/menuBuilder";
 
 class TaskManager extends Component {
   static contextType = ProgramContext;
@@ -41,7 +41,7 @@ class TaskManager extends Component {
         initialHeight={200}
         Component={WindowProgram}
         title="Task Manager"
-        className="TaskManager"
+        className="TaskManager  Window--active"
         onHelp={() => {}} // @todo
         onClose={context.toggleTaskManager}
         menuOptions={buildMenu({

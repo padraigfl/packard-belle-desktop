@@ -1,11 +1,8 @@
 .IframeWindow {
   > div:not(.Window__heading),
   iframe {
-    width: 100%;
-    flex-grow: 1;
-  }
-  iframe {
-    height: 100%;
+    width: calc(100% - 3px);
+    height: calc(100% - 10px);
   }
 
   &--alert.WindowAlert {

@@ -5,22 +5,9 @@ import * as icons from "../../icons";
 import "./_styles.scss";
 import { WindowExplorer } from "packard-belle";
 import Window from "../tools/Window";
+import buildMenu from "../../helpers/menuBuilder";
 
 const noop = () => {};
-
-export const buildMenu = props => [
-  {
-    title: "File",
-    options: [
-      { title: "Open", isDisabled: true },
-      { title: "Close", onClick: () => props.onClose(props) }
-    ]
-  },
-  {
-    title: "Help",
-    options: [{ title: `About ${props.title}`, isDisabled: true }]
-  }
-];
 
 const canAccessIframe = id => {
   const iframe = document && document.querySelector(`.${id}`);
@@ -58,10 +45,10 @@ class InternetExplorer extends Component {
         Component={WindowExplorer}
         className={cx("InternetExplorer", props.className)}
         title={`${
-          props.data.title || props.title !== "Internet Explorer"
+          props.data.title || props.title !== "Internet Explorer (WIP)"
             ? `${props.data.title || props.title} - `
             : ""
-        }Internet Explorer`}
+        }Internet Explorer (WIP)`}
         menuOptions={buildMenu(props)}
         minHeight={300}
         minWidth={300}
@@ -121,7 +108,12 @@ class InternetExplorer extends Component {
         ]}
         maximizeOnOpen
       >
-        {props.data.__html && <div dangerouslySetInnerHTML={props.data} />}
+        {props.data.__html && (
+          <div
+            style={{ margin: "2px 1px 0px 2px", minHeight: "calc(100% - 4px)" }}
+            dangerouslySetInnerHTML={props.data}
+          />
+        )}
         {props.children}
         {props.data &&
           !props.data.html &&

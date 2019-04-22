@@ -5,6 +5,11 @@
   src: url("../../assets/FixedsysStripped.woff2") format("woff2");
 }
 
+.Window--blocked * {
+  pointer-events: none !important;
+  user-select: none;
+}
+
 .Notepad {
   &__textarea {
     @include shadow-input;

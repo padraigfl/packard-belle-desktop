@@ -1,6 +1,6 @@
-import React, { Component, createContext } from "react";
-
-export const SettingsContext = createContext();
+import React, { Component } from "react";
+import bgImg from "../data/images/bgImg.png";
+import { SettingsContext } from ".";
 
 const toggle = (dis, key) => () => {
   dis.setState(state => ({ [key]: !state[key] }));
@@ -16,8 +16,11 @@ class SettingsProvider extends Component {
     crt: true,
     fullScreen: false,
     isMobile: false,
-    bgImg: window && window.localStorage.getItem("bgImg"),
-    bgStyle: window && window.localStorage.getItem("bgStyle")
+    bgImg:
+      (window && window.localStorage.getItem("bgImg")) ||
+      (window && !window.localStorage.getItem("loggedIn") && bgImg),
+    bgColor: (window && window.localStorage.getItem("bgColor")) || "#fff",
+    bgStyle: (window && window.localStorage.getItem("bgStyle")) || "contain"
   };
 
   toggleCrt = toggle(this, "crt");

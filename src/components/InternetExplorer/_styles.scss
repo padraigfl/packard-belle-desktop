@@ -2,6 +2,9 @@
   .WindowExplorer__view {
     position: relative;
     overflow: scroll;
+    display: initial;
+    margin: 2px;
+    height: 100%;
   }
 
   iframe.crossOrigin {

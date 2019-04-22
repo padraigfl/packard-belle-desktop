@@ -1,8 +1,18 @@
 import React from "react";
 import cx from "classnames";
 import { Rnd } from "react-rnd";
-import { SettingsContext } from "../../contexts/settings";
+import { SettingsContext } from "../../contexts";
 import "./_window.scss";
+
+const handleClasses = {
+  bottom: "ns-resize",
+  bottomLeft: "nesw-resize",
+  bottomRight: "nwse-resize",
+  left: "ew-resize",
+  right: "ew-resize",
+  top: "ns-resize",
+  topLeft: "nwse-resize"
+};
 
 const resizeStyles = pixels => {
   const corners = pixels * 4;
@@ -96,7 +106,6 @@ class Window extends React.PureComponent {
           disableDragging: true
         }
       : undefined;
-
     return (
       <>
         {this.state.isDragging && (
@@ -123,6 +132,7 @@ class Window extends React.PureComponent {
           }
           position={{ x: this.state.x, y: this.state.y }}
           dragHandleClassName="Window__title"
+          resizeHandleClasses={handleClasses}
           onDragStart={this.toggleDrag(true)}
           onDragStop={!this.state.maximized && this.updateLocation}
           bounds=".w98"
@@ -133,7 +143,7 @@ class Window extends React.PureComponent {
           scale={context.scale}
           onMouseDown={
             this.props.moveToTop
-              ? () => this.props.moveToTop(this.props)
+              ? () => this.props.moveToTop(this.props.id)
               : undefined
           }
           {...resizeProps}
@@ -144,7 +154,7 @@ class Window extends React.PureComponent {
             title={props.title}
             icon={props.icon}
             footer={props.footer}
-            onOpen={props.multiWindow && (() => props.onOpen(props))}
+            onOpen={props.multiInstance && props.onOpen}
             onClose={() => props.onClose(props)}
             onMinimize={props.onMinimize && (() => props.onMinimize(props.id))}
             onRestore={props.resizable && this.restore}
@@ -160,9 +170,8 @@ class Window extends React.PureComponent {
             explorerOptions={props.explorerOptions}
             data={props.data}
             style={props.style}
-          >
-            {props.children}
-          </props.Component>
+            children={props.children}
+          />
         </Rnd>
       </>
     );

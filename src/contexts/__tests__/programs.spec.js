@@ -1,17 +1,22 @@
 import ProgramProvider, { addIdsToData, initialize } from "../programs";
 
+const programs = [
+  { id: 1, title: "1", component: "Notepad" },
+  { id: 2, title: "2", component: "Notepad" },
+  { id: 3, title: "3", component: "Notepad" }
+];
+
 const defaults = {
-  activePrograms: [
-    { id: 1, Component: 1 },
-    { id: 2, Component: 2 },
-    { id: 3, Component: 3 }
-  ],
+  activePrograms: programs,
+  desktop: programs,
   openOrder: [1, 2, 3],
   activeId: 3
 };
 
 describe("ProgramProvider", () => {
-  const component = new ProgramProvider();
+  const component = new ProgramProvider({
+    props: { startMenuData: [], desktopData: [] }
+  });
   component.setState = val => {
     if (typeof val !== "function") {
       component.state = {
@@ -63,16 +68,27 @@ describe("ProgramProvider", () => {
     component.open({ id: 4 });
     expect(component.isProgramActive(4)).toEqual(false);
 
-    component.open({ id: 4, Component: 4 });
-    expect(component.isProgramActive(4)).toEqual(true);
-    expect(component.state.activeId).toEqual(4);
-    expect(component.state.openOrder).toEqual([1, 2, 3, 4]);
-    expect(component.state.activePrograms.map(v => v.id)).toEqual([1, 2, 3, 4]);
+    component.open({ id: 4, component: "Notepad" });
+    expect(component.state.activeId).not.toEqual(1);
+    expect(component.state.activeId).not.toEqual(2);
+    expect(component.state.activeId).not.toEqual(3);
+    expect(component.state.openOrder).toEqual([
+      1,
+      2,
+      3,
+      component.state.activeId
+    ]);
 
-    component.open({ id: 1, Component: 1 });
+    const nano_id = component.state.activeId;
+
+    component.open({ id: 1, component: "Notepad" });
     expect(component.state.activeId).toEqual(1);
-    expect(component.state.openOrder).toEqual([1, 2, 3, 4]);
-    expect(component.state.activePrograms.map(v => v.id)).toEqual([2, 3, 4, 1]);
+    expect(component.state.activePrograms.map(v => v.id)).toEqual([
+      2,
+      3,
+      nano_id,
+      1
+    ]);
   });
   it("exit", () => {
     component.exit(3);
@@ -82,8 +98,8 @@ describe("ProgramProvider", () => {
     expect(component.state.activePrograms.map(v => v.id)).toEqual([1, 2]);
   });
   it("opens new window for same component", () => {
-    component.open({ id: 5, Component: 5, multiWindow: true });
-    component.open({ id: 5, Component: 5, multiWindow: true });
+    component.open({ id: 5, component: "Notepad", multiInstance: true });
+    component.open({ id: 5, component: "Notepad", multiInstance: true });
     expect(typeof component.state.activeId).toEqual("string");
     expect(component.state.openOrder.length).toEqual(5);
   });
@@ -101,6 +117,16 @@ describe("ProgramProvider", () => {
       expect(p.minimized).toEqual(true);
     });
   });
+  it("save (new file)", () => {
+    console.log(component.state.desktop);
+    component.save(programs[0], { test: "testing" }, "18");
+    console.log(component.state.desktop);
+  });
+  it("save (existing file)", () => {
+    console.log(component.state.desktop);
+    component.save(programs[0], { test: "testing" }, "1");
+    console.log(component.state.desktop);
+  });
 });
 
 describe("helper functions", () => {
@@ -112,7 +138,7 @@ describe("helper functions", () => {
     const func2 = (a, b) => a + b;
     let desktop = initialize(func, [{ onClick: func2 }], true);
     expect(desktop.map(d => !!d.onDoubleClick)).toEqual([true]);
-    desktop = initialize(func, [{ onClick: func2, Component: "b" }]);
+    desktop = initialize(func, [{ onClick: func2, component: "b" }]);
     expect(desktop.map(d => d.onClick)).not.toEqual([func2]);
   });
 });

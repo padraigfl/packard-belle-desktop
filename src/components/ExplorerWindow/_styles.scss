@@ -18,11 +18,26 @@
   width: 100%;
   height: 100%;
 
+  &.wait2, &.wait {
+    * {
+      pointer-events: none;
+    }
+  }
+
+  &__view {
+    display: flex;
+  }
+
   &.Window--maximized {
     width: calc(100% + 4px);
     height: calc(100% + 4px);
   }
-  &:not(.Window--active) {
-    filter: grayscale(100%);
-  }
+}
+
+.WindowAlert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 10;
 }

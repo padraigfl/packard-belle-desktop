@@ -2,7 +2,7 @@ import React from "react";
 import cx from "classnames";
 
 import "./_background.scss";
-import { SettingsContext } from "../../contexts/settings";
+import { SettingsContext } from "../../contexts";
 
 const Background = props => (
   <SettingsContext.Consumer>
@@ -15,7 +15,12 @@ const Background = props => (
             "Background--stretch": context.bgStyle === "stretch"
           })}
         >
-          <div style={{ backgroundImage: `url(${context.bgImg})` }} />
+          <div
+            style={{
+              backgroundImage: `url(${context.bgImg})`,
+              backgroundColor: context.bgColor || "#5f9ea0"
+            }}
+          />
         </div>
       ) : null
     }

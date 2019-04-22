@@ -1,2 +1,2 @@
-import ExplorerWindow from "./ExplorerWindow";
-export default ExplorerWindow;
+import InternetExplorer from "./InternetExplorer";
+export default InternetExplorer;

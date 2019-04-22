@@ -1,6 +1,6 @@
 import React from "react";
 import { ExplorerView, ExplorerIcon } from "packard-belle";
-import { ProgramContext } from "../../contexts/programs";
+import { ProgramContext } from "../../contexts";
 
 const DesktopView = () => (
   <ProgramContext.Consumer>

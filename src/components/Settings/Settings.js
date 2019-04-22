@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { SettingsContext } from "../../contexts/settings";
-import { ProgramContext } from "../../contexts/programs";
+import { SettingsContext } from "../../contexts";
+import { ProgramContext } from "../../contexts";
 import {
   Window as AbstractWindow,
   DetailsSection,
   Checkbox,
   Radio,
-  ButtonForm
+  ButtonForm,
+  InputText
 } from "packard-belle";
 import Window from "../tools/Window";
 
-import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
+import buildMenu from "../../helpers/menuBuilder";
 
 import "./_styles.scss";
 
@@ -19,10 +20,19 @@ class Settings extends Component {
   state = {
     selected: null,
     bgImg: this.context.bgImg,
-    bgStyle: this.context.bgStyle
+    bgStyle: this.context.bgStyle,
+    bgColor: this.context.bgColor
   };
   timeout;
   fileReader;
+
+  changeColor = v => {
+    this.setState({ bgColor: v });
+    if (v.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
+      debugger;
+      this.context.updateLocalStorage("bgColor", v);
+    }
+  };
 
   onSelect = selected => this.setState({ selected });
 
@@ -59,7 +69,8 @@ class Settings extends Component {
 
   removeBackground = () => {
     this.context.removeLocalStorage(["bgImg", "bgStyle"]);
-    this.setState({ bgImg: null, bgStyle: null });
+    this.context.updateLocalStorage("bgColor", "#5f9ea0");
+    this.setState({ bgImg: null, bgStyle: null, bgColor: "#5f9ea0" });
   };
 
   handleFileRead = () => {
@@ -101,6 +112,7 @@ class Settings extends Component {
               resizable={false}
               onMinimize={null}
               onMaximize={null}
+              isActive
             >
               <DetailsSection>
                 Best avoid all these other than CRT on mobile
@@ -161,9 +173,11 @@ class Settings extends Component {
                         />
                       ))}
                     </div>
-                    <ButtonForm onClick={this.removeBackground}>
-                      Reset Background
-                    </ButtonForm>
+                    <div>
+                      <ButtonForm onClick={this.removeBackground}>
+                        Reset Background
+                      </ButtonForm>
+                    </div>
                   </>
                 ) : (
                   <div>
@@ -183,6 +197,13 @@ class Settings extends Component {
                     </div>
                   </div>
                 )}
+                <div>
+                  Color (HEX val)
+                  <InputText
+                    value={this.state.bgColor}
+                    onChange={this.changeColor}
+                  />
+                </div>
               </DetailsSection>
               {this.state.tempChange && "Previewing Changes"}
             </Window>

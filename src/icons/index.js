@@ -19,6 +19,7 @@ export { default as folderProgram16 } from "./folderProgram16-min.png";
 export { default as folderProgram24 } from "./folderProgram24-min.png";
 export { default as help24 } from "./help24-min.png";
 export { default as htmlFile16 } from "./htmlFile16-min.png";
+export { default as htmlFile32 } from "./htmlFile32-min.png";
 export { default as imaging16 } from "./imaging16-min.png";
 export { default as internetExplorere16 } from "./internetExplorer16-min.png";
 export { default as internetExplorere32 } from "./internetExplorer32-min.png";
@@ -66,3 +67,7 @@ export { default as ieStop } from "./ie-stop-min.png";
 
 export { default as minesweeper16 } from "./minesweeper16-min.png";
 export { default as skifree } from "./skifree-min.png";
+
+export { default as floppy32 } from "./floppy32-min.png";
+export { default as hdd32 } from "./hdd32-min.png";
+export { default as cd32 } from "./cd32-min.png";

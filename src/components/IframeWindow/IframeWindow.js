@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { WindowProgram, WindowAlert } from "packard-belle";
-import cx from "classnames";
-import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
+import buildMenu from "../../helpers/menuBuilder";
 import "./_styles.scss";
 import Window from "../tools/Window";
+import PureIframe from "./Iframe";
 
 class IFrame extends Component {
   state = {
@@ -27,23 +27,29 @@ class IFrame extends Component {
           {...commonProps}
           onOK={this.confirm}
           onCancel={commonProps.onClose}
-          className="IframeWindow--alert"
+          className="IframeWindow--alert Window--active"
         >
-          {props.data.disclaimer ||
-            `The Following is an iframe displaying, content belongs to ${props
-              .data.creator || "the original creator"} at ${
-              props.data.src
-            }. `}{" "}
-          Behaviour will be inconsistent with rest of system.
+          {props.data.disclaimer || (
+            <div>
+              The following is an iframe, content belongs to{" "}
+              {props.data.creator || "the original creator"} at
+              <a
+                href={props.data.src}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {props.data.src}
+              </a>
+              . Behaviour will be inconsistent with rest of system.
+            </div>
+          )}
         </WindowAlert>
       );
     }
     return (
       <Window
         {...props}
-        className={cx("IframeWindow", {
-          "Window--active": props.isActive
-        })}
+        className={"IframeWindow"}
         initialHeight={props.data.height || 380}
         initialWidth={props.data.width || 440}
         minWidth={props.data.width}
@@ -53,7 +59,7 @@ class IFrame extends Component {
         resizable={!(props.data.width || props.data.height)}
       >
         <div style={props.data && props.data.style}>
-          <iframe src={props.data.src} title={props.title} />
+          <PureIframe src={props.data.src} title={props.title} />
         </div>
       </Window>
     );
