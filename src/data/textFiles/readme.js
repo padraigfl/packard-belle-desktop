@@ -7,7 +7,7 @@ const generateRows = () => {
       content: `
       Hi, this is a small recreation of a Windows 98 Desktop.
       I developed a component library just to learn some browser stuff and this seemed like the best way to test it out<br/>
-      The focus was on trying to capture the feel of my own personal computer circa 2000-2002 rather than a straight copy of Windows 98 so theres's some big differences. Lemme know if you find any bugs!
+      The focus was on trying to capture the feel of my own personal computer circa 2000-2002 (terrible monitor included) rather than a straight copy of Windows 98 so theres's some big differences. Lemme know if you find any bugs!
       `
     },
     {
