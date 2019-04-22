@@ -1,5 +1,7 @@
 import * as icons from "../icons";
 import resume from "./textFiles/resume";
+import { ReadStream } from "tty";
+import readme from "./textFiles/readme";
 
 export default [
   {
@@ -42,7 +44,7 @@ export default [
     icon: icons.htmlFile32,
     component: "InternetExplorer",
     data: {
-      __html: `<table width="100%" bgcolor="#DDD"><tr><td>Test</td><td>Test</td></tr><tr><td colspan="2">sfsdfa</td></tr></table>`
+      __html: readme
     }
   },
   {
