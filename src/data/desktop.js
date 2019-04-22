@@ -1,6 +1,5 @@
 import * as icons from "../icons";
 import resume from "./textFiles/resume";
-import { ReadStream } from "tty";
 import readme from "./textFiles/readme";
 
 export default [

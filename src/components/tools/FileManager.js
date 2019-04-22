@@ -1,7 +1,7 @@
 import React from "react";
 import { Rnd } from "react-rnd";
 import { ProgramContext } from "../../contexts";
-import { WindowAction, ListIcon } from "packard-belle";
+import { WindowAction } from "packard-belle";
 
 const initialPostiions = () => {
   if (!window || window.innerWidth < 400) {
@@ -40,7 +40,9 @@ class FileManager extends React.Component {
   };
 
   open = () => {
-    const prog = this.context[this.props.location || 'desktop'].find(p => p.title === this.state.name);
+    const prog = this.context[this.props.location || "desktop"].find(
+      p => p.title === this.state.name
+    );
     if (prog) {
       this.context.onOpen(prog);
       this.props.onAction();
@@ -48,9 +50,9 @@ class FileManager extends React.Component {
   };
 
   getFolder = () =>
-    this.context[this.props.location].filter(
-      v => v.component === this.props.instance.component
-    ).map(v => ({ ...v, value: v.title}));
+    this.context[this.props.location]
+      .filter(v => v.component === this.props.instance.component)
+      .map(v => ({ ...v, value: v.title }));
 
   render() {
     const { props } = this;

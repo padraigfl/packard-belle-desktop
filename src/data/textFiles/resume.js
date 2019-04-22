@@ -36,14 +36,23 @@ Resposnsive Design, CSS (obviously, look at this thing!), TDD, Jest,
 Webpack, build tools.... I'm a bit afraid of leaving out stuff!
 
 Less strong but have used and enjoy a lot:
-Python, C, Ruby, PHP, Sketch, SQL, Vue... 
+Python, C, Ruby, PHP, Sketch, SQL, Vue, GraphQL, Gatsby... 
 
 Not too keen on going near again:
 C++, Twig, IE8 compatibiliy
 
 Stuff I'd like to do more of:
-Analytics, Go, a lot more backend, d3, a functional language, pixel.js, webGL
+Analytics, Go, a lot more backend, d3, a functional language, pixel.js, webGL,
 design, direct user engagement
+
+===============
+ACHIEVEMENTS
+===============
+- Best group project 2013
+- Published papers on Masters research (which was about security in embedded systems, not very frontend!)
+- 8 times only person in a cinema
+- Perfect attendance in the 4th grade
+- ...owns an Aeropress and two projectors?
 
 ===============
 LINKS
