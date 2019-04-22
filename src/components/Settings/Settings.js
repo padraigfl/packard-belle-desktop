@@ -29,7 +29,6 @@ class Settings extends Component {
   changeColor = v => {
     this.setState({ bgColor: v });
     if (v.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-      debugger;
       this.context.updateLocalStorage("bgColor", v);
     }
   };

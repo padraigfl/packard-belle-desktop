@@ -25,7 +25,6 @@ class FileManager extends React.Component {
     this.setState({ x: b.x, y: b.y, isDragging: false });
   toggleDrag = val => () => this.setState({ isDragging: val });
   onChangeName = val => {
-    debugger;
     this.setState({ name: val });
   };
 

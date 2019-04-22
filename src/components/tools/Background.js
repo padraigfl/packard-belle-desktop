@@ -4,10 +4,10 @@ import cx from "classnames";
 import "./_background.scss";
 import { SettingsContext } from "../../contexts";
 
-const Background = props => (
+const Background = () => (
   <SettingsContext.Consumer>
     {context =>
-      context.bgImg ? (
+      context.bgImg || context.bgColor ? (
         <div
           className={cx("Background", {
             "Background--tiled": context.bgStyle === "tile",
@@ -18,7 +18,9 @@ const Background = props => (
           <div
             style={{
               backgroundImage: `url(${context.bgImg})`,
-              backgroundColor: context.bgColor || "#5f9ea0"
+              backgroundColor: `${
+                context.bgColor ? context.bgColor : "#5f9ea0"
+              }`
             }}
           />
         </div>
