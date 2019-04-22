@@ -31,3 +31,10 @@
     filter: grayscale(100%);
   }
 }
+
+.Window {
+  &:not(.Window--active) .Window__heading {
+    background: none;
+    background-color: #808088;
+  }
+}

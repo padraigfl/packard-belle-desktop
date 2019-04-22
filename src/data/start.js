@@ -1,10 +1,10 @@
 import * as icons from "../icons";
-import IframeWindow from "../components/IframeWindow";
-import Notepad from "../components/Notepad";
-import JSDos from "../components/JSDos";
-import InternetExplorer from "../components/InternetExplorer/InternetExplorer";
-
-const goTo = url => () => window.open(url);
+import google1999 from "./textFiles/google1999";
+import facepalm from "./textFiles/facepalm";
+import squirtel from "./textFiles/squirtel";
+import rollin from "./textFiles/rollin";
+import sunscreen from "./textFiles/sunscreen";
+import allStarTabs from "./textFiles/allStarTabs";
 
 const accessories = [
   { title: "Entertainment", icon: icons.folderProgram16, options: [] },
@@ -14,15 +14,41 @@ const accessories = [
   {
     title: "Notepad",
     icon: icons.notepad16,
-    Component: Notepad,
-    multiWindow: true
+    component: "Notepad",
+    multiInstance: true
   },
   {
     title: "Paint",
     icon: icons.paint16,
-    Component: IframeWindow,
-    data: { src: "https://jspaint.app/" },
-    multiWindow: true
+    component: "IframeWindow",
+    data: { src: "https://jspaint.app/", creator: "https://github.com/1j01" },
+    multiInstance: true
+  },
+  {
+    title: "SkiFree",
+    icon: icons.skifree,
+    component: "IframeWindow",
+    data: {
+      src: "https://basicallydan.github.io/skifree.js/"
+    },
+    multiInstance: true
+  },
+  {
+    title: "Minesweeper",
+    icon: icons.minesweeper16,
+    component: "IframeWindow",
+    data: {
+      src: "https://mines.now.sh/",
+      creator: "https://github.com/ShizukuIchi",
+      height: 225,
+      width: 150,
+      style: {
+        transform: "scale(0.5) translateX(-50%) translateY(-50%)",
+        width: "300px",
+        height: "400px"
+      }
+    },
+    multiInstance: true
   }
 ];
 
@@ -31,16 +57,16 @@ const programs = [
   { title: "Online Services", icon: icons.folderProgram16, options: [] },
   { title: "StartUp", icon: icons.folderProgram16, options: [] },
   {
-    title: "Internet Explorer",
+    title: "IE4(BROKEN)",
     icon: icons.internetExplorere16,
-    Component: InternetExplorer,
-    data: { src: "https://www.spacejam.com/archive/spacejam/movie/jam.htm" }
+    component: "InternetExplorer",
+    data: { __html: google1999 }
   },
   {
     title: "JS-DOS Prompt",
     icon: icons.msDos16,
-    Component: JSDos,
-    multiWindow: true
+    component: "JSDos",
+    multiInstance: true
   },
   { title: "Outlook Express", icon: icons.outlook16, isDisabled: true },
   { title: "Windows Explorer", icon: icons.windowsExplorer16, isDisabled: true }
@@ -52,15 +78,37 @@ const favorites = [
     options: [],
     icon: icons.folder16
   },
-  { title: "Links", icon: icons.folder16, options: [] },
-  { title: "Media", icon: icons.folder16, options: [] },
-  { title: "MSN", icon: icons.htmlFile16, onClick: goTo("https://msn.com") },
   {
-    title: "Radio Station Guide",
-    icon: icons.htmlFile16,
-    onClick: goTo("https://msn.com")
+    title: "Links",
+    icon: icons.folder16,
+    options: [
+      {
+        title: "MySpace",
+        type: "ExternalLink",
+        icon: icons.htmlFile16,
+        href:
+          "https://web.archive.org/web/20080320075546/www.myspace.com/my_address"
+      }
+    ]
   },
-  { title: "Web Events", icon: icons.htmlFile16, isDisabled: true }
+  {
+    title: "Media",
+    icon: icons.folder16,
+    options: [
+      {
+        title: "My Big List of Films",
+        type: "ExternalLink",
+        icon: icons.htmlFile16,
+        href: "https://letterboxd.com/padraig"
+      }
+    ]
+  },
+  {
+    title: "My Github",
+    type: "ExternalLink",
+    icon: icons.htmlFile16,
+    href: "https://github.com/padraigfl"
+  }
 ];
 
 export const find = [
@@ -73,12 +121,14 @@ export const find = [
   {
     title: "On the Internet...",
     icon: icons.findOnline16,
-    onClick: goTo("https://google.com")
+    type: "ExternalLink",
+    href: "https://google.com"
   },
   {
     title: "People...",
     icon: icons.findPeople16,
-    onClick: goTo("https://facebook.com")
+    type: "ExternalLink",
+    href: "https://facebook.com"
   }
 ];
 
@@ -96,6 +146,73 @@ export default [
   {
     title: "Documents",
     icon: icons.folderOpen24,
-    options: []
+    options: [
+      {
+        title: "ASCII Art",
+        options: [
+          {
+            title: "facepalm",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: facepalm
+            }
+          },
+          {
+            title: "squirtel",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: squirtel
+            }
+          }
+        ],
+        icon: icons.folder16
+      },
+      {
+        title: "Lyrics",
+        options: [
+          {
+            title: "sunscreen",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: sunscreen
+            }
+          },
+          {
+            title: "all star lyrics",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: allStarTabs
+            }
+          }
+        ],
+        icon: icons.folder16
+      },
+      {
+        title: "Guitar Tabs",
+        options: [
+          {
+            title: "rollin guitar tabs",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: rollin
+            }
+          },
+          {
+            title: "all star",
+            icon: icons.notepadFile32,
+            component: "Notepad",
+            data: {
+              content: allStarTabs
+            }
+          }
+        ],
+        icon: icons.folder16
+      }
+    ]
   }
 ];

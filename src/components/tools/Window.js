@@ -1,8 +1,18 @@
 import React from "react";
 import cx from "classnames";
 import { Rnd } from "react-rnd";
-import { SettingsContext } from "../../contexts/settings";
+import { SettingsContext } from "../../contexts";
 import "./_window.scss";
+
+const handleClasses = {
+  bottom: "ns-resize",
+  bottomLeft: "nesw-resize",
+  bottomRight: "nwse-resize",
+  left: "ew-resize",
+  right: "ew-resize",
+  top: "ns-resize",
+  topLeft: "nwse-resize"
+};
 
 const resizeStyles = pixels => {
   const corners = pixels * 4;
@@ -58,7 +68,9 @@ class Window extends React.PureComponent {
   state = {
     height: this.props.initialHeight,
     width: this.props.initialWidth,
-    maximized: this.context.isMobile && this.props.resizable,
+    maximized:
+      (this.context.isMobile && this.props.resizable) ||
+      this.props.maximizeOnOpen,
     ...launchPositions(this.props.inintalX, this.props.initialY)
   };
 
@@ -106,7 +118,7 @@ class Window extends React.PureComponent {
               {...props}
               {...this.state}
               isDragging={false}
-              className="Window--active"
+              className={cx(props.className, "Window--active")}
             />
           </Rnd>
         )}
@@ -120,17 +132,18 @@ class Window extends React.PureComponent {
           }
           position={{ x: this.state.x, y: this.state.y }}
           dragHandleClassName="Window__title"
+          resizeHandleClasses={handleClasses}
           onDragStart={this.toggleDrag(true)}
           onDragStop={!this.state.maximized && this.updateLocation}
           bounds=".w98"
           minWidth={this.props.minWidth}
           minHeight={this.props.minHeight}
           maxWidth={!this.state.maximized ? this.props.maxWidth : "105%"}
-          maxHeight={!this.state.maximized ? this.props.maxHeigh : "105%"}
+          maxHeight={!this.state.maximized ? this.props.maxHeight : "105%"}
           scale={context.scale}
           onMouseDown={
             this.props.moveToTop
-              ? () => this.props.moveToTop(this.props)
+              ? () => this.props.moveToTop(this.props.id)
               : undefined
           }
           {...resizeProps}
@@ -141,23 +154,24 @@ class Window extends React.PureComponent {
             title={props.title}
             icon={props.icon}
             footer={props.footer}
-            onOpen={props.multiWindow && (() => props.onOpen(props.id))}
-            onClose={() => props.onClose(props.id)}
-            onMinimize={() => props.onMinimize(props.id)}
-            onRestore={this.restore}
-            onMaximize={this.maximize}
+            onOpen={props.multiInstance && props.onOpen}
+            onClose={() => props.onClose(props)}
+            onMinimize={props.onMinimize && (() => props.onMinimize(props.id))}
+            onRestore={props.resizable && this.restore}
+            onMaximize={props.resizable && this.maximize}
             changingState={this.state.isDragging || this.state.isResizing}
-            maximizeOnOpen={this.context.isMobile}
+            maximizeOnOpen={this.context.isMobile || this.props.maximizeOnOpen}
             className={cx(props.className, {
               "Window--active": props.isActive
             })}
+            resizable={props.resizable}
             menuOptions={props.menuOptions}
             hasMenu={props.hasMenu}
             explorerOptions={props.explorerOptions}
             data={props.data}
-          >
-            {props.children}
-          </props.Component>
+            style={props.style}
+            children={props.children}
+          />
         </Rnd>
       </>
     );
@@ -165,10 +179,10 @@ class Window extends React.PureComponent {
 }
 
 Window.defaultProps = {
-  minWidth: 160,
-  minHeight: 160,
-  initialHeight: 250,
+  minWidth: 200,
+  minHeight: 200,
   initialWidth: 250,
+  initialHeight: 250,
   // maxHeight: 448,
   // maxWidth: 635,
   resizable: true,

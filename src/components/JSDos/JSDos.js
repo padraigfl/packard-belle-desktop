@@ -4,21 +4,8 @@ import cx from "classnames";
 import safeEval from "safe-eval";
 import Window from "../tools/Window";
 import { msDos16 } from "../../icons";
+import buildMenu from "../../helpers/menuBuilder";
 import "./_styles.scss";
-
-export const buildMenu = props => [
-  {
-    title: "File",
-    options: [
-      { title: "Open", isDisabled: true },
-      { title: "Close", onClick: () => props.onClose(props.id) }
-    ]
-  },
-  {
-    title: "Help",
-    options: [{ title: `About ${props.title}`, isDisabled: true }]
-  }
-];
 
 const lineStart = "C:\\WINDOWNS>";
 
@@ -71,9 +58,7 @@ class JSDos extends Component {
         Component={WindowProgram}
         initialHeight={200}
         initialWidth={400}
-        className={cx("JSDos", props.className, {
-          "Window--active": props.isActive
-        })}
+        className={cx("JSDos", props.className)}
       >
         <form name="hiddenForm" onSubmit={this.processEntry}>
           <input

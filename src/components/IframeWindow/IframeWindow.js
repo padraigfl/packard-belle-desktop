@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { WindowProgram, WindowAlert } from "packard-belle";
-import cx from "classnames";
-import { buildMenu } from "../ExplorerWindow/ExplorerWindow";
+import buildMenu from "../../helpers/menuBuilder";
 import "./_styles.scss";
 import Window from "../tools/Window";
+import PureIframe from "./Iframe";
 
 class IFrame extends Component {
   state = {
@@ -18,7 +18,7 @@ class IFrame extends Component {
     const commonProps = {
       title: props.title,
       icon: props.icon,
-      onClose: () => props.onClose(props.id)
+      onClose: () => props.onClose(props)
     };
 
     if (state.displayAlert) {
@@ -27,28 +27,40 @@ class IFrame extends Component {
           {...commonProps}
           onOK={this.confirm}
           onCancel={commonProps.onClose}
-          className="IframeWindow--alert"
+          className="IframeWindow--alert Window--active"
         >
-          {props.data.disclaimer ||
-            `The Following is an iframe displaying, content belongs to the original creator at ${
-              props.data.src
-            }`}
+          {props.data.disclaimer || (
+            <div>
+              The following is an iframe, content belongs to{" "}
+              {props.data.creator || "the original creator"} at
+              <a
+                href={props.data.src}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {props.data.src}
+              </a>
+              . Behaviour will be inconsistent with rest of system.
+            </div>
+          )}
         </WindowAlert>
       );
     }
-
     return (
       <Window
         {...props}
-        className={cx("IframeWindow", {
-          "Window--active": props.isActive
-        })}
-        initialHeight={380}
-        initialWidth={440}
+        className={"IframeWindow"}
+        initialHeight={props.data.height || 380}
+        initialWidth={props.data.width || 440}
+        minWidth={props.data.width}
+        minHeight={props.data.height}
         menuOptions={props.data.useMenu && buildMenu(props)}
         Component={WindowProgram}
+        resizable={!(props.data.width || props.data.height)}
       >
-        <iframe src={props.data.src} title={props.title} />
+        <div style={props.data && props.data.style}>
+          <PureIframe src={props.data.src} title={props.title} />
+        </div>
       </Window>
     );
   }

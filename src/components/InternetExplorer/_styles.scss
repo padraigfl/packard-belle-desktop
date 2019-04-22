@@ -1,9 +1,13 @@
 .InternetExplorer {
   .WindowExplorer__view {
     position: relative;
+    overflow: scroll;
+    display: initial;
+    margin: 2px;
+    height: 0px; // @todo WHAT?!
   }
 
-  iframe {
+  iframe.crossOrigin {
     width: 200%;
     height: 200%;
     transform: scale(0.5);

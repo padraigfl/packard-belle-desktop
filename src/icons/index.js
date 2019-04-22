@@ -3,6 +3,7 @@ export { default as addressBook16 } from "./addressBook16-min.png";
 export { default as calculator16 } from "./calculator16-min.png";
 export { default as computer32 } from "./computer32-min.png";
 export { default as controlPanel16 } from "./controlPanel16-min.png";
+export { default as controlPanel32 } from "./controlPanel32-min.png";
 export { default as find24 } from "./find24-min.png";
 export { default as findComputer16 } from "./findComputer16-min.png";
 export { default as findFiles16 } from "./findFiles16-min.png";
@@ -18,6 +19,7 @@ export { default as folderProgram16 } from "./folderProgram16-min.png";
 export { default as folderProgram24 } from "./folderProgram24-min.png";
 export { default as help24 } from "./help24-min.png";
 export { default as htmlFile16 } from "./htmlFile16-min.png";
+export { default as htmlFile32 } from "./htmlFile32-min.png";
 export { default as imaging16 } from "./imaging16-min.png";
 export { default as internetExplorere16 } from "./internetExplorer16-min.png";
 export { default as internetExplorere32 } from "./internetExplorer32-min.png";
@@ -62,3 +64,10 @@ export { default as ieRefresh } from "./ie-refresh-min.png";
 export { default as iePrint } from "./ie-print-min.png";
 export { default as ieSearch } from "./ie-search-min.png";
 export { default as ieStop } from "./ie-stop-min.png";
+
+export { default as minesweeper16 } from "./minesweeper16-min.png";
+export { default as skifree } from "./skifree-min.png";
+
+export { default as floppy32 } from "./floppy32-min.png";
+export { default as hdd32 } from "./hdd32-min.png";
+export { default as cd32 } from "./cd32-min.png";

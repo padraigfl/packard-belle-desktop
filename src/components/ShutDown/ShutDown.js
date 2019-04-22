@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import cx from "classnames";
 import { Window, Radio, ButtonForm } from "packard-belle";
-import { ProgramContext } from "../../contexts/programs";
+import { ProgramContext } from "../../contexts";
 import { shutDown24 } from "../../icons";
 
 import "./_styles.scss";

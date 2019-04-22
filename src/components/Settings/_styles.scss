@@ -2,11 +2,18 @@
   .DetailsSection {
     display: flex;
     flex-direction: column;
+    > div {
+      margin: 4px 0px;
+    }
   }
   .Checkbox {
     margin: 4px;
   }
   .Radio {
     margin: auto 2px;
+  }
+
+  .ButtonForm {
+    padding: auto 4px;
   }
 }
