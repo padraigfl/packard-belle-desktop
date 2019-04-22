@@ -45,7 +45,8 @@ const settings = (injectedData = []) => [
   ],
   {
     title: "Windows Update...",
-    icon: icons.windowsUpdate16
+    icon: icons.windowsUpdate16,
+    isDisabled: true
   }
 ];
 

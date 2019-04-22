@@ -68,8 +68,8 @@ const generateRows = () => {
           <li>Full desktop as exportable component</li>
           <li>Storing system data on server with accounts instead of local storage</li>
           <li>Better flexibility RE: directories</li>
-          <li>Recreation of MSN or AIM</li>
-          <li>Recreations of smaller apps</li>
+          <li>Recreation of MSN or AIM as an example of a multiwindow background app</li>
+          <li>Recreations of smaller apps (minesweeper, calculator, image viewer)</li>
           <li>Semi operational Internet Explorer (including nav) to work with same origin-sites (could be cool with gatsby)</li>
         </ul>
       `
