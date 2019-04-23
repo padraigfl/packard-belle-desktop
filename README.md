@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![Running on iPhone SE](repoImages/notepad.gif)
+
+Really strained for mobile friendliness where I could (dragging still causes issues, it should look a good bit better one Chrome for Desktop)
+
 # Things this site currently does
 
 - Recreation of Windows 98 UI via [Packard Belle](https://www.npmjs.com/package/packard-belle)
@@ -93,3 +97,8 @@ Internet Explorer is a mess now and whenever I get around to it it'll need docum
 - https://codepen.io/lbebber/pen/XJRdrV for that great CRT effect
 - https://basicallydan.github.io/skifree.js/ for skifree
 - all the people I've forgotten
+
+
+![Launch Screen iPhone SE](repoImages/launch.gif)
+
+![Background edits iPhone SE](repoImages/background.gif)
