@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import bgImg from "../data/images/bgImg.png";
+import bgImg from "../data/images/pbbg.jpg";
 import { SettingsContext } from ".";
 
 const toggle = (dis, key) => () => {
@@ -20,7 +20,7 @@ class SettingsProvider extends Component {
       (window && window.localStorage.getItem("bgImg")) ||
       (window && !window.localStorage.getItem("loggedIn") && bgImg),
     bgColor: (window && window.localStorage.getItem("bgColor")) || "#fff",
-    bgStyle: (window && window.localStorage.getItem("bgStyle")) || "contain"
+    bgStyle: (window && window.localStorage.getItem("bgStyle")) || "stretch"
   };
 
   toggleCrt = toggle(this, "crt");
