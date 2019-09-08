@@ -40,11 +40,13 @@ The answer is probably Start -> Settings -> Control Panel
 - [x] conversion of data files to be easily swapped with JSON (i.e. just strings, booleans and numbers)
 - [ ] CONTEXT (handle IDs instead of full program objects)
 - [ ] CONTEXT: means of handling folders and plugging in custom data better
-- [ ] CONTEXT: improve passing of props between sectios
+- [ ] CONTEXT: improve passing of props between sections
 - [ ] UI Library: increase flexibility by passing unspecified props
 - [ ] Reduced data-uri usage
 - [ ] documentation for the file system API to allow easy expandability of said component
 - [ ] Airbnb linting
+- [ ] z-index layering reworking
+- [ ] retain state of minimised programs (hide instead of removing)
 
 ## Important
 
@@ -52,6 +54,7 @@ The answer is probably Start -> Settings -> Control Panel
 - [x] shutdown screen
 - [x] Improved mobile operations (but can be improved further)
 - [x] writable features via local storage (desktop only atm)
+- [ ] documentation of states
 - [ ] optimised bundles of this exported and the component library
 - [ ] cypress testing of core features
 - [ ] refactoring (renaming to match purposes better, reducing prop passing)
@@ -61,6 +64,7 @@ The answer is probably Start -> Settings -> Control Panel
 
 - [x] Semi-working My Computer folder (e.g. contains a floppy disc icon that freezes the whole machine for 10 seconds before saying no floppy is inserted)
 - [ ] Blue screen on all crashes
+- [ ] minesweeper difficulty options
 - [ ] Napster simulator (I've never actually used Napster so if you have then this will suck)
 - [ ] Images viewer, images folder
 - [ ] An actual working minesweeper (seems like an easy afternoon job?), separate component package
@@ -92,12 +96,11 @@ Internet Explorer is a mess now and whenever I get around to it it'll need docum
 - https://github.com/1j01/jspaint for JS Paint
 - https://github.com/react95/react95 I stole some of their icons
 - https://github.com/1000hz/winmine-exe for an amazing version of MSSansSerif
-- https://github.com/ShizukuIchi/ for reminding me to finish this thing after seeing his great XP one, and for his minesweeper as a placeholder
+- https://github.com/ShizukuIchi/ for reminding me to finish this thing after seeing his great XP one
 - https://int10h.org/oldschool-pc-fonts/fontlist/ for the boot screen font
 - https://codepen.io/lbebber/pen/XJRdrV for that great CRT effect
 - https://basicallydan.github.io/skifree.js/ for skifree
 - all the people I've forgotten
-
 
 ![Launch Screen iPhone SE](repoImages/launch.gif)
 

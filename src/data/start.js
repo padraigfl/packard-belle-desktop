@@ -12,6 +12,12 @@ const accessories = [
   { title: "System Tools", icon: icons.folderProgram16, options: [] },
   { title: "Calculator", icon: icons.calculator16, isDisabled: true },
   {
+    title: "Minesweeper",
+    icon: icons.minesweeper16,
+    component: "Minesweeper",
+    multiInstance: true
+  },
+  {
     title: "Notepad",
     icon: icons.notepad16,
     component: "Notepad",
@@ -30,23 +36,6 @@ const accessories = [
     component: "IframeWindow",
     data: {
       src: "https://basicallydan.github.io/skifree.js/"
-    },
-    multiInstance: true
-  },
-  {
-    title: "Minesweeper",
-    icon: icons.minesweeper16,
-    component: "IframeWindow",
-    data: {
-      src: "https://mines.now.sh/",
-      creator: "https://github.com/ShizukuIchi",
-      height: 225,
-      width: 150,
-      style: {
-        transform: "scale(0.5) translateX(-50%) translateY(-50%)",
-        width: "300px",
-        height: "400px"
-      }
     },
     multiInstance: true
   }

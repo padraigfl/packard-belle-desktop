@@ -11,6 +11,7 @@ const buildCustomOptions = rows =>
   );
 
 export const buildMenu = (props, customOptions = {}) => {
+  const fileOptions = props.fileOptions || [];
   const onClose = [{ title: "Close", onClick: () => props.onClose(props) }];
   const saveOptions =
     props.onSave || props.onSaveAs
@@ -44,7 +45,7 @@ export const buildMenu = (props, customOptions = {}) => {
   return [
     {
       title: "File",
-      options: [...multiInstance, ...saveOptions, ...onClose]
+      options: [...multiInstance, ...saveOptions, ...fileOptions, ...onClose]
     },
     ...customElements,
     {
