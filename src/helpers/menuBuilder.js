@@ -10,6 +10,14 @@ const buildCustomOptions = rows =>
     []
   );
 
+export const helpOptions = props => ({
+  title: "Help",
+  options: [
+    [{ title: "Help Topics", isDisabled: true }],
+    { title: `About ${props.title}`, isDisabled: true }
+  ]
+});
+
 export const buildMenu = (props, customOptions = {}) => {
   const fileOptions = props.fileOptions || [];
   const onClose = [{ title: "Close", onClick: () => props.onClose(props) }];
@@ -27,14 +35,14 @@ export const buildMenu = (props, customOptions = {}) => {
   const multiInstance = props.multiInstance
     ? [
         {
-          title: "Open",
-          isDisabled: !props.onOpenSearch,
-          onClick: props.onOpenSearch
-        },
-        {
           title: "New",
           onClick: () => props.onOpen(props, { new: true }),
           isDisabled: props.singleInstance
+        },
+        {
+          title: "Open...",
+          isDisabled: !props.onOpenSearch,
+          onClick: props.onOpenSearch
         }
       ]
     : [];
@@ -45,16 +53,10 @@ export const buildMenu = (props, customOptions = {}) => {
   return [
     {
       title: "File",
-      options: [...multiInstance, ...saveOptions, ...fileOptions, ...onClose]
+      options: [...multiInstance, saveOptions, ...fileOptions, onClose]
     },
     ...customElements,
-    {
-      title: "Help",
-      options: [
-        [{ title: "Help Topics", isDisabled: true }],
-        { title: `About ${props.title}`, isDisabled: true }
-      ]
-    }
+    helpOptions(props)
   ];
 };
 

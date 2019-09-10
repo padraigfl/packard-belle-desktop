@@ -4,19 +4,38 @@ import { WindowProgram } from "packard-belle";
 import Minesweeper95 from "pb-minesweeper";
 
 import { minesweeper16 } from "../../icons";
-import buildMenu from "../../helpers/menuBuilder";
+import { helpOptions } from "../../helpers/menuBuilder";
 
 import Window from "../tools/Window";
 
 import "./_styles.scss";
+
+const difficulty = {
+  beginner: {
+    gridSize: [9, 9],
+    mines: 11
+  },
+  intermediate: {
+    gridSize: [15, 15],
+    mines: 30
+  },
+  expert: {
+    gridSize: [30, 15],
+    mines: 40
+  }
+};
 
 class Minesweeper extends Component {
   static defaultProps = {
     data: {}
   };
   state = {
-    gameId: Date.now()
+    gameId: Date.now(),
+    difficulty: "beginner"
   };
+
+  updateDifficulty = difficulty => () =>
+    this.setState({ difficulty, gameId: Date.now() });
 
   render() {
     const { props, state } = this;
@@ -29,16 +48,28 @@ class Minesweeper extends Component {
             { text: "needs 100% width height" },
             { text: "overflow control" }
           ]}
-          menuOptions={buildMenu({
-            ...props,
-            fileOptions: [
-              {
-                title: "Restart Game",
-                onClick: () => this.setState({ gameId: Date.now() })
-              }
-            ],
-            multiInstance: true
-          })}
+          menuOptions={[
+            {
+              title: "File",
+              options: [
+                {
+                  title: "New",
+                  onClick: () => this.setState({ gameId: Date.now() })
+                },
+                [
+                  ...Object.keys(difficulty).map(level => ({
+                    title: level[0].toUpperCase() + level.slice(1),
+                    onClick: this.updateDifficulty(level),
+                    className:
+                      this.state.difficulty === level ? "checked" : undefined
+                  })),
+                  { title: "Custom", isDisabled: true }
+                ],
+                { title: "Close", onClick: () => props.onClose(props) }
+              ]
+            },
+            helpOptions(props)
+          ]}
           className={cx("Minesweeper", props.className, {
             "Minesweeper--wrap": state.wrap,
             "Window--blocked": state.saveScreen
@@ -47,12 +78,15 @@ class Minesweeper extends Component {
           Component={WindowProgram}
           minHeight={150}
           minWidth={150}
-          initialHeight={200}
-          initialWidth={200}
+          initialHeight={150}
+          initialWidth={150}
           resizable={false}
           onMaximize={null}
         >
-          <Minesweeper95 key={this.state.gameId} />
+          <Minesweeper95
+            key={this.state.gameId}
+            {...difficulty[this.state.difficulty]}
+          />
         </Window>
       </>
     );
