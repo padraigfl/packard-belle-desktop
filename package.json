@@ -8,10 +8,10 @@
     "node-sass": "^4.11.0",
     "packard-belle": "github:padraigfl/packard-belle#0.3.3",
     "pb-minesweeper": "1.0.4",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
-    "react-rnd": "^9.1.2",
-    "react-scripts": "2.1.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-rnd": "^10.0.0",
+    "react-scripts": "3.1.1",
     "safe-eval": "^0.4.1"
   },
   "scripts": {
