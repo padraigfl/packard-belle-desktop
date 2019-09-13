@@ -84,6 +84,7 @@ class Explorer extends Component {
             Array.isArray(props.data.content) &&
             props.data.content.map(entry => (
               <ExplorerIcon
+                key={entry.title}
                 title={entry.title}
                 icon={icons[entry.icon]}
                 className={entry.icon}

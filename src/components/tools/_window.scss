@@ -1,6 +1,9 @@
 .react-draggable-maximized-hack {
   height: calc(100% - 29px) !important;
   width: calc(100% - 2px) !important;
+  top: -2px !important;
+  left: -2px !important;
+  transform: none !important;
 }
 
 .react-draggable {

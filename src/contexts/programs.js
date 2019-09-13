@@ -197,8 +197,9 @@ class ProgramProvider extends Component {
         title: "Display Desktop"
       }
     ],
-    activePrograms: [],
+    activePrograms: {},
     openOrder: [],
+    zIndexes: [],
     settingsDisplay: false,
     shutDownMenu: false
   };
@@ -237,24 +238,22 @@ class ProgramProvider extends Component {
   };
 
   isProgramActive = programId =>
-    this.state.activePrograms.some(sameProgram(programId));
+    this.state.activePrograms[programId];
 
   moveToTop = windowId => {
-    const programIndex = this.state.activePrograms.findIndex(
-      sameProgram(windowId)
-    );
-    if (programIndex === -1) {
-      return;
-    }
     this.setState({
-      activePrograms: [
-        ...this.state.activePrograms.filter(notSameProgram(windowId)),
-        {
-          ...this.state.activePrograms[programIndex],
-          minimized: false
-        }
+      activePrograms: {
+        ...this.state.activePrograms,
+        [windowId]: {
+          ...this.state.activePrograms[windowId],
+          minimized: false,
+        },
+      },
+      activeId: windowId,
+      zIndexes: [
+        ...this.state.zIndexes.filter(v => v !== windowId),
+        windowId,
       ],
-      activeId: windowId
     });
   };
 
@@ -275,8 +274,12 @@ class ProgramProvider extends Component {
       title: options.new ? program.component : program.title
     };
     this.setState({
-      activePrograms: [...this.state.activePrograms, newProgram],
+      activePrograms: {
+        ...this.state.activePrograms,
+        [newProgram.id]: newProgram,
+      },
       openOrder: [...this.state.openOrder, newProgram.id],
+      zIndexes: [ ...this.state.zIndexes, newProgram.id],
       activeId: newProgram.id
     });
   };
@@ -286,7 +289,10 @@ class ProgramProvider extends Component {
       return;
     }
     const taskBar = this.state.openOrder.filter(p => p !== program.id);
-    this.setState({ openOrder: taskBar });
+    this.setState({
+      openOrder: taskBar,
+      zIndexes: this.state.zIndexes.filter(p => p !== program.id),
+    });
 
     if (!program.background || exit) {
       this.exit(program.id);
@@ -295,37 +301,42 @@ class ProgramProvider extends Component {
 
   exit = programId =>
     this.setState({
-      activePrograms: this.state.activePrograms.filter(
-        notSameProgram(programId)
-      ),
-      openOrder: this.state.openOrder.filter(x => x !== programId),
-      activeId: null
+      activePrograms: Object.keys(this.state.activePrograms).reduce((acc, val) => {
+        if (programId !== val) {
+          return {
+            ...acc,
+            [val]: this.state.activePrograms[val],
+          }
+        }
+        return acc;
+      }, {}),
+      activeId: null,
     });
 
   minimize = programId => {
-    if (!this.isProgramActive(programId)) {
+    if (!this.state.activePrograms[programId]) {
       return;
     } else {
-      const programIndex = this.state.activePrograms.findIndex(
-        sameProgram(programId)
-      );
       this.setState({
-        activePrograms: [
-          {
-            ...this.state.activePrograms[programIndex],
-            minimized: true
+        activePrograms: {
+          ...this.state.activePrograms,
+          [programId]: {
+            ...this.state.activePrograms[programId],
+            minimized: true,
           },
-          ...this.state.activePrograms.filter(prog => prog.id !== programId)
-        ],
+        },
         activeId: null
       });
     }
   };
   minimizeAll = () =>
     this.setState(state => ({
-      activePrograms: state.activePrograms.map(p => ({
-        ...p,
-        minimized: true
+      activePrograms: Object.keys(state.activePrograms).reduce((acc, val) => ({
+        ...state.activePrograms,
+        [val]: {
+          ...state.activePrograms[val],
+          minimized: true,
+        }
       })),
       activeId: null
     }));

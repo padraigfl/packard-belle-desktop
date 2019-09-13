@@ -57,9 +57,8 @@ body {
   padding-top: 1px;
 }
 
-.Window.Window--maximized {
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
+.TaskBar {
+  z-index: 75;
 }
 
 .itIsNowSafeToTurnOffYourComputer {

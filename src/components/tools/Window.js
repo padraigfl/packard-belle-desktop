@@ -113,6 +113,9 @@ class Window extends React.PureComponent {
             size={{ width: this.state.width, height: this.state.height }}
             position={{ x: this.state.x, y: this.state.y }}
             scale={context.scale}
+            style={{
+              zIndex: this.props.zIndex,
+            }}
           >
             <props.Component
               {...props}
@@ -123,7 +126,18 @@ class Window extends React.PureComponent {
           </Rnd>
         )}
         <Rnd
-          className={this.state.maximized && "react-draggable-maximized-hack"}
+          className={
+            cx(
+              {
+                "react-draggable-maximized-hack": this.state.maximized,
+                'Window--minimized': this.props.minimized,
+              }
+            )
+          }
+          style={{
+            zIndex: this.props.zIndex,
+            visibility: this.props.minimized ? 'hidden' : undefined,
+          }}
           size={
             !this.state.maximized && {
               width: this.state.width,
@@ -157,8 +171,8 @@ class Window extends React.PureComponent {
             onOpen={props.multiInstance && props.onOpen}
             onClose={() => props.onClose(props)}
             onMinimize={props.onMinimize && (() => props.onMinimize(props.id))}
-            onRestore={props.resizable && this.restore}
-            onMaximize={props.resizable && this.maximize}
+            onRestore={props.resizable ? this.restore : undefined}
+            onMaximize={props.resizable ? this.maximize : undefined}
             changingState={this.state.isDragging || this.state.isResizing}
             maximizeOnOpen={this.context.isMobile || this.props.maximizeOnOpen}
             className={cx(props.className, {

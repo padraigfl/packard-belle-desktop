@@ -10,11 +10,12 @@ const TaskBar = () => (
         quickLaunch={context.quickLaunch}
         openWindows={context.openOrder.map(windowId => {
           const { activePrograms } = context;
-          const programIdx = activePrograms.findIndex(x => x.id === windowId);
+          // const programIdx = activePrograms[windowId);
           const isActive = windowId === context.activeId;
           const onClick = isActive ? context.onMinimize : context.moveToTop;
-          const { title, icon } = activePrograms[programIdx];
+          const { title, icon } = activePrograms[windowId];
           return {
+            id: windowId,
             title,
             icon,
             isActive,
