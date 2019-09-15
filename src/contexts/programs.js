@@ -334,7 +334,7 @@ class ProgramProvider extends Component {
           ...state.activePrograms[val],
           minimized: true,
         }
-      })),
+      }), {}),
       activeId: null
     }));
 
