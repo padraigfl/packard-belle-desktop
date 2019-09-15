@@ -92,9 +92,6 @@ const startMenu = (injectedData = [], set, shutDown) => [
   }
 ];
 
-const sameProgram = a => b => a === b.id;
-const notSameProgram = a => b => a !== b.id;
-
 export const addIdsToData = data =>
   Array.isArray(data)
     ? data.map(d => {

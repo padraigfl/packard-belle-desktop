@@ -23,6 +23,11 @@ body {
   height: 80vh;
 }
 
+.w98 .WindowExplorer .window__menu {
+  padding: 2px 0px 2px 12px;
+  align-items: center;
+}
+
 @media (min-width: 640px) and (min-height: 500px) {
   #root {
     height: 100vh;

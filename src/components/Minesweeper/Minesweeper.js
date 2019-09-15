@@ -13,15 +13,15 @@ import "./_styles.scss";
 const difficulty = {
   beginner: {
     gridSize: [9, 9],
-    mines: 11
+    mines: 10
   },
   intermediate: {
-    gridSize: [15, 15],
-    mines: 30
+    gridSize: [16, 16],
+    mines: 40
   },
   expert: {
-    gridSize: [30, 15],
-    mines: 40
+    gridSize: [30, 16],
+    mines: 99
   }
 };
 
