@@ -1,8 +1,12 @@
 .IframeWindow {
-  > div:not(.Window__heading),
-  iframe {
-    width: calc(100% - 3px);
+  > div:not(.Window__heading) {
+    width: 100%;
     height: calc(100% - 10px);
+  }
+  iframe {
+    border: none;
+    width: 100%;
+    height: calc(100% - 4px);
   }
 
   &--alert.WindowAlert {
