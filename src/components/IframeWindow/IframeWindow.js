@@ -57,6 +57,7 @@ class IFrame extends Component {
         menuOptions={props.data.useMenu && buildMenu(props)}
         Component={WindowProgram}
         resizable={!(props.data.width || props.data.height)}
+        hideOnDrag={true}
       >
         <div style={props.data && props.data.style}>
           <PureIframe src={props.data.src} title={props.title} />

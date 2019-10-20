@@ -74,8 +74,9 @@ class Window extends React.PureComponent {
     ...launchPositions(this.props.inintalX, this.props.initialY)
   };
 
-  updateLocation = (a, b) =>
+  updateLocation = (a, b) => {
     this.setState({ x: b.x, y: b.y, isDragging: false });
+  }
   resize = (e, direction, ref, delta, position) =>
     this.setState({
       width: ref.style.width,
@@ -122,7 +123,9 @@ class Window extends React.PureComponent {
               {...this.state}
               isDragging={false}
               className={cx(props.className, "Window--active")}
-            />
+            >
+              {!props.hideOnDrag && props.children}
+            </props.Component>
           </Rnd>
         )}
         <Rnd
