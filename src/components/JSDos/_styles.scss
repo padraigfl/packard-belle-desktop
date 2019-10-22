@@ -30,6 +30,7 @@
     letter-spacing: 1px;
     line-height: 1.5em;
     padding: 8px 4px;
+    overflow: auto;
     &::selection {
       background-color: white;
       color: black;
@@ -37,5 +38,8 @@
   }
   form:focus-within + .terminal .terminal__content > span:after {
     content: "_";
+  }
+  &.Window:after {
+    content: none;
   }
 }
