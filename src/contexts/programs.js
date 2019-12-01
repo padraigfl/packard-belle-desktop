@@ -64,6 +64,7 @@ const startMenu = (injectedData = [], set, shutDown) => [
       options: settings(set)
     },
     {
+      className: "hideMobileY",
       title: "Help",
       icon: icons.help24,
       options: [
@@ -75,12 +76,14 @@ const startMenu = (injectedData = [], set, shutDown) => [
       ]
     },
     {
+      className: "hideMobileY",
       title: "Run...",
       icon: icons.run24,
       options: []
     }
   ],
   {
+    className: "hideMobileY",
     title: "Log Off",
     icon: icons.logOff24,
     isDisabled: true

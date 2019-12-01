@@ -33,19 +33,6 @@ const resizeStyles = pixels => {
   };
 };
 
-const getMaxes = document => {
-  const holder = document.querySelector(".w98");
-
-  if (holder && (holder.offsetWidth < 640 || holder.offsetHeight < 480)) {
-    return {
-      maxWidth: Math.ceil(holder.offsetWidth - 5),
-      maxHeight: Math.ceil(holder.offsetHeight - 32)
-    };
-  }
-
-  return {};
-};
-
 const randomizeLaunchSpot = max => Math.ceil(Math.random() * max);
 
 const launchPositions = (propX, propY, isMobile) => {
@@ -165,7 +152,6 @@ class Window extends React.PureComponent {
           }
           {...resizeProps}
           {...maximizedProps}
-          {...getMaxes(document)}
         >
           <props.Component
             title={props.title}

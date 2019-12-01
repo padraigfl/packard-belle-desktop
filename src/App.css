@@ -91,3 +91,14 @@ body {
     background-size: cover;
   }
 }
+
+@media (max-height: 500px) {
+  .hideMobileY {
+    display: none !important;
+  }
+}
+@media (max-width: 600px) {
+  .hideMobileX {
+    display: none !important;
+  }
+}
