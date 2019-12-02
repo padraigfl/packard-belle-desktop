@@ -44,10 +44,11 @@ class ShutDown extends Component {
         })}
       >
         <Window
-          className="ShutDown__window"
+          className="ShutDown__window Window--active"
           title="Shut Down Windows"
           onClose={context.toggleShutDownMenu}
           resizable={false}
+          isActive
         >
           <div className="ShutDown__content">
             <img src={shutDown24} alt="shut down" />
