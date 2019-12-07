@@ -22,16 +22,23 @@
     * {
       pointer-events: none;
     }
+
+    footer:after {
+      width: 50px;
+      background-position: right;
+      background-repeat: no-repeat;
+      content: 'Loading...';
+    }
   }
 
   &__view {
     display: flex;
   }
 
-  &.Window--maximized {
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-  }
+  // &.Window--maximized {
+  //   width: calc(100% + 4px);
+  //   height: calc(100% + 4px);
+  // }
 }
 
 .WindowAlert {
