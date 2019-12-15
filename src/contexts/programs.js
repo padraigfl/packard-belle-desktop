@@ -83,7 +83,6 @@ const startMenu = (injectedData = [], set, shutDown) => [
     }
   ],
   {
-    className: "hideMobileY",
     title: "Log Off",
     icon: icons.logOff24,
     isDisabled: true

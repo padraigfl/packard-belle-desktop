@@ -11,6 +11,7 @@
   z-index: 1;
   position: absolute;
   right: -3px;
+
   bottom: -3px;
 }
 
@@ -24,7 +25,7 @@
     }
 
     footer:after {
-      width: 50px;
+      width: 54px;
       background-position: right;
       background-repeat: no-repeat;
       content: 'Loading...';
@@ -47,4 +48,8 @@
   left: 50%;
   transform: translate(-50%);
   z-index: 10;
+}
+
+.StandardMenu {
+  z-index: 1;
 }

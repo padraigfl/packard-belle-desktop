@@ -128,7 +128,6 @@ export default [
     options: programs
   },
   {
-    className: "hideMobileY",
     title: "Favorites",
     icon: icons.folderFavorites24,
     options: favorites,
