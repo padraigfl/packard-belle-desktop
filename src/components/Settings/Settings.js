@@ -15,6 +15,29 @@ import buildMenu from "../../helpers/menuBuilder";
 
 import "./_styles.scss";
 
+const backgroundStyleGenerator = (bgStyle) => {
+  if (bgStyle === 'tile') {
+    return {
+      backgroundSize: 30,
+      backgroundRepeat: 'repeat',
+    };
+  }
+  if (bgStyle === 'contain') {
+    return {
+      backgroundSize: '80%',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    };
+  }
+  if (bgStyle === 'stretch') {
+    return {
+      backgroundSize: '100% 100%',
+      backgroundRepeat: 'no-repeat',
+    };
+  }
+  return {};
+}
+
 class Settings extends Component {
   static contextType = SettingsContext;
   state = {
@@ -28,10 +51,16 @@ class Settings extends Component {
 
   changeColor = v => {
     this.setState({ bgColor: v });
-    if (v.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-      this.context.updateLocalStorage("bgColor", v);
-    }
   };
+
+  updateBackground = () => {
+    // TODO accept valid html color
+    if (this.state.bgColor.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
+      this.context.updateLocalStorage("bgColor", this.state.bgColor);
+    }
+    this.context.updateLocalStorage("bgStyle", this.state.bgStyle);
+    this.context.updateLocalStorage("bgImg", this.state.bgImg);
+  }
 
   onSelect = selected => this.setState({ selected });
 
@@ -57,13 +86,13 @@ class Settings extends Component {
     }, 500);
   };
 
-  updateBackground = () => {
-    this.context.updateLocalStorage("bgImg", this.state.bgImg);
+  uploadBackground = () => {
+    document.getElementById('bgImg').click();
   };
 
   updateBackgroundStyle = e => {
     const val = e.target.value;
-    this.context.updateLocalStorage("bgStyle", val);
+    this.setState({ bgStyle: val });
   };
 
   removeBackground = () => {
@@ -75,7 +104,9 @@ class Settings extends Component {
   handleFileRead = () => {
     const content = this.fileReader.result;
     if (content.length < 120000) {
-      this.setState({ bgImg: content });
+      this.setState(
+        { bgImg: content },
+      );
     } else {
       window.alert("100kb or less please, sorry =/");
     }
@@ -158,50 +189,67 @@ class Settings extends Component {
                 </DetailsSection>
               )}
               <DetailsSection title="Background">
-                {this.context.bgImg ? (
-                  <>
-                    <div>
-                      {["tile", "stretch", "contain"].map(v => (
-                        <Radio
-                          key={v}
-                          id={v}
-                          label={v}
-                          value={v}
-                          onChange={this.updateBackgroundStyle}
-                          checked={this.context.bgStyle === v}
-                        />
-                      ))}
-                    </div>
-                    <div>
-                      <ButtonForm onClick={this.removeBackground}>
-                        Reset Background
-                      </ButtonForm>
-                    </div>
-                  </>
-                ) : (
+                <div className="Settings__background-config">
                   <div>
-                    <input
-                      type="file"
-                      onChange={this.handleFileChosen}
-                      name="bgImg"
-                      id="bgImg"
-                    />
+                    {this.state.bgImg ? (
+                      <>
+                        <div>
+                          {["tile", "stretch", "contain"].map(v => (
+                            <Radio
+                              key={v}
+                              id={v}
+                              label={v}
+                              value={v}
+                              onChange={this.updateBackgroundStyle}
+                              checked={this.state.bgStyle === v}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <div>
+                        <input
+                          style={{ display: 'none' }}
+                          type="file"
+                          onChange={this.handleFileChosen}
+                          name="bgImg"
+                          id="bgImg"
+                        />
+                        <div>
+                          <ButtonForm
+                            onClick={this.uploadBackground}
+                          >
+                            Upload Image
+                          </ButtonForm>
+                        </div>
+                      </div>
+                    )}
                     <div>
-                      <ButtonForm
-                        onClick={this.updateBackground}
-                        isDisabled={!this.state.bgImg}
-                      >
-                        Upload Image
-                      </ButtonForm>
+                      Color (HEX val)
+                      <InputText
+                        value={this.state.bgColor}
+                        onChange={this.changeColor}
+                      />
                     </div>
                   </div>
-                )}
-                <div>
-                  Color (HEX val)
-                  <InputText
-                    value={this.state.bgColor}
-                    onChange={this.changeColor}
+                  <div
+                    style={{
+                      backgroundColor: this.state.bgColor,
+                      backgroundImage: `url(${this.state.bgImg}`,
+                      width: 100,
+                      height: 75,
+                      margin: 2,
+                      border: '1px solid black',
+                      ...backgroundStyleGenerator(this.state.bgStyle),
+                    }}
                   />
+                </div>
+
+                <div className="Settings__background-update">
+                  <ButtonForm onClick={this.updateBackground}>Update</ButtonForm>
+                  <ButtonForm onClick={this.removeBackground}>
+                    Reset
+                  </ButtonForm>
                 </div>
               </DetailsSection>
               {this.state.tempChange && "Previewing Changes"}
