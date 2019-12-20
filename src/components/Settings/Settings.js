@@ -129,7 +129,7 @@ class Settings extends Component {
               initialX={200}
               initialY={100}
               initialWidth={280}
-              initialHeight={320}
+              initialHeight={360}
               Component={AbstractWindow}
               title="Control Panel"
               className="Settings"

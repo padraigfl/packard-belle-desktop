@@ -22,7 +22,7 @@ const generateRows = () => {
           <li>StartMenu</li>
           <li>Resizable windows</li>
           <li>Notepad</li>
-          <li>Custom backgrounds</li>
+          <li>Custom backgrounds (see Start -> Settings -> Control Panel)</li>
           <li>Save Notepad files for later, Save As new files</li>
           <li>Annoying Floppy Disk Lag</li>
         </ul>
