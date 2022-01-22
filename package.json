@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "nanoid": "^2.0.1",
+    "nanoid": "^3.1.31",
     "node-sass": "^4.11.0",
     "packard-belle": "github:padraigfl/packard-belle#0.3.5",
     "pb-minesweeper": "1.0.5",
