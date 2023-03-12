@@ -1,0 +1,12 @@
+
+- how to handle root?? fixed instance?
+- how to handling application files? (data files and eval)
+- switch from class based structure to objects with parent param (which is erased when saved??)
+- or split data from filesystem?
+- can/should a folder and a file in the same directory have the same name
+- improve process of making hierarchy immutable 
+- instantiation issue with tests and root type, revisit
+- is recycle bin logic required with delete?
+- need to look at how 
+- add hard links?
+- directory class needs add file operation **
