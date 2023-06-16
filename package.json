@@ -5,8 +5,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "nanoid": "^2.0.1",
-    "node-sass": "^4.11.0",
-    "packard-belle": "github:padraigfl/packard-belle#0.3.5",
+    "packard-belle": "github:padraigfl/packard-belle#node-14",
     "pb-minesweeper": "1.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -22,6 +21,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "sass": "^1.63.4"
   },
   "browserslist": [
     ">0.2%",
