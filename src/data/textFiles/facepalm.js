@@ -1,5 +1,5 @@
 /* eslint-disable */
-export default `
+const facepalm = `
 THIS IS BROKEN, _ESPECIALLY_ ON FIREFOX
 Please submit a PR if you have the fix
 
@@ -28,3 +28,5 @@ Please submit a PR if you have the fix
 ........................................_..........._,-%.......\` 
 ..................................., 
 `;
+
+export default facepalm 

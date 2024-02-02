@@ -1,4 +1,4 @@
-export default `
+const sunscreenLyrics = `
 Ladies and Gentlemen of the class of ’99:
 
 Wear sunscreen. If I could offer you only one tip for the future, sunscreen would be it. The long term benefits of sunscreen have been proved by scientists whereas the rest of my advice has no basis more reliable than my own meandering experience. I will dispense this advice now
@@ -102,3 +102,5 @@ Everybody's free
 Oh, yeah
 Don't you fear
 `;
+
+export default sunscreenLyrics;

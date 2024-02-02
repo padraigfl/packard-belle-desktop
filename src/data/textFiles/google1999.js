@@ -1,4 +1,4 @@
-export default `<body bgcolor="#FFFFFF" text="#000000" link="#000099" vlink="#003366" alink="#000099"><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+const google1999html = `<body bgcolor="#FFFFFF" text="#000000" link="#000099" vlink="#003366" alink="#000099"><!-- BEGIN WAYBACK TOOLBAR INSERT -->
 <script type="text/javascript" src="/static/js/timestamp.js?v=1553621510" charset="utf-8"></script>
 <script type="text/javascript" src="/static/js/graph-calc.js?v=1553621510" charset="utf-8"></script>
 <script type="text/javascript" src="/static/js/auto-complete.js?v=1553621510" charset="utf-8"></script>
@@ -78,3 +78,5 @@ playback timings (ms):
   PetaboxLoader3.resolve: 114.583
   load_resource: 145.987
 --></body>`;
+
+export default google1999html;

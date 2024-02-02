@@ -1,4 +1,4 @@
-export default `
+const resumePF = `
 .....____............__..........._..........________................__
 ..../ __ \\____ _____/ /________ _(_)___ _.. / ____/ /___..____..____/ /
 .../ /_/ / __ \`/ __. / ___/ __ \`/ / __ \`/../ /_../ / __ \\/ __ \\/ __. / 
@@ -62,3 +62,5 @@ Github: https://www.github.com/padraigfl
 LinkedIn: https://www.linkedin.com/in/padraig-f-334b8764/
 Phone: HAHAHAHA I'm not putting that up here
 `;
+
+export default resumePF;
