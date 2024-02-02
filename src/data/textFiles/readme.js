@@ -123,7 +123,7 @@ const marqueeGen = () =>
     )
     .join(" | ");
 
-export default `
+const readmeHTML = `
 <style>
 font * {font-family: 'Comic Sans MS' !important;}
 blink {
@@ -180,3 +180,5 @@ blink {
   </table>
  </font>
 `;
+
+export default readmeHTML;

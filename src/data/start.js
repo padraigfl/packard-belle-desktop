@@ -121,7 +121,7 @@ export const find = [
   }
 ];
 
-export default [
+const startMenuData = [
   {
     title: "Programs",
     icon: icons.folderProgram24,
@@ -205,3 +205,5 @@ export default [
     ]
   }
 ];
+
+export default startMenuData;
