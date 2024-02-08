@@ -1,4 +1,4 @@
-export default `
+const allStarTabs = `
 SOURCE https://tabs.ultimate-guitar.com/tab/smash_mouth/all_star_tabs_1933121
 
 e|----------9--6--6----------------7----6--6---------------------------------|
@@ -9,3 +9,5 @@ A|---------------------------------------------------------------------------|
 E|---------------------------------------------------------------------------|
    Some-    body once told me the world is gonna roll me
 `;
+
+export default allStarTabs;

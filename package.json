@@ -5,14 +5,14 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "nanoid": "^2.0.1",
-    "node-sass": "^4.11.0",
-    "packard-belle": "github:padraigfl/packard-belle#0.3.5",
+    "packard-belle": "^0.4.0",
     "pb-minesweeper": "1.0.5",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-rnd": "^10.0.0",
-    "react-scripts": "3.1.1",
-    "safe-eval": "^0.4.1"
+    "react-scripts": "^5.0.1",
+    "safe-eval": "^0.4.1",
+    "vm": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,6 +22,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "sass": "^1.63.4"
   },
   "browserslist": [
     ">0.2%",

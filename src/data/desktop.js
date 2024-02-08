@@ -2,7 +2,7 @@ import * as icons from "../icons";
 import resume from "./textFiles/resume";
 import readme from "./textFiles/readme";
 
-export default [
+const desktopData = [
   {
     title: "My Computer",
     icon: icons.computer32,
@@ -56,3 +56,5 @@ export default [
     }
   }
 ];
+
+export default desktopData;
