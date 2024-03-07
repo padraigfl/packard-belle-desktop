@@ -7,7 +7,7 @@ $screen-background: #121010;
 @keyframes flicker {
   $steps: 20;
   @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
+    #{percentage($i * calc(1/$steps))} {
       opacity: random();
     }
   }
