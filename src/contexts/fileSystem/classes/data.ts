@@ -15,12 +15,12 @@ class DataNode extends AbstractFileNode {
     if (!this.parent) {
       this.parent = DataNode.lostFilesDir;
     }
-    this.data = params;
+    this.data = params.data;
   }
 
-  toObject = () => {
+  public toObject() {
     return {
-      name: this.name,
+      ...super.toObject(),
       type: FileTypes.DATA,
       data: this.data,
     }

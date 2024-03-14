@@ -31,9 +31,9 @@ class DirNode extends AbstractFileNode {
       : [];
   }
 
-  toObject = (): DirectoryParams => {
+  public toObject(): DirectoryParams {
     return {
-      name: this.name,
+      ...super.toObject(),
       type: FileTypes.DIR,
       contents: this.contents.map(v => v.toObject()),
     };

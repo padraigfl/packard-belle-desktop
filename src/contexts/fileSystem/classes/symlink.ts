@@ -14,8 +14,9 @@ class SymlinkNode extends AbstractFileNode {
     this.link = params.link!;
   }
 
-  public toObject = (): SymlinkParams => {
+  public toObject(): SymlinkParams {
     return {
+      ...super.toObject(),
       name: this.name,
       link: this.link,
       type: FileTypes.LINK,

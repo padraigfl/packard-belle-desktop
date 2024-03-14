@@ -29,6 +29,19 @@ export const mntHierarchyNested = {
                       { name: 'readme.html',  data: '<p>And the text is <b>BOLD</b> in this line</p>' },
                     ]
                   },
+                  {
+                    name: 'readonly',
+                    contents: [
+                      { name: 'file.txt', data: 'sometext'},
+                      {
+                        name: 'nested',
+                        contents: [{ name: 'file.txt', data: 'sometext' }],
+                      },
+                    ],
+                    readonly: true,
+                  },
+                  { name: 'readonly.txt', data: 'test', readonly: true },
+                  { name: 'readme.html',  data: '<p>And the text is <b>BOLD</b> in this line</p>' },
                 ]
               }
             ]

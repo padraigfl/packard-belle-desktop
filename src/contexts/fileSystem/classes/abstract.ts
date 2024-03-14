@@ -30,6 +30,7 @@ class AbstractFileNode implements AbstractFileParams {
     this.customIcon = params.customIcon;
   }
 
+  // TODO: return source of read only status perhaps?
   public isReadOnly = () => {
     let iterativeValue = this.readonly;
     let focusedNode = this as AbstractFileNode; // TODO revisti this override
@@ -50,8 +51,12 @@ class AbstractFileNode implements AbstractFileParams {
     return path;
   }
 
-  public toObject = () => {
-    return { name: this.name };
+  public toObject(): AbstractFileParams {
+    return {
+      name: this.name,
+      readonly: this.readonly,
+      customIcon: this.customIcon,
+    };
   }
 
   public toString = () => {

@@ -10,22 +10,34 @@ describe('filesystem utils', () => {
       fileSystem = new DirNode(mntHierarchyNested, null);
     })
     it('class and object have same keys and values', () => {
-      const checkAllChildrenForDifference = (object: AbstractFileParams, chain: string[]): boolean => {
-        let acc = false;
+      const checkAllChildrenForDifference = (object: AbstractFileParams, chain: string[]): any => {
+        let nonMatchFileDir = '';
         const filePath = [...chain, object.name];
         const matchingFile = getFileFromPath(`${filePath.join('/')}` || '/', fileSystem);
-        Object.entries(object).forEach(([k, v]) => {
+        for (let [k, v ] of Object.entries(object)) {
+          const currentPath = filePath.join('/');
           if (['name', 'link'].includes(k) && v !== (matchingFile as any)[k]) {
-            acc = true;
+            nonMatchFileDir = currentPath;
           }
           if (k === 'data') {
-            acc = Object.entries(v).some(([k, v]) => typeof v !== 'object' && v === (matchingFile as any).data[k]);
+            if (Object.entries(v).find(([k, v]) => typeof v !== 'object' && v === (matchingFile as any).data[k])) {
+              nonMatchFileDir = currentPath;
+            };
           }
-          if (k === 'contents' && !acc) {
-            acc = v.some((_: ValidFileNode) => checkAllChildrenForDifference(_, [...filePath]))
+          if (k === 'contents') {
+            for (let content of v) {
+              const res = checkAllChildrenForDifference(content, [...filePath]);
+              if (res) {
+                nonMatchFileDir = currentPath;
+                break;
+              }
+            }
           }
-        });
-        return acc;
+          if (nonMatchFileDir) {
+            break;
+          }
+        }
+        return nonMatchFileDir;
       }
       expect(checkAllChildrenForDifference(mntHierarchyNested, [])).toBeFalsy();
     });
